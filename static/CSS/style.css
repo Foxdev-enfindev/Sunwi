@@ -1361,3 +1361,13 @@ body.playlists-body, body.classement-body, body.quit-body {
     color: var(--text-color) !important;
     padding: 8px;
 }
+/* =======================================================
+   CORRECTION DE L'AFFICHAGE DES IMAGES / POKÉMON SUR MOBILE
+   ======================================================= */
+.track-card img, .pochette {
+    width: 75px !important;
+    height: 75px !important;
+    object-fit: contain !important;
+    flex-shrink: 0 !important;
+    display: block !important;
+}

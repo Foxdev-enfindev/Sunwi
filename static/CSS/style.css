@@ -1362,7 +1362,7 @@ body.playlists-body, body.classement-body, body.quit-body {
     padding: 8px;
 }
 /* =======================================================
-   CORRECTION FINALE : CONTRAINTE ABSOLUE DES CARTES POKÉMON
+   NOUVELLE MISE EN PAGE PORTRAIT (IMAGE GAUCHE, NOM + INFOS, ELO DROITE)
    ======================================================= */
 @media screen and (orientation: portrait) {
     .track-card {
@@ -1370,54 +1370,67 @@ body.playlists-body, body.classement-body, body.quit-body {
         flex-direction: row !important;
         align-items: center !important;
         justify-content: space-between !important;
-        padding: 8px 8px !important;
-        gap: 6px !important;
+        padding: 10px 12px !important;
+        gap: 10px !important;
         width: 100% !important;
         box-sizing: border-box !important;
-        overflow: hidden !important;
     }
 
+    /* 1. L'image à gauche avec une taille fixe */
     .pochette-wrapper, .pochette-wrapper .pochette, .track-card img {
-        width: 44px !important;
-        height: 44px !important;
-        min-width: 44px !important;
-        min-height: 44px !important;
+        width: 55px !important;
+        height: 55px !important;
+        min-width: 55px !important;
+        min-height: 55px !important;
         object-fit: contain !important;
         flex-shrink: 0 !important;
         display: block !important;
     }
 
-    /* Le texte prend toute la place centrale disponible sans écraser l'Elo */
+    /* 2. Le bloc central : Nom au-dessus, Numéro/Génération et types en dessous */
     .track-info {
         flex: 1 1 auto !important;
         min-width: 0 !important;
-        padding: 0 4px !important;
-        overflow: hidden !important;
-    }
-
-    .track-badge {
-        font-size: 0.58rem !important;
-        padding: 1px 4px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        gap: 2px !important;
     }
 
     .track-title {
-        font-size: 0.82rem !important;
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
         white-space: nowrap !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
-        max-width: 100% !important;
+        width: 100% !important;
+        order: 1 !important;
     }
 
-    /* Le bloc de droite (Elo) est isolé et fixe pour ne jamais déborder */
-    .track-card > .elo-display, .elo-display {
+    /* On s'assure que les types et le badge (#ID + Génération) se placent sous le nom */
+    .track-badge {
+        font-size: 0.6rem !important;
+        padding: 1px 4px !important;
+        order: 2 !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Si les types sont dans un conteneur, on les ajuste */
+    .track-info .d-flex, .track-info div {
+        order: 3 !important;
+    }
+
+    /* 3. Le bloc Elo bien fixé à droite */
+    .elo-display {
         flex: 0 0 auto !important;
         text-align: right !important;
-        font-size: 0.68rem !important;
+        font-size: 0.72rem !important;
         white-space: nowrap !important;
         margin-left: auto !important;
     }
 
     .elo-display strong {
-        font-size: 0.78rem !important;
+        font-size: 0.85rem !important;
     }
 }

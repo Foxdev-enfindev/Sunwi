@@ -20,41 +20,41 @@ def hub():
             'id': 'ligue1',
             'title': 'Ligue 1',
             'category': 'Sport',
-            'badge': 'Bientôt',
-            'active': False,
-            'url': '#'
+            'badge': 'Disponible',
+            'active': True,
+            'url': '/football/ligue1'
         },
         {
             'id': 'laliga',
             'title': 'LaLiga',
             'category': 'Sport',
-            'badge': 'Bientôt',
-            'active': False,
-            'url': '#'
+            'badge': 'Disponible',
+            'active': True,
+            'url': '/football/laliga'
         },
         {
             'id': 'premier_league',
             'title': 'Premier League',
             'category': 'Sport',
-            'badge': 'Bientôt',
-            'active': False,
-            'url': '#'
+            'badge': 'Disponible',
+            'active': True,
+            'url': '/football/premier league'
         },
         {
             'id': 'serie_a',
             'title': 'Serie A',
             'category': 'Sport',
-            'badge': 'Bientôt',
-            'active': False,
-            'url': '#'
+            'badge': 'Disponible',
+            'active': True,
+            'url': '/football/serie a'
         },
         {
             'id': 'bundesliga',
             'title': 'Bundesliga',
             'category': 'Sport',
-            'badge': 'Bientôt',
-            'active': False,
-            'url': '#'
+            'badge': 'Disponible',
+            'active': True,
+            'url': '/football/bundesliga'
         },
         {
             'id': 'nba',

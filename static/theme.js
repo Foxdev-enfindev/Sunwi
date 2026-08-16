@@ -55,3 +55,20 @@ function setAudioMode(mode) {
             window.location.reload();
         });
 }
+function scrollCarousel(button, direction) {
+    // Récupère le conteneur parent de la ligne
+    const container = button.closest('.hub-row-carousel-container');
+    if (!container) return;
+    
+    // Récupère la piste défilante associée
+    const track = container.querySelector('.hub-row-track');
+    if (!track) return;
+
+    // Définit la distance de défilement (en pixels) par clic
+    const scrollAmount = 400;
+    
+    track.scrollBy({
+        left: direction * scrollAmount,
+        behavior: 'smooth'
+    });
+}

@@ -72,14 +72,15 @@
 
     <li><hr class="dropdown-divider"></li>
 
-    <!-- Navigation dynamique -->
+    <!-- Navigation dynamique selon le module -->
     {% if request.blueprint == 'spotify' %}
       <li><a class="dropdown-item rounded py-2" href="{{ url_for('spotify.playlists') }}">🎵 Mes Playlists</a></li>
       <li><a class="dropdown-item rounded py-2" href="{{ url_for('spotify.classement') }}">📊 Classement</a></li>
       <li><a class="dropdown-item rounded py-2" href="{{ url_for('spotify.stats') }}">📈 Statistiques</a></li>
       <li><hr class="dropdown-divider"></li>
     {% elif request.blueprint == 'football' %}
-      <li><a class="dropdown-item rounded py-2" href="{{ url_for('football.classement') }}">📊 Classement Football</a></li>
+      {% set active_league = session.get('current_football_league') %}
+      <li><a class="dropdown-item rounded py-2" href="{{ url_for('football.classement_league', league=active_league) if active_league else url_for('football.classement') }}">📊 Classement Football</a></li>
       <li><hr class="dropdown-divider"></li>
     {% endif %}
 

@@ -213,7 +213,8 @@ def restore_session_if_lost():
                     
                     if row['active_playlist_id']:
                         session['selected_playlist_id'] = row['active_playlist_id']
-                    if row['silent_mode'] is not None:
+                    # CORRECTION : Ne restaure le mode silencieux de la BDD que s'il n'est pas déjà défini en session
+                    if row['silent_mode'] is not None and 'silent_mode' not in session:
                         session['silent_mode'] = row['silent_mode']
                     if row['theme']:
                         session['theme'] = row['theme']
@@ -702,14 +703,16 @@ def seek_offset(offset_seconds):
 @spotify_bp.route('/set_theme/<theme_name>', methods=['POST'])
 def set_theme_route(theme_name):
     session['theme'] = theme_name
+    session.modified = True
     return jsonify({"status": "success"})
 
 @spotify_bp.route('/set_silent_mode/<int:status>', methods=['POST'])
 def set_silent_mode_route(status):
     is_silent = bool(status)
     session['silent_mode'] = is_silent
-    sp = get_spotify_client()
+    session.modified = True  # Force la mise à jour immédiate de la session Flask
     
+    sp = get_spotify_client()
     if sp:
         profile = get_user_profile_cached(sp)
         if profile and profile.get('id'):

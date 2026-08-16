@@ -31,3 +31,27 @@ function setAccentColor(color) {
     fetch('/spotify/set_theme/' + color, { method: 'POST' })
         .catch(err => console.error('Erreur sauvegarde thème :', err));
 }
+
+function setAudioMode(mode) {
+    // 1. Appel vers la route Spotify si disponible
+    const status = (mode === 'silent') ? 1 : 0;
+    
+    fetch('/spotify/set_silent_mode/' + status, { method: 'POST' })
+        .then(res => {
+            if (res.ok) return res.json();
+            // Fallback si la route /set_audio_mode globale est utilisée
+            return fetch('/set_audio_mode', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mode: mode })
+            }).then(r => r.json());
+        })
+        .then(() => {
+            window.location.reload();
+        })
+        .catch(err => {
+            console.error('Erreur changement mode audio :', err);
+            // Rechargement secours au cas où
+            window.location.reload();
+        });
+}

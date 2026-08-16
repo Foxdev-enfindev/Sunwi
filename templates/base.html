@@ -12,6 +12,16 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon_io/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon_io/favicon-16x16.png') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon_io/favicon.ico') }}">
+    <!-- Fichier Manifest pour l'installation sur mobile -->
+    <link rel="manifest" href="{{ url_for('static', filename='favicon_io/site.webmanifest') }}">
+
+    <!-- Configuration pour iOS (Plein écran) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Sunwi">
+
+    <!-- Couleur de la barre d'état sur mobile (Android / Chrome) -->
+    <meta name="theme-color" content="#0f172a">
     
     <script src="{{ url_for('static', filename='theme.js') }}?v=4"></script>
     {% block extra_head %}{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Classement - {{ playlist_name }}{% endblock %}
+
+{% block content %}
+<div class="classement-container">
+    <div class="classement-header">
+        <h1>🏆 CLASSEMENT COMPLET 🏆</h1>
+        
+        <p class="quit-subtitle" style="margin-top: 4px; font-size: 1.05rem; font-weight: 600;">
+            🎵 {{ playlist_name }}
+            {% if owner_name %}
+                <span style="opacity: 0.8; font-size: 0.9rem; font-weight: 400;">(par {{ owner_name }})</span>
+            {% endif %}
+        </p>
+
+        <div class="quit-actions-group">
+            <a href="{{ url_for('spotify.duel') }}" class="back-btn">⚔️ Retour aux duels</a>
+            <a href="{{ url_for('main.hub') }}" class="back-btn" style="background: rgba(255,255,255,0.1);">🏠 Hub</a>
+            <button type="button" class="resume-btn" onclick="copyPublicLink()">
+                🔗 Partager ce classement
+            </button>
+        </div>
+    </div>
+
+    <div class="ranking-list">
+        {% if ranking %}
+            {% for track in ranking %}
+            <div class="ranking-card">
+                <span class="ranking-rank">#{{ loop.index }}</span>
+                {% if track.image_url %}
+                    <img src="{{ track.image_url }}" alt="{{ track.name }}" class="ranking-img">
+                {% endif %}
+                <div class="ranking-info">
+                    <span class="ranking-name">{{ track.name }}</span>
+                    <span class="ranking-artist">{{ track.artist }}</span>
+                </div>
+                <div class="ranking-score-box">
+                    <span class="ranking-elo">{{ track.elo }} pts</span>
+                    <span class="ranking-matches">{{ track.matches_count or 0 }} duel{% if track.matches_count and track.matches_count > 1 %}s{% endif %}</span>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p style="text-align: center; color: var(--text-muted); margin-top: 20px;">
+                Aucun titre classé pour le moment dans cette playlist.
+            </p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    function copyPublicLink() {
+        const publicUrl = window.location.origin + "/spotify/classement/{{ playlist_id }}";
+        navigator.clipboard.writeText(publicUrl).then(() => {
+            alert("Lien du classement copié dans le presse-papier !");
+        }).catch(err => {
+            console.error("Erreur lors de la copie :", err);
+        });
+    }
+</script>
+{% endblock %}

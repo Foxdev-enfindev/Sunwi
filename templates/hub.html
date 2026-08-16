@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Sunwi — Tableau de bord{% endblock %}
+
+{% block content %}
+<div class="sunwi-content">
+    <div class="container hub-container my-2">
+      <div class="text-center mb-4">
+        <h1 class="hub-title mb-1">Tableau de bord</h1>
+        <p class="hub-subtitle">Choisis une catégorie et commence tes duels pour établir le classement ultime.</p>
+      </div>
+
+      <div class="hub-rows-wrapper">
+        {% for cat in categories %}
+        <div class="hub-row-section mb-3">
+          <h2 class="hub-row-title">{{ cat.name }}</h2>
+          
+          <div class="hub-row-carousel-container">
+            <button class="hub-scroll-arrow left-arrow" onclick="scrollCarousel(this, -1)" aria-label="Précédent">‹</button>
+            
+            <div class="hub-row-track">
+              {% for module in cat.modules %}
+              <div class="hub-carousel-card {% if module.active %}active-module{% else %}locked-module{% endif %}">
+                <div class="hub-card-content">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    {% if not module.active %}
+                      <span class="hub-badge-status">{{ module.badge }}</span>
+                    {% else %}
+                      <span class="hub-badge-status active-badge">Disponible</span>
+                    {% endif %}
+                  </div>
+                  
+                  <h3 class="hub-module-title">{{ module.title }}</h3>
+                  
+                  <div class="mt-auto pt-2">
+                    {% if module.active %}
+                      <a href="{{ module.url }}" class="hub-btn-action">Lancer ⚔️</a>
+                    {% else %}
+                      <button class="hub-btn-disabled" disabled>Bientôt 🔒</button>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            
+            <button class="hub-scroll-arrow right-arrow" onclick="scrollCarousel(this, 1)" aria-label="Suivant">›</button>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</div>
+{% endblock %}

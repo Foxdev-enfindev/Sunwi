@@ -1,0 +1,7 @@
+Flask
+spotipy
+gunicorn
+psycopg2-binary
+Flask-Session
+Flask-SQLAlchemy
+python-dotenv

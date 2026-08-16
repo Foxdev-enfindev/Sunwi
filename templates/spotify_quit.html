@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Session Terminée - Sunwi{% endblock %}
+
+{% block content %}
+<div class="quit-page-container">
+    <h1>SESSION TERMINÉE</h1>
+    <p class="quit-subtitle">Voici le Top 5 de ta playlist « {{ playlist_name }} » :</p>
+
+    <div class="top5-list">
+        {% for track in top5 %}
+        <div class="top5-card">
+            <span class="top5-rank">#{{ loop.index }}</span>
+            {% if track.image_url %}
+                <img src="{{ track.image_url }}" alt="{{ track.name }}" class="top5-img">
+            {% endif %}
+            <div class="top5-info">
+                <span class="top5-name">{{ track.name }}</span>
+                <span class="top5-artist">{{ track.artist }}</span>
+            </div>
+            <span class="top5-elo">{{ track.elo }} pts</span>
+        </div>
+        {% endfor %}
+    </div>
+
+    <p class="close-notice">Tu peux maintenant fermer la page.</p>
+
+    <div class="quit-actions-group" style="margin-top: 18px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+        <a href="{{ url_for('main.hub') }}" class="resume-btn" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);">🏠 Hub Sunwi</a>
+        <a href="{{ url_for('spotify.duel') }}" class="resume-btn">⚔️ Reprendre les duels</a>
+        <a href="{{ url_for('spotify.classement') }}" class="full-rank-btn">📊 Classement complet</a>
+    </div>
+</div>
+{% endblock %}

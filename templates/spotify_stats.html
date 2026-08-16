@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Statistiques Playlist - Sunwi{% endblock %}
+
+{% block content %}
+<div class="classement-container">
+    <div class="classement-header">
+        <h1>📊 STATISTIQUES ARTISTES 📊</h1>
+        <p class="quit-subtitle" style="margin-bottom: 12px;">Répartition des {{ total_tracks }} titres de ta playlist active :</p>
+        <a href="{{ url_for('spotify.duel') }}" class="back-btn">⚔️ Retour aux duels</a>
+    </div>
+
+    <div class="ranking-list">
+        {% for artist, count in sorted_artists %}
+        <div class="ranking-card">
+            <span class="ranking-rank">#{{ loop.index }}</span>
+            <div class="ranking-info">
+                <span class="ranking-name">{{ artist }}</span>
+                <span class="ranking-artist">{{ ((count / total_tracks) * 100) | round(1) }}% de la playlist</span>
+            </div>
+            <span class="ranking-elo">{{ count }} titre{% if count > 1 %}s{% endif %}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

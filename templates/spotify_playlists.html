@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Mes Playlists - Sunwi{% endblock %}
+
+{% block content %}
+<div class="playlists-container">
+    <div class="playlists-header">
+        <h1>🎵 CHOISIS UNE PLAYLIST 🎵</h1>
+        <a href="{{ url_for('spotify.duel') }}" class="back-btn">⚔️ Retour aux duels</a>
+    </div>
+
+    <div class="playlists-grid">
+        {% if playlists %}
+            {% for playlist in playlists %}
+            <a href="{{ url_for('spotify.select_playlist', playlist_id=playlist.id) }}" class="playlist-card">
+                {% if playlist.image_url %}
+                    <img src="{{ playlist.image_url }}" alt="{{ playlist.name }}" class="playlist-img">
+                {% else %}
+                    <div class="playlist-img-placeholder">🎵</div>
+                {% endif %}
+                <div class="playlist-info">
+                    <span class="playlist-name">{{ playlist.name }}</span>
+                    <span class="playlist-tracks">{{ playlist.tracks_count }} titres</span>
+                </div>
+            </a>
+            {% endfor %}
+        {% else %}
+            <p style="text-align: center; color: var(--text-muted, #b3b3b3); margin-top: 30px;">
+                Aucune playlist trouvée. Connecte-toi à Spotify pour charger tes playlists.
+            </p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

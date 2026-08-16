@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+
+{% block title %}Sunwi - Duel Spotify{% endblock %}
+
+{% block content %}
+<div id="spotify-toast" class="toast hidden"></div>
+
+<div class="container">
+    <div class="header-zone">
+        <h1>À toi de choisir !</h1>
+        <div class="result-banner-wrapper">
+            <div class="result-banner {% if not dernier_resultat %}hidden{% endif %}">
+                {{ dernier_resultat if dernier_resultat else '&nbsp;' }}
+            </div>
+        </div>
+    </div>
+
+    <div class="duel-zone">
+        <!-- PISTE A -->
+        <div class="track-slot">
+            <div class="track-card active" id="card-a" onclick="onCardClick('a', '{{ track_a.uri }}')" onmouseenter="onCardHover('a', '{{ track_a.uri }}')">
+                <div class="pochette-wrapper">
+                    <img src="{{ track_a.image_url }}" alt="{{ track_a.name }}" class="pochette">
+                    <form action="{{ url_for('spotify.vote') }}" method="POST" id="form-a" class="vote-form" onsubmit="handleVote(event, 'a')">
+                        <input type="hidden" name="id_a" value="{{ track_a.id }}">
+                        <input type="hidden" name="id_b" value="{{ track_b.id }}">
+                        <input type="hidden" name="outcome" value="1.0">
+                    </form>
+                </div>
+                <div class="track-info">
+                    <span class="track-badge">TITRE 1</span>
+                    <h2 class="track-title" title="{{ track_a.name }}">{{ track_a.name }}</h2>
+                    <p class="track-artist" title="{{ track_a.artist }}">{{ track_a.artist }}</p>
+                    <div class="elo-display">Elo actuel: <strong>{{ track_a.elo }}</strong></div>
+                    <div class="match-count">
+                        {% set current_match_a = (track_a.matches_count or 0) + 1 %}
+                        {{ current_match_a }}{% if current_match_a == 1 %}er{% else %}e{% endif %} duel
+                    </div>
+                </div>
+            </div>
+            
+            {% if not silent_mode %}
+            <div class="seek-controls" id="seek-a">
+                <button type="button" class="seek-btn" onclick="seekOffset(event, -30)">-30s</button>
+                <button type="button" class="seek-btn" onclick="seekOffset(event, -10)">-10s</button>
+                <button type="button" class="seek-btn pause-btn-inline" onclick="togglePause(event)">⏸</button>
+                <button type="button" class="seek-btn" onclick="seekOffset(event, 10)">+10s</button>
+                <button type="button" class="seek-btn" onclick="seekOffset(event, 30)">+30s</button>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- VS ZONE -->
+        <div class="vs-zone" id="vsZone">
+            <div class="vs-circle">VS</div>
+            <form action="{{ url_for('spotify.vote') }}" method="POST" onsubmit="handleVote(event, 'tie')">
+                <input type="hidden" name="id_a" value="{{ track_a.id }}">
+                <input type="hidden" name="id_b" value="{{ track_b.id }}">
+                <input type="hidden" name="outcome" value="0.5">
+                <button type="submit" class="tie-btn">🤝 Match Nul</button>
+            </form>
+            <a href="{{ url_for('spotify.classement') }}" class="central-rank-btn">📊 Classement</a>
+        </div>
+
+        <!-- PISTE B -->
+        <div class="track-slot">
+            <div class="track-card {% if silent_mode %}active{% endif %}" id="card-b" onclick="onCardClick('b', '{{ track_b.uri }}')" onmouseenter="onCardHover('b', '{{ track_b.uri }}')">
+                <div class="pochette-wrapper">
+                    <img src="{{ track_b.image_url }}" alt="{{ track_b.name }}" class="pochette">
+                    <form action="{{ url_for('spotify.vote') }}" method="POST" id="form-b" class="vote-form" onsubmit="handleVote(event, 'b')">
+                        <input type="hidden" name="id_a" value="{{ track_a.id }}">
+                        <input type="hidden" name="id_b" value="{{ track_b.id }}">
+                        <input type="hidden" name="outcome" value="0.0">
+                    </form>
+                </div>
+                <div class="track-info">
+                    <span class="track-badge">TITRE 2</span>
+                    <h2 class="track-title" title="{{ track_b.name }}">{{ track_b.name }}</h2>
+                    <p class="track-artist" title="{{ track_b.artist }}">{{ track_b.artist }}</p>
+                    <div class="elo-display">Elo actuel: <strong>{{ track_b.elo }}</strong></div>
+                    <div class="match-count">
+                        {% set current_match_b = (track_b.matches_count or 0) + 1 %}
+                        {{ current_match_b }}{% if current_match_b == 1 %}er{% else %}e{% endif %} duel
+                    </div>
+                </div>
+            </div>
+
+            {% if not silent_mode %}
+            <div class="seek-controls" id="seek-b">
+                <button type="button" class="seek-btn" onclick="seekOffset(event, -30)">-30s</button>
+                <button type="button" class="seek-btn" onclick="seekOffset(event, -10)">-10s</button>
+                <button type="button" class="seek-btn pause-btn-inline" onclick="togglePause(event)">⏸</button>
+                <button type="button" class="seek-btn" onclick="seekOffset(event, 10)">+10s</button>
+                <button type="button" class="seek-btn" onclick="seekOffset(event, 30)">+30s</button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Seul le bouton Terminer reste présent pour clore la session -->
+    <div class="quit-wrapper" style="display: flex; justify-content: center; margin-top: 20px;">
+        <a href="{{ url_for('spotify.quit_app') }}" class="quit-btn" onclick="disableCardsOnQuit()">🚪 Terminer</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    let currentPlaying = 'a';
+    const isDesktop = window.matchMedia('(pointer: fine)').matches;
+    const isSilentMode = {{ 'true' if silent_mode else 'false' }};
+
+    window.addEventListener('DOMContentLoaded', () => {
+        if (!isSilentMode) {
+            fetch('{{ url_for("spotify.listen", track_uri="") }}' + '{{ track_a.uri }}', { method: 'POST' })
+                .then(res => res.json())
+                .then(data => { 
+                    if (data.warning) showSpotifyWarning("⚠️ " + data.warning, data.can_switch_silent); 
+                })
+                .catch(err => console.error('Erreur lecture initiale :', err));
+        }
+    });
+
+    function showSpotifyWarning(msg, canSwitch = false) {
+        if (isSilentMode) return;
+
+        const toast = document.getElementById('spotify-toast');
+        if (canSwitch) {
+            toast.innerHTML = `
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <span>${msg}</span>
+                    <button type="button" 
+                            onclick="enableSilentMode()" 
+                            style="background: #0d0d0d; color: #ff9900; border: none; padding: 6px 14px; border-radius: 12px; font-weight: 800; cursor: pointer; font-size: 0.8rem;">
+                        🤫 Passer en Mode Silence
+                    </button>
+                </div>
+            `;
+        } else {
+            toast.innerText = msg;
+        }
+
+        toast.classList.remove('hidden');
+        toast.classList.add('show');
+    }
+
+    function enableSilentMode() {
+        fetch('{{ url_for("spotify.set_silent_mode_route", status=1) }}', { method: 'POST' })
+            .then(res => res.json())
+            .then(data => {
+                window.location.reload();
+            })
+            .catch(err => {
+                console.error('Erreur bascule mode silence:', err);
+                window.location.reload();
+            });
+    }
+
+    function switchActiveCard(trackKey, trackUri) {
+        const cardA = document.getElementById('card-a');
+        const cardB = document.getElementById('card-b');
+        currentPlaying = trackKey;
+        if (trackKey === 'a') {
+            cardA.classList.add('active'); cardB.classList.remove('active');
+        } else {
+            cardB.classList.add('active'); cardA.classList.remove('active');
+        }
+        if (!isSilentMode) {
+            fetch('{{ url_for("spotify.listen", track_uri="") }}' + trackUri, { method: 'POST' })
+                .then(res => res.json())
+                .then(data => { 
+                    if (data.warning) showSpotifyWarning("⚠️ " + data.warning, data.can_switch_silent); 
+                })
+                .catch(err => console.error('Erreur changement piste :', err));
+        }
+    }
+
+    function onCardHover(trackKey, trackUri) {
+        if (!isDesktop || isSilentMode) return;
+        if (currentPlaying !== trackKey) switchActiveCard(trackKey, trackUri);
+    }
+
+    function onCardClick(trackKey, trackUri) {
+        if (isSilentMode || currentPlaying === trackKey) {
+            triggerVoteAnimation(trackKey);
+            setTimeout(() => { document.getElementById('form-' + trackKey).submit(); }, 150);
+        } else {
+            switchActiveCard(trackKey, trackUri);
+        }
+    }
+
+    function disableCardsOnQuit() {
+        document.getElementById('vsZone').classList.add('voting-in-progress');
+        document.getElementById('card-a').classList.add('voted-loser');
+        document.getElementById('card-b').classList.add('voted-loser');
+    }
+
+    function seekOffset(event, seconds) {
+        event.stopPropagation();
+        if (isSilentMode) return;
+        fetch('{{ url_for("spotify.seek_offset", offset_seconds=0) }}'.replace('/0', '/' + seconds), { method: 'POST' })
+            .then(res => res.json())
+            .then(data => { if (data.warning) showSpotifyWarning("⚠️ " + data.warning, data.can_switch_silent); })
+            .catch(err => console.error('Erreur timecode :', err));
+    }
+
+    function triggerVoteAnimation(winner) {
+        const cardA = document.getElementById('card-a');
+        const cardB = document.getElementById('card-b');
+        document.getElementById('vsZone').classList.add('voting-in-progress');
+        if (winner === 'a') { cardA.classList.add('voted-winner'); cardB.classList.add('voted-loser'); }
+        else if (winner === 'b') { cardB.classList.add('voted-winner'); cardA.classList.add('voted-loser'); }
+        else { cardA.classList.add('voted-winner'); cardB.classList.add('voted-winner'); }
+    }
+
+    function handleVote(event, winner) { triggerVoteAnimation(winner); }
+
+    function togglePause(event) {
+        if (event) event.stopPropagation();
+        if (isSilentMode) return;
+        fetch('{{ url_for("spotify.toggle_pause") }}', { method: 'POST' })
+            .then(res => res.json())
+            .then(data => {
+                const btns = document.querySelectorAll('.pause-btn-inline');
+                if (data.warning) showSpotifyWarning("⚠️ " + data.warning, data.can_switch_silent);
+                else btns.forEach(btn => btn.innerText = (data.status === 'paused') ? '▶' : '⏸');
+            })
+            .catch(err => console.error('Erreur pause :', err));
+    }
+</script>
+{% endblock %}

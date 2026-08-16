@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_title | default('Sunwi - Duel') }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="header-zone">
+        <h1>{{ header_title | default('À toi de choisir !') }}</h1>
+        <div class="result-banner-wrapper">
+            {% if last_result %}
+                <div class="result-banner">🏆 {{ last_result }}</div>
+            {% else %}
+                <div class="result-banner hidden"></div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="duel-zone" id="duelZone">
+        <!-- FORMULAIRES DE VOTE ISOLÉS (Hors de la structure visuelle) -->
+        <form action="{{ vote_url }}" method="POST" id="form-a" style="display:none;">
+            <input type="hidden" name="p1_id" value="{{ item_a_id }}">
+            <input type="hidden" name="p2_id" value="{{ item_b_id }}">
+            <input type="hidden" name="outcome" value="1.0">
+        </form>
+
+        <form action="{{ vote_url }}" method="POST" id="form-b" style="display:none;">
+            <input type="hidden" name="p1_id" value="{{ item_a_id }}">
+            <input type="hidden" name="p2_id" value="{{ item_b_id }}">
+            <input type="hidden" name="outcome" value="0.0">
+        </form>
+
+        <form action="{{ vote_url }}" method="POST" id="form-tie" style="display:none;">
+            <input type="hidden" name="p1_id" value="{{ item_a_id }}">
+            <input type="hidden" name="p2_id" value="{{ item_b_id }}">
+            <input type="hidden" name="outcome" value="0.5">
+        </form>
+
+        <!-- SLOT A -->
+        <div class="track-slot">
+            <div class="track-card active" id="card-a" onclick="handleDuelVote(event, 'a', 'form-a')">
+                {% block card_a_content %}{% endblock %}
+            </div>
+            {% block card_a_extra %}{% endblock %}
+        </div>
+
+        <!-- ZONE VS -->
+        <div class="vs-zone" id="vsZone">
+            <div class="vs-circle">VS</div>
+            <button type="button" class="tie-btn" onclick="handleDuelVote(event, 'tie', 'form-tie')">🤝 Match Nul</button>
+            {% if leaderboard_url %}
+                <a href="{{ leaderboard_url }}" class="central-rank-btn" onclick="event.stopPropagation();">📊 Classement</a>
+            {% endif %}
+        </div>
+
+        <!-- SLOT B -->
+        <div class="track-slot">
+            <div class="track-card active" id="card-b" onclick="handleDuelVote(event, 'b', 'form-b')">
+                {% block card_b_content %}{% endblock %}
+            </div>
+            {% block card_b_extra %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/duel_engine.js') }}"></script>
+{% block module_scripts %}{% endblock %}
+{% endblock %}

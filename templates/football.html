@@ -1,0 +1,39 @@
+{% extends 'base_duel.html' %}
+
+{% set page_title = 'Sunwi - Duel Football' %}
+{% set vote_url = url_for('football.vote') %}
+{% set leaderboard_url = url_for('football.classement') %}
+{% set item_a_id = p1.player_id %}
+{% set item_b_id = p2.player_id %}
+
+{% block card_a_content %}
+<div class="pochette-wrapper">
+    <img src="{{ p1.photo_url or 'https://cdn.sofifa.net/player_0.png' }}" alt="{{ p1.name }}" class="pochette" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://cdn.sofifa.net/player_0.png';">
+</div>
+<div class="track-info">
+    <span class="track-badge">{{ p1.position or 'JOUEUR' }} • GEN {{ p1.overall }}</span>
+    <h2 class="track-title" title="{{ p1.name }}">{{ p1.name }}</h2>
+    <p class="track-artist" title="{{ p1.club }}">{{ p1.club }} ({{ p1.nationality }})</p>
+    <div class="elo-display">Elo actuel: <strong>{{ p1.elo }}</strong></div>
+    <div class="match-count">
+        {% set current_match_a = (p1.matches_count or 0) + 1 %}
+        {{ current_match_a }}{% if current_match_a == 1 %}er{% else %}e{% endif %} duel
+    </div>
+</div>
+{% endblock %}
+
+{% block card_b_content %}
+<div class="pochette-wrapper">
+    <img src="{{ p2.photo_url or 'https://cdn.sofifa.net/player_0.png' }}" alt="{{ p2.name }}" class="pochette" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://cdn.sofifa.net/player_0.png';">
+</div>
+<div class="track-info">
+    <span class="track-badge">{{ p2.position or 'JOUEUR' }} • GEN {{ p2.overall }}</span>
+    <h2 class="track-title" title="{{ p2.name }}">{{ p2.name }}</h2>
+    <p class="track-artist" title="{{ p2.club }}">{{ p2.club }} ({{ p2.nationality }})</p>
+    <div class="elo-display">Elo actuel: <strong>{{ p2.elo }}</strong></div>
+    <div class="match-count">
+        {% set current_match_b = (p2.matches_count or 0) + 1 %}
+        {{ current_match_b }}{% if current_match_b == 1 %}er{% else %}e{% endif %} duel
+    </div>
+</div>
+{% endblock %}

@@ -32,13 +32,72 @@
                   
                   <h3 class="hub-module-title">{{ module.title }}</h3>
                   
-                  <div class="mt-auto pt-2">
-                    {% if module.active %}
-                      <a href="{{ module.url }}" class="hub-btn-action">Lancer ⚔️</a>
-                    {% else %}
-                      <button class="hub-btn-disabled" disabled>Bientôt 🔒</button>
-                    {% endif %}
-                  </div>
+                  <!-- Cas spécifique de la carte avec menu déroulant par championnat -->
+                  {% if module.id == 'football_leagues' %}
+                    <div class="d-flex flex-column gap-1 mt-auto">
+                      <select id="football-league-select" class="form-select form-select-sm hub-league-select">
+                        <option value="/football/ligue1">Ligue 1</option>
+                        <option value="/football/laliga">LaLiga</option>
+                        <option value="/football/premier_league">Premier League</option>
+                        <option value="/football/serie_a">Serie A</option>
+                        <option value="/football/bundesliga">Bundesliga</option>
+                      </select>
+                      <button onclick="window.location.href=document.getElementById('football-league-select').value" class="hub-btn-action border-0" style="padding: 3px 0;">Lancer ⚔️</button>
+                    </div>
+
+                  <!-- Cas spécifique de la carte Pokémon par génération -->
+                  {% elif module.id == 'pokemon_generations' %}
+                    <div class="d-flex flex-column gap-1 mt-auto">
+                      <select id="pokemon-gen-select" class="form-select form-select-sm hub-league-select">
+                        <option value="/pokemon/?generation=generation-i">Génération 1</option>
+                        <option value="/pokemon/?generation=generation-ii">Génération 2</option>
+                        <option value="/pokemon/?generation=generation-iii">Génération 3</option>
+                        <option value="/pokemon/?generation=generation-iv">Génération 4</option>
+                        <option value="/pokemon/?generation=generation-v">Génération 5</option>
+                        <option value="/pokemon/?generation=generation-vi">Génération 6</option>
+                        <option value="/pokemon/?generation=generation-vii">Génération 7</option>
+                        <option value="/pokemon/?generation=generation-viii">Génération 8</option>
+                        <option value="/pokemon/?generation=generation-ix">Génération 9</option>
+                      </select>
+                      <button onclick="window.location.href=document.getElementById('pokemon-gen-select').value" class="hub-btn-action border-0" style="padding: 3px 0;">Lancer ⚔️</button>
+                    </div>
+
+                  <!-- Cas spécifique de la carte Pokémon par type -->
+                  {% elif module.id == 'pokemon_types' %}
+                    <div class="d-flex flex-column gap-1 mt-auto">
+                      <select id="pokemon-type-select" class="form-select form-select-sm hub-league-select">
+                        <option value="/pokemon/?type=normal">Normal</option>
+                        <option value="/pokemon/?type=fire">Feu</option>
+                        <option value="/pokemon/?type=water">Eau</option>
+                        <option value="/pokemon/?type=grass">Plante</option>
+                        <option value="/pokemon/?type=electric">Électrik</option>
+                        <option value="/pokemon/?type=ice">Glace</option>
+                        <option value="/pokemon/?type=fighting">Combat</option>
+                        <option value="/pokemon/?type=poison">Poison</option>
+                        <option value="/pokemon/?type=ground">Sol</option>
+                        <option value="/pokemon/?type=flying">Vol</option>
+                        <option value="/pokemon/?type=psychic">Psy</option>
+                        <option value="/pokemon/?type=bug">Insecte</option>
+                        <option value="/pokemon/?type=rock">Roche</option>
+                        <option value="/pokemon/?type=ghost">Spectre</option>
+                        <option value="/pokemon/?type=dragon">Dragon</option>
+                        <option value="/pokemon/?type=dark">Ténèbres</option>
+                        <option value="/pokemon/?type=steel">Acier</option>
+                        <option value="/pokemon/?type=fairy">Fée</option>
+                      </select>
+                      <button onclick="window.location.href=document.getElementById('pokemon-type-select').value" class="hub-btn-action border-0" style="padding: 3px 0;">Lancer ⚔️</button>
+                    </div>
+
+                  {% else %}
+                    <div class="mt-auto pt-2">
+                      {% if module.active %}
+                        <a href="{{ module.url }}" class="hub-btn-action">Lancer ⚔️</a>
+                      {% else %}
+                        <button class="hub-btn-disabled" disabled>Bientôt 🔒</button>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+
                 </div>
               </div>
               {% endfor %}

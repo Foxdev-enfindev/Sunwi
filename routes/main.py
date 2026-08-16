@@ -9,7 +9,7 @@ def hub():
     modules = [
         # --- SPORT ---
         {
-            'id': 'football',
+            'id': 'football_top500',
             'title': 'Football (Top 500)',
             'category': 'Sport',
             'badge': 'Disponible',
@@ -17,44 +17,12 @@ def hub():
             'url': '/football/'
         },
         {
-            'id': 'ligue1',
-            'title': 'Ligue 1',
+            'id': 'football_leagues',
+            'title': 'Football (Par championnat)',
             'category': 'Sport',
             'badge': 'Disponible',
             'active': True,
-            'url': '/football/ligue1'
-        },
-        {
-            'id': 'laliga',
-            'title': 'LaLiga',
-            'category': 'Sport',
-            'badge': 'Disponible',
-            'active': True,
-            'url': '/football/laliga'
-        },
-        {
-            'id': 'premier_league',
-            'title': 'Premier League',
-            'category': 'Sport',
-            'badge': 'Disponible',
-            'active': True,
-            'url': '/football/premier league'
-        },
-        {
-            'id': 'serie_a',
-            'title': 'Serie A',
-            'category': 'Sport',
-            'badge': 'Disponible',
-            'active': True,
-            'url': '/football/serie a'
-        },
-        {
-            'id': 'bundesliga',
-            'title': 'Bundesliga',
-            'category': 'Sport',
-            'badge': 'Disponible',
-            'active': True,
-            'url': '/football/bundesliga'
+            'url': '#'
         },
         {
             'id': 'nba',
@@ -95,11 +63,27 @@ def hub():
 
         # --- GAMING ---
         {
-            'id': 'pokemon',
-            'title': 'Pokémon',
+            'id': 'pokemon_global',
+            'title': 'Pokémon (Global)',
             'category': 'Gaming',
-            'badge': 'Bientôt',
-            'active': False,
+            'badge': 'Disponible',
+            'active': True,
+            'url': '/pokemon/'
+        },
+        {
+            'id': 'pokemon_generations',
+            'title': 'Pokémon (Par génération)',
+            'category': 'Gaming',
+            'badge': 'Disponible',
+            'active': True,
+            'url': '#'
+        },
+        {
+            'id': 'pokemon_types',
+            'title': 'Pokémon (Par type)',
+            'category': 'Gaming',
+            'badge': 'Disponible',
+            'active': True,
             'url': '#'
         }
     ]

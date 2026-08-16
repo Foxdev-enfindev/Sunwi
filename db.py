@@ -1,22 +1,26 @@
 # db.py
 import os
 import psycopg2
+from dotenv import load_dotenv
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
+# Charge les variables du .env dès l'importation de db.py
+load_dotenv()
 
 def get_db_connection():
-    if not DATABASE_URL:
+    database_url = os.environ.get('DATABASE_URL')
+    if not database_url:
         return None
-    return psycopg2.connect(DATABASE_URL, sslmode='require')
+    return psycopg2.connect(database_url, sslmode='require')
 
 def init_global_db():
-    if not DATABASE_URL:
+    database_url = os.environ.get('DATABASE_URL')
+    if not database_url:
         return
     try:
         conn = get_db_connection()
         cur = conn.cursor()
         
-        # Utilisateurs
+        # Utilisateurs[cite: 5]
         cur.execute("""
             CREATE TABLE IF NOT EXISTS users (
                 id SERIAL PRIMARY KEY,
@@ -28,7 +32,7 @@ def init_global_db():
             );
         """)
         
-        # Métadonnées statiques des joueurs
+        # Métadonnées statiques des joueurs[cite: 5]
         cur.execute("""
             CREATE TABLE IF NOT EXISTS football_players_scores (
                 player_id VARCHAR(50) PRIMARY KEY,
@@ -42,7 +46,7 @@ def init_global_db():
             );
         """)
 
-        # Scores Elo INDIVIDUELS par utilisateur
+        # Scores Elo INDIVIDUELS par utilisateur[cite: 5]
         cur.execute("""
             CREATE TABLE IF NOT EXISTS user_football_scores (
                 user_id INT REFERENCES users(id) ON DELETE CASCADE,
@@ -53,7 +57,31 @@ def init_global_db():
             );
         """)
 
-        # Traçabilité des votes
+        # Métadonnées statiques des Pokémon
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS pokemon_players (
+                pokemon_id INT PRIMARY KEY,
+                name VARCHAR(100) NOT NULL,
+                generation VARCHAR(50),
+                type1 VARCHAR(50) NOT NULL,
+                type2 VARCHAR(50),
+                sprite_url TEXT,
+                shiny_url TEXT
+            );
+        """)
+
+        # Scores Elo INDIVIDUELS des Pokémon par utilisateur
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS user_pokemon_scores (
+                user_id INT REFERENCES users(id) ON DELETE CASCADE,
+                pokemon_id INT REFERENCES pokemon_players(pokemon_id) ON DELETE CASCADE,
+                elo INT DEFAULT 1000.0,
+                matches_count INT DEFAULT 0,
+                PRIMARY KEY (user_id, pokemon_id)
+            );
+        """)
+
+        # Traçabilité des votes[cite: 5]
         cur.execute("""
             CREATE TABLE IF NOT EXISTS user_votes (
                 id SERIAL PRIMARY KEY,

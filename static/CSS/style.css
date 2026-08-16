@@ -1129,7 +1129,8 @@ body.playlists-body, body.classement-body, body.quit-body {
 
 .hub-carousel-card {
     flex: 0 0 200px !important;
-    height: 115px !important;
+    height: auto !important;       /* Hauteur fluide pour accueillir le select */
+    min-height: 115px !important;  /* Hauteur minimum compacte */
     background: var(--card-bg) !important;
     border: 1px solid rgba(150, 150, 150, 0.15) !important;
     border-radius: 12px !important;
@@ -1326,4 +1327,31 @@ body.playlists-body, body.classement-body, body.quit-body {
     background: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(0, 0, 0, 0.1);
     color: #0f172a;
+}
+/* =======================================================
+   STYLE DU MENU DÉROULANT DES CHAMPIONNATS
+   ======================================================= */
+.hub-league-select {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border: 1.5px solid var(--neon-green) !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    padding: 4px 8px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 0 8px var(--neon-green-glow) !important;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.hub-league-select:focus {
+    border-color: var(--neon-green) !important;
+    box-shadow: 0 0 12px var(--neon-green-glow) !important;
+    outline: none;
+}
+
+.hub-league-select option {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    padding: 8px;
 }

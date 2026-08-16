@@ -1,0 +1,111 @@
+{% extends 'base_duel.html' %}
+
+{% set page_title = "Sunwi — Duels Pokémon" %}
+{% set header_title = "Choisis ton Pokémon favori" %}
+{% set vote_url = url_for('pokemon.vote') %}
+{% set leaderboard_url = url_for('pokemon.classement') %}
+
+{% set item_a_id = p1.pokemon_id %}
+{% set item_b_id = p2.pokemon_id %}
+
+{% block card_a_content %}
+<!-- Badge supérieur (Génération + Numéro) -->
+<div class="player-badge mb-2">
+    #{{ p1.pokemon_id }} • {{ p1.generation | upper }}
+</div>
+
+<!-- Sprite du Pokémon -->
+<div class="my-3 text-center">
+    <img src="{{ p1.sprite_url }}" alt="{{ p1.name }}" class="img-fluid" style="height: 130px; object-fit: contain; image-rendering: pixelated; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));">
+</div>
+
+<!-- Nom -->
+<h2 class="player-name mb-2">{{ p1.name }}</h2>
+
+<!-- Types -->
+<div class="d-flex justify-content-center gap-1 mb-3">
+    <span class="badge type-badge type-{{ p1.type1 }}">{{ p1.type1 }}</span>
+    {% if p1.type2 %}
+    <span class="badge type-badge type-{{ p1.type2 }}">{{ p1.type2 }}</span>
+    {% endif %}
+</div>
+
+<!-- Score Elo -->
+<div class="player-elo">
+    Elo actuel: <span class="elo-value text-info fw-bold">{{ p1.elo | int }}</span>
+</div>
+
+<!-- Nombre de duels -->
+<div class="player-team">
+    {% if p1.matches_count == 0 %}
+        1er duel
+    {% elif p1.matches_count == 1 %}
+        1 duel
+    {% else %}
+        {{ p1.matches_count }} duels
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block card_b_content %}
+<!-- Badge supérieur (Génération + Numéro) -->
+<div class="player-badge mb-2">
+    #{{ p2.pokemon_id }} • {{ p2.generation | upper }}
+</div>
+
+<!-- Sprite du Pokémon -->
+<div class="my-3 text-center">
+    <img src="{{ p2.sprite_url }}" alt="{{ p2.name }}" class="img-fluid" style="height: 130px; object-fit: contain; image-rendering: pixelated; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));">
+</div>
+
+<!-- Nom -->
+<h2 class="player-name mb-2">{{ p2.name }}</h2>
+
+<!-- Types -->
+<div class="d-flex justify-content-center gap-1 mb-3">
+    <span class="badge type-badge type-{{ p2.type1 }}">{{ p2.type1 }}</span>
+    {% if p2.type2 %}
+    <span class="badge type-badge type-{{ p2.type2 }}">{{ p2.type2 }}</span>
+    {% endif %}
+</div>
+
+<!-- Score Elo -->
+<div class="player-elo">
+    Elo actuel: <span class="elo-value text-info fw-bold">{{ p2.elo | int }}</span>
+</div>
+
+<!-- Nombre de duels -->
+<div class="player-team">
+    {% if p2.matches_count == 0 %}
+        1er duel
+    {% elif p2.matches_count == 1 %}
+        1 duel
+    {% else %}
+        {{ p2.matches_count }} duels
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block module_scripts %}
+<style>
+/* Couleurs officielles des types Pokémon */
+.type-fire { background-color: #EE7F30; color: white; }
+.type-water { background-color: #6790F0; color: white; }
+.type-grass { background-color: #78C850; color: white; }
+.type-electric { background-color: #F8D030; color: #333; }
+.type-ice { background-color: #98D8D8; color: #333; }
+.type-fighting { background-color: #C03028; color: white; }
+.type-poison { background-color: #A040A0; color: white; }
+.type-ground { background-color: #E0C068; color: #333; }
+.type-flying { background-color: #A890F0; color: white; }
+.type-psychic { background-color: #F85888; color: white; }
+.type-bug { background-color: #A8B820; color: white; }
+.type-rock { background-color: #B8A038; color: white; }
+.type-ghost { background-color: #705898; color: white; }
+.type-dragon { background-color: #7038F8; color: white; }
+.type-dark { background-color: #705848; color: white; }
+.type-steel { background-color: #B8B8D0; color: #333; }
+.type-fairy { background-color: #EE99AC; color: #333; }
+.type-normal { background-color: #A8A878; color: white; }
+</style>
+{% endblock %}

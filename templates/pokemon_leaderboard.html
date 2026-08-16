@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}Sunwi — Classement Pokémon{% endblock %}
+
+{% block content %}
+<div class="classement-container py-4">
+    <!-- En-tête -->
+    <div class="classement-header text-center mb-4">
+        <h1 class="display-5 fw-bold text-light mb-2">🏆 CLASSEMENT POKÉMON 🏆</h1>
+        <p class="text-secondary fs-5">Ton classement individuel Pokédex Global</p>
+
+        <div class="quit-actions-group d-flex justify-content-center gap-3 mt-3">
+            <a href="{{ url_for('pokemon.pokemon_hub') }}" class="btn btn-primary fw-bold">⚔️ Retour aux duels</a>
+            <a href="{{ url_for('main.hub') }}" class="btn btn-outline-secondary">🏠 Hub</a>
+        </div>
+    </div>
+
+    <!-- Liste des cartes de classement (Même largeur et conteneur que le football) -->
+    <div class="ranking-list mx-auto" style="max-width: 700px;">
+        {% if ranking %}
+            {% for p in ranking %}
+            <div class="ranking-card d-flex align-items-center justify-content-between p-3 mb-2 rounded-3 shadow-sm" style="background: linear-gradient(145deg, #1e293b, #0f172a); border: 1px solid rgba(255,255,255,0.08);">
+                
+                <!-- Partie Gauche : Rang, Sprite et Infos -->
+                <div class="d-flex align-items-center gap-3 flex-grow-1 min-width-0">
+                    <span class="ranking-rank fw-bold text-warning fs-5 flex-shrink-0" style="min-width: 40px; text-align: center;">#{{ loop.index }}</span>
+
+                    <!-- Sprite du Pokémon -->
+                    <div class="bg-black bg-opacity-25 p-1 rounded-3 text-center flex-shrink-0" style="width: 55px; height: 55px; display: flex; align-items: center; justify-content: center;">
+                        <img src="{{ p.sprite_url }}" alt="{{ p.name }}" style="max-height: 45px; object-fit: contain; image-rendering: pixelated;">
+                    </div>
+
+                    <!-- Nom et détails -->
+                    <div class="min-width-0 flex-grow-1">
+                        <div class="d-flex align-items-center flex-wrap gap-2">
+                            <span class="fw-bold text-light fs-6 text-truncate">{{ p.name }}</span>
+                            <span class="badge bg-secondary text-uppercase" style="font-size: 0.6rem;">#{{ p.pokemon_id }} • {{ p.generation | upper }}</span>
+                        </div>
+                        <!-- Types -->
+                        <div class="d-flex gap-1 mt-1">
+                            <span class="badge type-badge type-{{ p.type1 }}" style="font-size: 0.65rem;">{{ p.type1 }}</span>
+                            {% if p.type2 %}
+                            <span class="badge type-badge type-{{ p.type2 }}" style="font-size: 0.65rem;">{{ p.type2 }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Partie Droite : Score Elo et Nombre de Duels -->
+                <div class="text-end ps-3 flex-shrink-0" style="white-space: nowrap;">
+                    <div class="fw-bold text-primary fs-6">{{ p.elo | int }} pts</div>
+                    <div class="text-info" style="font-size: 0.8rem;">
+                        {% if p.matches_count == 0 %}
+                            1er duel
+                        {% elif p.matches_count == 1 %}
+                            1 duel
+                        {% else %}
+                            {{ p.matches_count }} duels
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-center text-muted mt-4">
+                Aucun Pokémon classé pour le moment.
+            </p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<style>
+/* Couleurs des types Pokémon pour le classement */
+.type-fire { background-color: #EE7F30; color: white; }
+.type-water { background-color: #6790F0; color: white; }
+.type-grass { background-color: #78C850; color: white; }
+.type-electric { background-color: #F8D030; color: #333; }
+.type-ice { background-color: #98D8D8; color: #333; }
+.type-fighting { background-color: #C03028; color: white; }
+.type-poison { background-color: #A040A0; color: white; }
+.type-ground { background-color: #E0C068; color: #333; }
+.type-flying { background-color: #A890F0; color: white; }
+.type-psychic { background-color: #F85888; color: white; }
+.type-bug { background-color: #A8B820; color: white; }
+.type-rock { background-color: #B8A038; color: white; }
+.type-ghost { background-color: #705898; color: white; }
+.type-dragon { background-color: #7038F8; color: white; }
+.type-dark { background-color: #705848; color: white; }
+.type-steel { background-color: #B8B8D0; color: #333; }
+.type-fairy { background-color: #EE99AC; color: #333; }
+.type-normal { background-color: #A8A878; color: white; }
+</style>
+{% endblock %}

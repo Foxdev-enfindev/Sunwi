@@ -9,81 +9,177 @@
 {% set item_b_id = p2.pokemon_id %}
 
 {% block card_a_content %}
-<!-- Badge supérieur (Génération + Numéro) -->
-<div class="player-badge mb-2">
-    #{{ p1.pokemon_id }} • {{ p1.generation | upper }}
-</div>
+<div class="pokemon-card-inner">
+    <!-- Sprite du Pokémon (à gauche sur mobile) -->
+    <div class="pokemon-sprite-wrapper">
+        <img src="{{ p1.sprite_url }}" alt="{{ p1.name }}" class="pokemon-sprite-img">
+    </div>
 
-<!-- Sprite du Pokémon -->
-<div class="my-3 text-center">
-    <img src="{{ p1.sprite_url }}" alt="{{ p1.name }}" class="img-fluid" style="height: 130px; object-fit: contain; image-rendering: pixelated; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));">
-</div>
+    <!-- Infos centrales : Nom + Badge (Numéro & Génération) + Types -->
+    <div class="pokemon-info-wrapper">
+        <h2 class="player-name">{{ p1.name }}</h2>
+        <div class="player-badge">
+            #{{ p1.pokemon_id }} • {{ p1.generation | upper }}
+        </div>
+        <div class="d-flex flex-wrap gap-1 mt-1">
+            <span class="badge type-badge type-{{ p1.type1 }}">{{ p1.type1 }}</span>
+            {% if p1.type2 %}
+            <span class="badge type-badge type-{{ p1.type2 }}">{{ p1.type2 }}</span>
+            {% endif %}
+        </div>
+    </div>
 
-<!-- Nom -->
-<h2 class="player-name mb-2">{{ p1.name }}</h2>
-
-<!-- Types -->
-<div class="d-flex justify-content-center gap-1 mb-3">
-    <span class="badge type-badge type-{{ p1.type1 }}">{{ p1.type1 }}</span>
-    {% if p1.type2 %}
-    <span class="badge type-badge type-{{ p1.type2 }}">{{ p1.type2 }}</span>
-    {% endif %}
-</div>
-
-<!-- Score Elo -->
-<div class="player-elo">
-    Elo actuel: <span class="elo-value text-info fw-bold">{{ p1.elo | int }}</span>
-</div>
-
-<!-- Nombre de duels -->
-<div class="player-team">
-    {% if p1.matches_count == 0 %}
-        1er duel
-    {% else %}
-        {{ p1.matches_count + 1 }}e duel
-    {% endif %}
+    <!-- Score Elo (à droite) -->
+    <div class="pokemon-elo-wrapper">
+        <div class="player-elo">
+            Elo: <span class="elo-value text-info fw-bold">{{ p1.elo | int }}</span>
+        </div>
+        <div class="player-team">
+            {% if p1.matches_count == 0 %}
+                1er duel
+            {% else %}
+                {{ p1.matches_count + 1 }}e duel
+            {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}
 
 {% block card_b_content %}
-<!-- Badge supérieur (Génération + Numéro) -->
-<div class="player-badge mb-2">
-    #{{ p2.pokemon_id }} • {{ p2.generation | upper }}
-</div>
+<div class="pokemon-card-inner">
+    <!-- Sprite du Pokémon (à gauche sur mobile) -->
+    <div class="pokemon-sprite-wrapper">
+        <img src="{{ p2.sprite_url }}" alt="{{ p2.name }}" class="pokemon-sprite-img">
+    </div>
 
-<!-- Sprite du Pokémon -->
-<div class="my-3 text-center">
-    <img src="{{ p2.sprite_url }}" alt="{{ p2.name }}" class="img-fluid" style="height: 130px; object-fit: contain; image-rendering: pixelated; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));">
-</div>
+    <!-- Infos centrales : Nom + Badge (Numéro & Génération) + Types -->
+    <div class="pokemon-info-wrapper">
+        <h2 class="player-name">{{ p2.name }}</h2>
+        <div class="player-badge">
+            #{{ p2.pokemon_id }} • {{ p2.generation | upper }}
+        </div>
+        <div class="d-flex flex-wrap gap-1 mt-1">
+            <span class="badge type-badge type-{{ p2.type1 }}">{{ p2.type1 }}</span>
+            {% if p2.type2 %}
+            <span class="badge type-badge type-{{ p2.type2 }}">{{ p2.type2 }}</span>
+            {% endif %}
+        </div>
+    </div>
 
-<!-- Nom -->
-<h2 class="player-name mb-2">{{ p2.name }}</h2>
-
-<!-- Types -->
-<div class="d-flex justify-content-center gap-1 mb-3">
-    <span class="badge type-badge type-{{ p2.type1 }}">{{ p2.type1 }}</span>
-    {% if p2.type2 %}
-    <span class="badge type-badge type-{{ p2.type2 }}">{{ p2.type2 }}</span>
-    {% endif %}
-</div>
-
-<!-- Score Elo -->
-<div class="player-elo">
-    Elo actuel: <span class="elo-value text-info fw-bold">{{ p2.elo | int }}</span>
-</div>
-
-<!-- Nombre de duels -->
-<div class="player-team">
-    {% if p2.matches_count == 0 %}
-        1er duel
-    {% else %}
-        {{ p2.matches_count + 1 }}e duel
-    {% endif %}
+    <!-- Score Elo (à droite) -->
+    <div class="pokemon-elo-wrapper">
+        <div class="player-elo">
+            Elo: <span class="elo-value text-info fw-bold">{{ p2.elo | int }}</span>
+        </div>
+        <div class="player-team">
+            {% if p2.matches_count == 0 %}
+                1er duel
+            {% else %}
+                {{ p2.matches_count + 1 }}e duel
+            {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}
 
 {% block module_scripts %}
 <style>
+/* Disposition par défaut (Bureau / Grands écrans) */
+.pokemon-card-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.pokemon-sprite-wrapper {
+    margin: 12px 0;
+}
+
+.pokemon-sprite-img {
+    height: 130px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
+}
+
+.pokemon-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.pokemon-elo-wrapper {
+    margin-top: 8px;
+}
+
+/* =======================================================
+   ADAPTATION MOBILE (Portrait) : Ligne unique compacte
+   ======================================================= */
+@media screen and (orientation: portrait) {
+    .pokemon-card-inner {
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        text-align: left !important;
+        padding: 4px 0 !important;
+        gap: 8px !important;
+        width: 100% !important;
+    }
+
+    .pokemon-sprite-wrapper {
+        margin: 0 !important;
+        flex-shrink: 0 !important;
+    }
+
+    .pokemon-sprite-img {
+        width: 55px !important;
+        height: 55px !important;
+    }
+
+    .pokemon-info-wrapper {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        align-items: flex-start !important;
+        padding: 0 4px !important;
+    }
+
+    .player-name {
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 0 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        width: 100% !important;
+    }
+
+    .player-badge {
+        font-size: 0.6rem !important;
+        color: var(--text-muted) !important;
+        margin-bottom: 2px !important;
+    }
+
+    .pokemon-elo-wrapper {
+        margin-top: 0 !important;
+        flex-shrink: 0 !important;
+        text-align: right !important;
+        font-size: 0.72rem !important;
+        white-space: nowrap !important;
+    }
+
+    .player-elo {
+        font-size: 0.7rem !important;
+    }
+
+    .player-team {
+        font-size: 0.65rem !important;
+        opacity: 0.8;
+    }
+}
+
 /* Couleurs officielles des types Pokémon */
 .type-fire { background-color: #EE7F30; color: white; }
 .type-water { background-color: #6790F0; color: white; }

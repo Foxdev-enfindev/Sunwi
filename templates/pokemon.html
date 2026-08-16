@@ -39,10 +39,8 @@
 <div class="player-team">
     {% if p1.matches_count == 0 %}
         1er duel
-    {% elif p1.matches_count == 1 %}
-        1 duel
     {% else %}
-        {{ p1.matches_count }} duels
+        {{ p1.matches_count + 1 }}e duel
     {% endif %}
 </div>
 {% endblock %}
@@ -78,10 +76,8 @@
 <div class="player-team">
     {% if p2.matches_count == 0 %}
         1er duel
-    {% elif p2.matches_count == 1 %}
-        1 duel
     {% else %}
-        {{ p2.matches_count }} duels
+        {{ p2.matches_count + 1 }}e duel
     {% endif %}
 </div>
 {% endblock %}

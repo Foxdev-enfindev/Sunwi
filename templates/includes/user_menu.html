@@ -6,9 +6,9 @@
 <div class="dropdown">
   <button class="btn user-menu-btn d-flex align-items-center gap-2 rounded-pill px-3 py-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     {% if sunwi_u and sunwi_u.get('picture') %}
-      <img src="{{ sunwi_u['picture'] }}" alt="Avatar" class="rounded-circle" width="26" height="26">
+      <img src="{{ sunwi_u['picture'] }}" alt="Avatar" class="rounded-circle" width="24" height="24">
     {% elif spotify_u and spotify_u.get('image') %}
-      <img src="{{ spotify_u['image'] }}" alt="Avatar" class="rounded-circle" width="26" height="26">
+      <img src="{{ spotify_u['image'] }}" alt="Avatar" class="rounded-circle" width="24" height="24">
     {% else %}
       <span>👤</span>
     {% endif %}
@@ -27,7 +27,8 @@
     <li><hr class="dropdown-divider"></li>
     {% endif %}
 
-    <!-- Mode Audio (Silence / Spotify) -->
+    <!-- Mode Audio (Visible UNIQUEMENT dans le module Spotify) -->
+    {% if request.blueprint == 'spotify' %}
     <li class="mb-2">
       <small class="theme-label d-block mb-1">Mode Audio</small>
       <div class="btn-group w-100" role="group">
@@ -41,10 +42,10 @@
         </a>
       </div>
     </li>
-    
     <li><hr class="dropdown-divider"></li>
+    {% endif %}
 
-    <!-- Mode d'affichage -->
+    <!-- Mode d'affichage (Global) -->
     <li class="mb-2">
       <small class="theme-label d-block mb-1">Mode d'affichage</small>
       <div class="btn-group w-100" role="group">
@@ -55,7 +56,7 @@
     
     <li><hr class="dropdown-divider"></li>
 
-    <!-- Thème couleur -->
+    <!-- Thème couleur (Global) -->
     <li class="mb-2">
       <small class="theme-label d-block mb-1">Couleur d'accent</small>
       <div class="d-flex justify-content-between align-items-center">
@@ -71,11 +72,17 @@
 
     <li><hr class="dropdown-divider"></li>
 
-    <!-- Navigation -->
-    <li><a class="dropdown-item rounded py-2" href="{{ url_for('spotify.playlists') }}">🎵 Mes Playlists</a></li>
-    <li><a class="dropdown-item rounded py-2" href="{{ url_for('spotify.classement') }}">📊 Classement</a></li>
-    <li><a class="dropdown-item rounded py-2" href="{{ url_for('spotify.stats') }}">📈 Statistiques</a></li>
-    <li><hr class="dropdown-divider"></li>
+    <!-- Navigation dynamique -->
+    {% if request.blueprint == 'spotify' %}
+      <li><a class="dropdown-item rounded py-2" href="{{ url_for('spotify.playlists') }}">🎵 Mes Playlists</a></li>
+      <li><a class="dropdown-item rounded py-2" href="{{ url_for('spotify.classement') }}">📊 Classement</a></li>
+      <li><a class="dropdown-item rounded py-2" href="{{ url_for('spotify.stats') }}">📈 Statistiques</a></li>
+      <li><hr class="dropdown-divider"></li>
+    {% elif request.blueprint == 'football' %}
+      <li><a class="dropdown-item rounded py-2" href="{{ url_for('football.classement') }}">📊 Classement Football</a></li>
+      <li><hr class="dropdown-divider"></li>
+    {% endif %}
+
     <li>
       <a class="dropdown-item rounded py-2 text-danger fw-bold" href="{{ url_for('auth.logout') if sunwi_u else url_for('spotify.logout') }}">
         🚪 Déconnexion
@@ -84,8 +91,8 @@
   </ul>
 </div>
 {% else %}
-<a href="{{ url_for('auth.google_login') }}" class="btn btn-outline-light rounded-pill px-3 py-1 fw-bold d-flex align-items-center gap-2 text-decoration-none" style="border-color: rgba(255,255,255,0.2); font-size: 0.9rem;">
-  <svg width="18" height="18" viewBox="0 0 24 24">
+<a href="{{ url_for('auth.google_login') }}" class="btn btn-outline-light rounded-pill px-3 py-1 fw-bold d-flex align-items-center gap-2 text-decoration-none" style="border-color: rgba(255,255,255,0.2); font-size: 0.85rem;">
+  <svg width="16" height="16" viewBox="0 0 24 24">
     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
     <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
     <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>

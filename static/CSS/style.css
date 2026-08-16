@@ -1362,48 +1362,55 @@ body.playlists-body, body.classement-body, body.quit-body {
     padding: 8px;
 }
 /* =======================================================
-   CORRECTION FINALE RESPONSIVE DES CARTES POKÉMON (MOBILE)
+   CORRECTION RESPONSIVE PORTRAIT (CARTES POKÉMON EN 2 LIGNES)
    ======================================================= */
 @media screen and (orientation: portrait) {
     .track-card {
         display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        padding: 12px 14px !important;
+        gap: 10px !important;
+    }
+
+    /* Ligne supérieure : Image + Nom + Types */
+    .track-card-top, .track-card > div:first-child {
+        display: flex !important;
         flex-direction: row !important;
         align-items: center !important;
-        justify-content: space-between !important;
-        padding: 10px 10px !important;
-        gap: 8px !important;
+        gap: 12px !important;
+        width: 100% !important;
     }
 
     .pochette-wrapper, .pochette-wrapper .pochette, .track-card img {
-        width: 60px !important;
-        height: 60px !important;
-        min-width: 60px !important;
-        min-height: 60px !important;
-        max-width: 60px !important;
-        max-height: 60px !important;
+        width: 55px !important;
+        height: 55px !important;
+        min-width: 55px !important;
+        min-height: 55px !important;
         object-fit: contain !important;
         flex-shrink: 0 !important;
         display: block !important;
-        position: relative !important;
     }
 
     .track-info {
         flex: 1 !important;
         min-width: 0 !important;
-        padding: 0 4px !important;
         text-align: left !important;
     }
 
     .track-title {
-        font-size: 0.9rem !important;
+        font-size: 1.05rem !important;
         white-space: nowrap !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
     }
 
-    .elo-display {
-        flex-shrink: 0 !important;
-        text-align: right !important;
-        font-size: 0.75rem !important;
+    /* Ligne inférieure : Génération à gauche, Elo à droite */
+    .track-card-bottom, .track-card .elo-display, .track-card .track-badge {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        margin: 0 !important;
     }
 }

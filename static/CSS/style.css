@@ -1362,7 +1362,7 @@ body.playlists-body, body.classement-body, body.quit-body {
     padding: 8px;
 }
 /* =======================================================
-   CORRECTION FINALE COMPacte PORTRAIT
+   CORRECTION FINALE RESPONSIVE : MISE EN PAGE 2 COLONNES
    ======================================================= */
 @media screen and (orientation: portrait) {
     .track-card {
@@ -1370,42 +1370,56 @@ body.playlists-body, body.classement-body, body.quit-body {
         flex-direction: row !important;
         align-items: center !important;
         justify-content: space-between !important;
-        padding: 10px 12px !important;
-        gap: 8px !important;
+        padding: 12px 14px !important;
+        gap: 12px !important;
+    }
+
+    /* Bloc de gauche : Image + Numéro/Génération empilés */
+    .track-card-left, .track-card > div:first-child {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 4px !important;
+        flex-shrink: 0 !important;
     }
 
     .pochette-wrapper, .pochette-wrapper .pochette, .track-card img {
-        width: 50px !important;
-        height: 50px !important;
-        min-width: 50px !important;
-        min-height: 50px !important;
+        width: 65px !important;
+        height: 65px !important;
+        min-width: 65px !important;
+        min-height: 65px !important;
         object-fit: contain !important;
-        flex-shrink: 0 !important;
         display: block !important;
-    }
-
-    .track-info {
-        flex: 1 !important;
-        min-width: 0 !important;
-        padding: 0 6px !important;
-        text-align: left !important;
     }
 
     .track-badge {
         font-size: 0.65rem !important;
         padding: 2px 6px !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+    }
+
+    /* Bloc de droite : Nom, types et Elo */
+    .track-info {
+        flex: 1 !important;
+        min-width: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        text-align: left !important;
     }
 
     .track-title {
-        font-size: 0.9rem !important;
+        font-size: 1.05rem !important;
         white-space: nowrap !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
+        width: 100% !important;
     }
 
     .elo-display {
-        flex-shrink: 0 !important;
-        text-align: right !important;
-        font-size: 0.75rem !important;
+        margin-top: 4px !important;
+        font-size: 0.8rem !important;
+        width: 100% !important;
     }
 }

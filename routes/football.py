@@ -144,12 +144,31 @@ def vote():
     cache_key = f'football_players_cache_{active_league or "all"}'
     
     players_dict = get_cached_players(user_id, active_league)
-    p1, p2 = players_dict.get(p1_id), players_dict.get(p2_id)
+    p1 = players_dict.get(p1_id)
+    p2 = players_dict.get(p2_id)
 
     if p1 and p2:
-        p1['id'], p2['id'] = p1_id, p2_id
+        # On isole les données dans de nouveaux dictionnaires pour éviter la mutation par référence
+        item_a = {
+            'id': p1_id,
+            'name': p1['name'],
+            'elo': p1['elo'],
+            'matches_count': p1['matches_count']
+        }
+        item_b = {
+            'id': p2_id,
+            'name': p2['name'],
+            'elo': p2['elo'],
+            'matches_count': p2['matches_count']
+        }
 
-        new_p1_elo, new_p2_elo, winner_id, loser_id, last_result = compute_and_update_vote(p1, p2, outcome)
+        new_p1_elo, new_p2_elo, winner_id, loser_id, last_result = compute_and_update_vote(item_a, item_b, outcome)
+
+        # Mise à jour propre du cache de session
+        p1['elo'] = int(new_p1_elo)
+        p1['matches_count'] += 1
+        p2['elo'] = int(new_p2_elo)
+        p2['matches_count'] += 1
 
         session['football_last_result'] = last_result
         session[cache_key] = players_dict
@@ -157,7 +176,7 @@ def vote():
 
         save_vote_async_generic(
             db_save_football_vote, 
-            user_id, p1_id, p2_id, new_p1_elo, new_p2_elo, winner_id, loser_id
+            user_id, p1_id, p2_id, int(new_p1_elo), int(new_p2_elo), winner_id, loser_id
         )
 
     return redirect(url_for('football.football_hub', league=active_league) if active_league else url_for('football.football_hub'))

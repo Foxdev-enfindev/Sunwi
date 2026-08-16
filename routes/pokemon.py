@@ -135,18 +135,36 @@ def vote():
     cache_key = f'pokemon_cache_{generation or "all"}_{p_type or "all"}'
 
     pokemon_dict = get_cached_pokemon(user_id, generation, p_type)
-    p1, p2 = pokemon_dict.get(p1_id), pokemon_dict.get(p2_id)
+    p1 = pokemon_dict.get(p1_id)
+    p2 = pokemon_dict.get(p2_id)
 
     if p1 and p2:
-        p1['id'], p1['overall'] = p1_id, p1['elo']
-        p2['id'], p2['overall'] = p2_id, p2['elo']
+        # On s'assure de passer des dictionnaires propres avec leurs vraies clés 'pokemon_id' ou 'id'
+        item_a = {
+            'id': p1_id,
+            'name': p1['name'],
+            'elo': p1['elo'],
+            'matches_count': p1['matches_count']
+        }
+        item_b = {
+            'id': p2_id,
+            'name': p2['name'],
+            'elo': p2['elo'],
+            'matches_count': p2['matches_count']
+        }
 
-        new_p1_elo, new_p2_elo, winner_id, loser_id, last_result = compute_and_update_vote(p1, p2, outcome)
+        new_p1_elo, new_p2_elo, winner_id, loser_id, last_result = compute_and_update_vote(item_a, item_b, outcome)
 
         new_p1_elo = int(new_p1_elo)
         new_p2_elo = int(new_p2_elo)
         if last_result:
             last_result = last_result.replace('.0', '')
+
+        # Mise à jour directe du cache de session avec les nouvelles valeurs
+        p1['elo'] = new_p1_elo
+        p1['matches_count'] += 1
+        p2['elo'] = new_p2_elo
+        p2['matches_count'] += 1
 
         session['pokemon_last_result'] = last_result
         session[cache_key] = pokemon_dict

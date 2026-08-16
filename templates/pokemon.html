@@ -10,7 +10,7 @@
 
 {% block card_a_content %}
 <div class="pokemon-card-inner">
-    <!-- Sprite du Pokémon (à gauche sur mobile) -->
+    <!-- Sprite du Pokémon (plus grand à gauche) -->
     <div class="pokemon-sprite-wrapper">
         <img src="{{ p1.sprite_url }}" alt="{{ p1.name }}" class="pokemon-sprite-img">
     </div>
@@ -47,7 +47,7 @@
 
 {% block card_b_content %}
 <div class="pokemon-card-inner">
-    <!-- Sprite du Pokémon (à gauche sur mobile) -->
+    <!-- Sprite du Pokémon (plus grand à gauche) -->
     <div class="pokemon-sprite-wrapper">
         <img src="{{ p2.sprite_url }}" alt="{{ p2.name }}" class="pokemon-sprite-img">
     </div>
@@ -116,16 +116,19 @@
 }
 
 /* =======================================================
-   ADAPTATION MOBILE (Portrait) : Ligne unique compacte
+   ADAPTATION MOBILE (Portrait) : Carte élargie & Image agrandie
    ======================================================= */
 @media screen and (orientation: portrait) {
+    .track-card {
+        padding: 14px 14px !important; /* Carte plus généreuse en hauteur/espacement */
+    }
+
     .pokemon-card-inner {
         flex-direction: row !important;
         align-items: center !important;
         justify-content: space-between !important;
         text-align: left !important;
-        padding: 4px 0 !important;
-        gap: 8px !important;
+        gap: 12px !important;
         width: 100% !important;
     }
 
@@ -135,8 +138,8 @@
     }
 
     .pokemon-sprite-img {
-        width: 55px !important;
-        height: 55px !important;
+        width: 85px !important;  /* Image bien plus grande */
+        height: 85px !important;
     }
 
     .pokemon-info-wrapper {
@@ -147,9 +150,9 @@
     }
 
     .player-name {
-        font-size: 0.95rem !important;
-        font-weight: 700 !important;
-        margin-bottom: 0 !important;
+        font-size: 1.1rem !important; /* Nom plus lisible */
+        font-weight: 800 !important;
+        margin-bottom: 2px !important;
         white-space: nowrap !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
@@ -157,25 +160,25 @@
     }
 
     .player-badge {
-        font-size: 0.6rem !important;
+        font-size: 0.7rem !important;
         color: var(--text-muted) !important;
-        margin-bottom: 2px !important;
+        margin-bottom: 4px !important;
     }
 
     .pokemon-elo-wrapper {
         margin-top: 0 !important;
         flex-shrink: 0 !important;
         text-align: right !important;
-        font-size: 0.72rem !important;
+        font-size: 0.78rem !important;
         white-space: nowrap !important;
     }
 
     .player-elo {
-        font-size: 0.7rem !important;
+        font-size: 0.75rem !important;
     }
 
     .player-team {
-        font-size: 0.65rem !important;
+        font-size: 0.7rem !important;
         opacity: 0.8;
     }
 }

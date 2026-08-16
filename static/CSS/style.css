@@ -167,7 +167,6 @@ h1 {
     text-align: center;
     border-radius: 30px;
     
-    /* Utilisation dynamique des variables de ton thème */
     background: rgba(150, 150, 150, 0.08);
     border: 1.5px solid var(--neon-green) !important;
     color: var(--neon-green) !important;
@@ -205,6 +204,7 @@ h1 {
 .sunwi-dropdown-menu .dropdown-divider {
     border-top-color: rgba(150, 150, 150, 0.2) !important;
 }
+
 /* PASTILLES DE COULEUR D'ACCENT */
 .theme-dot {
     width: 20px;
@@ -1074,8 +1074,10 @@ body.playlists-body, body.classement-body, body.quit-body {
     font-family: 'Outfit', 'Inter', sans-serif !important;
     font-size: clamp(1.6rem, 3vw, 2.2rem) !important;
     font-weight: 800 !important;
-    color: var(--text-color) !important;
+    color: var(--neon-green) !important;
+    text-shadow: 0 0 12px var(--neon-green-glow) !important;
     letter-spacing: -0.5px;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
 .hub-subtitle {
@@ -1100,9 +1102,11 @@ body.playlists-body, body.classement-body, body.quit-body {
     font-family: 'Outfit', 'Inter', sans-serif !important;
     font-size: 1.1rem !important;
     font-weight: 700 !important;
-    color: var(--text-color) !important;
+    color: var(--neon-green) !important;
+    text-shadow: 0 0 8px var(--neon-green-glow) !important;
     margin-bottom: 6px !important;
     letter-spacing: -0.2px;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
 .hub-row-carousel-container {
@@ -1118,7 +1122,7 @@ body.playlists-body, body.classement-body, body.quit-body {
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
-    padding: 10px 16px 12px 16px !important; /* Padding top pour laisser respirer le hover */
+    padding: 10px 16px 12px 16px !important;
     width: 100%;
 }
 
@@ -1128,7 +1132,7 @@ body.playlists-body, body.classement-body, body.quit-body {
 
 .hub-carousel-card {
     flex: 0 0 200px !important;
-    height: 115px !important; /* Hauteur compacte */
+    height: 115px !important;
     background: var(--card-bg) !important;
     border: 1px solid rgba(150, 150, 150, 0.15) !important;
     border-radius: 12px !important;
@@ -1139,7 +1143,7 @@ body.playlists-body, body.classement-body, body.quit-body {
 }
 
 .hub-carousel-card.active-module:hover {
-    transform: translateY(-3px) !important; /* Décalage maîtrisé pour ne pas mordre sur le titre */
+    transform: translateY(-3px) !important;
     border-color: var(--neon-green) !important;
     box-shadow: 0 6px 20px var(--neon-green-glow) !important;
 }
@@ -1291,9 +1295,8 @@ body.playlists-body, body.classement-body, body.quit-body {
     border-top-color: #e2e8f0 !important;
 }
 
-[data-bg-mode="light"] h1,
-[data-bg-mode="light"] .hub-title {
-    color: #0f172a !important;
+[data-bg-mode="light"] h1 {
+    color: var(--neon-green) !important;
     text-shadow: none !important;
 }
 
@@ -1301,8 +1304,7 @@ body.playlists-body, body.classement-body, body.quit-body {
 [data-bg-mode="light"] .ranking-name,
 [data-bg-mode="light"] .top5-name,
 [data-bg-mode="light"] .playlist-name,
-[data-bg-mode="light"] .hub-module-title,
-[data-bg-mode="light"] .hub-row-title {
+[data-bg-mode="light"] .hub-module-title {
     color: #0f172a !important;
 }
 

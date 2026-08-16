@@ -7,3 +7,4 @@ Flask-SQLAlchemy
 python-dotenv
 Flask-Mail==0.9.1
 itsdangerous
+Authlib

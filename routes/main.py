@@ -7,22 +7,83 @@ main_bp = Blueprint('main', __name__)
 @main_bp.route('/')
 def hub():
     modules = [
+        # --- SPORT ---
         {
             'id': 'football',
-            'title': 'Football',
+            'title': 'Football (Top 500)',
             'category': 'Sport',
             'badge': 'Disponible',
             'active': True,
             'url': '/football/'
         },
         {
+            'id': 'ligue1',
+            'title': 'Ligue 1',
+            'category': 'Sport',
+            'badge': 'Bientôt',
+            'active': False,
+            'url': '#'
+        },
+        {
+            'id': 'laliga',
+            'title': 'LaLiga',
+            'category': 'Sport',
+            'badge': 'Bientôt',
+            'active': False,
+            'url': '#'
+        },
+        {
+            'id': 'premier_league',
+            'title': 'Premier League',
+            'category': 'Sport',
+            'badge': 'Bientôt',
+            'active': False,
+            'url': '#'
+        },
+        {
+            'id': 'serie_a',
+            'title': 'Serie A',
+            'category': 'Sport',
+            'badge': 'Bientôt',
+            'active': False,
+            'url': '#'
+        },
+        {
+            'id': 'bundesliga',
+            'title': 'Bundesliga',
+            'category': 'Sport',
+            'badge': 'Bientôt',
+            'active': False,
+            'url': '#'
+        },
+        {
+            'id': 'nba',
+            'title': 'NBA',
+            'category': 'Sport',
+            'badge': 'Bientôt',
+            'active': False,
+            'url': '#'
+        },
+
+        # --- PERSONNEL ---
+        {
             'id': 'spotify',
             'title': 'Musique (Spotify)',
-            'category': 'Personnel',
+            'category': 'Personnel (Nécessite une connexion externe)',
             'badge': 'Disponible',
             'active': True,
             'url': '/spotify/'
         },
+        {
+            'id': 'steam',
+            'title': 'Steam',
+            'category': 'Personnel (Nécessite une connexion externe)',
+            'badge': 'Bientôt',
+            'active': False,
+            'url': '#'
+        },
+
+        # --- CINÉMA ---
         {
             'id': 'disney',
             'title': 'Films Disney',
@@ -31,6 +92,8 @@ def hub():
             'active': False,
             'url': '#'
         },
+
+        # --- GAMING ---
         {
             'id': 'pokemon',
             'title': 'Pokémon',
@@ -41,7 +104,7 @@ def hub():
         }
     ]
 
-    category_order = ['Sport', 'Personnel', 'Cinéma', 'Gaming']
+    category_order = ['Sport', 'Personnel (Nécessite une connexion externe)', 'Cinéma', 'Gaming']
 
     grouped = {}
     for m in modules:
@@ -58,9 +121,8 @@ def hub():
 def set_audio_mode(mode):
     is_silent = (mode == 'silent')
     session['silent_mode'] = is_silent
-    session.modified = True  # Persiste la session immédiatement
+    session.modified = True
     
-    # 1. Si on passe en mode silencieux, on met en pause la lecture Spotify
     if is_silent:
         try:
             from routes.spotify import get_spotify_client
@@ -70,7 +132,6 @@ def set_audio_mode(mode):
         except Exception as e:
             print(f"⚠️ Impossible de mettre Spotify en pause : {e}")
 
-    # 2. Si un utilisateur Spotify est connecté, on sauvegarde la préférence en BDD
     user_profile = session.get('user_profile')
     if user_profile and user_profile.get('id'):
         try:
@@ -79,5 +140,4 @@ def set_audio_mode(mode):
         except Exception:
             pass
 
-    # 3. Redirection sur la page actuelle
     return redirect(request.referrer or url_for('main.hub'))

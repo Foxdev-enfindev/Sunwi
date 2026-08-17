@@ -51,15 +51,7 @@ def hub():
             'url': '#'
         },
 
-        # --- CINÉMA ---
-        {
-            'id': 'disney',
-            'title': 'Films Disney',
-            'category': 'Cinéma',
-            'badge': 'Bientôt',
-            'active': False,
-            'url': '#'
-        },
+        
 
         # --- GAMING ---
         {
@@ -85,10 +77,20 @@ def hub():
             'badge': 'Disponible',
             'active': True,
             'url': '#'
+        },
+
+        # --- CINÉMA ---
+        {
+            'id': 'disney',
+            'title': 'Films Disney',
+            'category': 'Cinéma',
+            'badge': 'Bientôt',
+            'active': False,
+            'url': '#'
         }
     ]
 
-    category_order = ['Sport', 'Personnel (Nécessite une connexion externe)', 'Cinéma', 'Gaming']
+    category_order = ['Sport', 'Personnel (Nécessite une connexion externe)', 'Gaming', 'Cinéma']
 
     grouped = {}
     for m in modules:

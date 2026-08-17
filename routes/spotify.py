@@ -12,6 +12,9 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from collections import Counter
 
+# Importation des fonctions mutualisées du moteur Elo
+from elo_engine import compute_and_update_vote, select_matchup
+
 spotify_bp = Blueprint('spotify', __name__)
 
 DATABASE_URL = os.environ.get('DATABASE_URL')
@@ -213,7 +216,6 @@ def restore_session_if_lost():
                     
                     if row['active_playlist_id']:
                         session['selected_playlist_id'] = row['active_playlist_id']
-                    # CORRECTION : Ne restaure le mode silencieux de la BDD que s'il n'est pas déjà défini en session
                     if row['silent_mode'] is not None and 'silent_mode' not in session:
                         session['silent_mode'] = row['silent_mode']
                     if row['theme']:
@@ -313,12 +315,14 @@ def load_local_scores():
         print(f"⚠️ Erreur chargement BDD : {e}")
         return {}
 
-def _save_to_db_async(playlist_id, scores_to_update):
+def _save_to_db_async(playlist_id, scores_to_update, user_id=None, winner_id=None, loser_id=None):
     if not DATABASE_URL or not playlist_id:
         return
     try:
         conn = get_db_connection()
         cur = conn.cursor()
+
+        # 1. Mise à jour des scores ELO dans tracks_scores
         for track_id, data in scores_to_update.items():
             cur.execute("""
                 INSERT INTO tracks_scores (playlist_id, track_id, name, artist, image_url, elo, matches_count)
@@ -336,13 +340,21 @@ def _save_to_db_async(playlist_id, scores_to_update):
                 data.get('image_url', ''), data.get('elo', 1000), 
                 data.get('matches_count', 0)
             ))
+
+        # 2. Enregistrement de l'historique du vote dans user_votes
+        if user_id and winner_id and loser_id:
+            cur.execute("""
+                INSERT INTO user_votes (user_id, module_id, winner_id, loser_id)
+                VALUES (%s, 'spotify', %s, %s);
+            """, (str(user_id), str(winner_id), str(loser_id)))
+
         conn.commit()
         cur.close()
         conn.close()
     except Exception as e:
         print(f"⚠️ Erreur écriture BDD arrière-plan : {e}")
 
-def save_local_scores(scores_to_update):
+def save_local_scores(scores_to_update, user_id=None, winner_id=None, loser_id=None):
     scores = session.get('scores_cache', {})
     scores.update(scores_to_update)
     session['scores_cache'] = scores
@@ -350,55 +362,11 @@ def save_local_scores(scores_to_update):
 
     playlist_id = session.get('selected_playlist_id')
     if DATABASE_URL and playlist_id:
-        threading.Thread(target=_save_to_db_async, args=(playlist_id, scores_to_update), daemon=True).start()
-
-# --- MOTEUR ELO DYNAMIQUE ---
-
-def get_k_factor(matches_count):
-    if matches_count < 10:
-        return 50
-    elif matches_count <= 30:
-        return 32
-    else:
-        return 16
-
-def calculate_elo(elo_a, elo_b, outcome_a, k_a=32, k_b=32):
-    expected_a = 1 / (1 + 10 ** ((elo_b - elo_a) / 400))
-    expected_b = 1 - expected_a
-    new_elo_a = round(elo_a + k_a * (outcome_a - expected_a))
-    new_elo_b = round(elo_b + k_b * ((1.0 - outcome_a) - expected_b))
-    return new_elo_a, new_elo_b
-
-def select_duel(tracks, scores):
-    if len(tracks) < 2:
-        return None, None
-
-    if random.random() < 0.20:
-        return random.sample(tracks, 2)
-
-    sorted_by_matches = sorted(
-        tracks, 
-        key=lambda t: scores.get(t['id'], {}).get('matches_count', 0)
-    )
-    pool_a_size = max(1, len(tracks) // 4)
-    track_a = random.choice(sorted_by_matches[:pool_a_size])
-    elo_a = scores.get(track_a['id'], {}).get('elo', 1000)
-
-    candidates_b = [
-        t for t in tracks 
-        if t['id'] != track_a['id'] and abs(scores.get(t['id'], {}).get('elo', 1000) - elo_a) <= 150
-    ]
-
-    if candidates_b:
-        candidates_b.sort(key=lambda t: scores.get(t['id'], {}).get('matches_count', 0))
-        pool_b_size = max(1, len(candidates_b) // 2)
-        track_b = random.choice(candidates_b[:pool_b_size])
-    else:
-        remaining = [t for t in tracks if t['id'] != track_a['id']]
-        remaining.sort(key=lambda t: abs(scores.get(t['id'], {}).get('elo', 1000) - elo_a))
-        track_b = remaining[0]
-
-    return track_a, track_b
+        threading.Thread(
+            target=_save_to_db_async, 
+            args=(playlist_id, scores_to_update, user_id, winner_id, loser_id), 
+            daemon=True
+        ).start()
 
 # --- ROUTES & ENDPOINTS ---
 
@@ -572,6 +540,11 @@ def duel():
     if len(tracks) < 2: 
         return "Playlist trop courte (minimum 2 titres).", 400
 
+    # Association des données Elo et du compteur de duels
+    for t in tracks:
+        t['elo'] = scores.get(t['id'], {}).get('elo', 1000)
+        t['matches_count'] = scores.get(t['id'], {}).get('matches_count', 0)
+
     current_duel = session.get('current_duel')
     track_a, track_b = None, None
 
@@ -580,75 +553,80 @@ def duel():
         track_b = next((t for t in tracks if t['id'] == current_duel[1]), None)
 
     if not track_a or not track_b or track_a['id'] == track_b['id']:
-        track_a, track_b = select_duel(tracks, scores)
+        track_a, track_b = select_matchup(tracks)
         session['current_duel'] = (track_a['id'], track_b['id'])
 
-    track_a['elo'] = scores.get(track_a['id'], {}).get('elo', 1000)
-    track_b['elo'] = scores.get(track_b['id'], {}).get('elo', 1000)
-    track_a['matches_count'] = scores.get(track_a['id'], {}).get('matches_count', 0)
-    track_b['matches_count'] = scores.get(track_b['id'], {}).get('matches_count', 0)
-
-    dernier_resultat = session.pop('dernier_resultat', None)
+    last_result = session.pop('dernier_resultat', None)
     silent_mode = session.get('silent_mode', False)
 
-    return render_template('spotify_duel.html', track_a=track_a, track_b=track_b, dernier_resultat=dernier_resultat, user=profile, current_theme=session.get('theme', 'green'), silent_mode=silent_mode)
+    return render_template(
+        'spotify.html', 
+        track_a=track_a, 
+        track_b=track_b, 
+        last_result=last_result, 
+        user=profile, 
+        current_theme=session.get('theme', 'green'), 
+        silent_mode=silent_mode
+    )
 
 @spotify_bp.route('/vote', methods=['POST'])
 def vote():
-    id_a = request.form.get('id_a')
-    id_b = request.form.get('id_b')
+    p1_id = request.form.get('p1_id') or request.form.get('id_a')
+    p2_id = request.form.get('p2_id') or request.form.get('id_b')
     outcome = float(request.form.get('outcome', 0.5))
 
     tracks = session.get('tracks_cache', [])
-    track_a = next((t for t in tracks if t['id'] == id_a), None)
-    track_b = next((t for t in tracks if t['id'] == id_b), None)
+    track_a = next((t for t in tracks if t['id'] == p1_id), None)
+    track_b = next((t for t in tracks if t['id'] == p2_id), None)
 
     if track_a and track_b:
         scores = load_local_scores()
         
-        data_a = scores.get(id_a, {})
-        data_b = scores.get(id_b, {})
-        
-        elo_a, matches_a = data_a.get('elo', 1000), data_a.get('matches_count', 0)
-        elo_b, matches_b = data_b.get('elo', 1000), data_b.get('matches_count', 0)
+        data_a = scores.get(p1_id, {})
+        data_b = scores.get(p2_id, {})
 
-        k_a = get_k_factor(matches_a)
-        k_b = get_k_factor(matches_b)
+        item_a = {
+            'id': p1_id,
+            'name': track_a['name'],
+            'elo': data_a.get('elo', 1000),
+            'matches_count': data_a.get('matches_count', 0)
+        }
+        item_b = {
+            'id': p2_id,
+            'name': track_b['name'],
+            'elo': data_b.get('elo', 1000),
+            'matches_count': data_b.get('matches_count', 0)
+        }
 
-        new_elo_a, new_elo_b = calculate_elo(elo_a, elo_b, outcome, k_a=k_a, k_b=k_b)
-        delta_a, delta_b = new_elo_a - elo_a, new_elo_b - elo_b
+        new_elo_a, new_elo_b, winner_id, loser_id, last_result = compute_and_update_vote(item_a, item_b, outcome)
 
         updated = {
-            id_a: {
+            p1_id: {
                 'name': track_a['name'], 
                 'artist': track_a['artist'], 
                 'image_url': track_a['image_url'], 
-                'elo': new_elo_a,
-                'matches_count': matches_a + 1
+                'elo': int(new_elo_a),
+                'matches_count': item_a['matches_count'] + 1
             },
-            id_b: {
+            p2_id: {
                 'name': track_b['name'], 
                 'artist': track_b['artist'], 
                 'image_url': track_b['image_url'], 
-                'elo': new_elo_b,
-                'matches_count': matches_b + 1
+                'elo': int(new_elo_b),
+                'matches_count': item_b['matches_count'] + 1
             }
         }
-        save_local_scores(updated)
 
-        sign_a = f"+{delta_a}" if delta_a > 0 else f"{delta_a}"
-        sign_b = f"+{delta_b}" if delta_b > 0 else f"{delta_b}"
-        if outcome == 1.0: 
-            session['dernier_resultat'] = f"🏆 Victoire de {track_a['name']} ({sign_a} Elo) face à {track_b['name']} ({sign_b} Elo)"
-        elif outcome == 0.0: 
-            session['dernier_resultat'] = f"🏆 Victoire de {track_b['name']} ({sign_b} Elo) face à {track_a['name']} ({sign_a} Elo)"
-        else: 
-            session['dernier_resultat'] = f"🤝 Match nul entre {track_a['name']} ({sign_a} Elo) et {track_b['name']} ({sign_b} Elo)"
+        profile = session.get('user_profile')
+        user_id = profile.get('id') if profile else None
+
+        session['dernier_resultat'] = last_result
+        save_local_scores(updated, user_id=user_id, winner_id=winner_id, loser_id=loser_id)
 
     session.pop('current_duel', None)
     return redirect(url_for('spotify.duel'))
 
-# --- CONTROLES LECTEUR API SPOTIFY ---
+# --- CONTRÔLES LECTEUR API SPOTIFY ---
 
 @spotify_bp.route('/listen/<path:track_uri>', methods=['POST'])
 def listen(track_uri):
@@ -710,7 +688,7 @@ def set_theme_route(theme_name):
 def set_silent_mode_route(status):
     is_silent = bool(status)
     session['silent_mode'] = is_silent
-    session.modified = True  # Force la mise à jour immédiate de la session Flask
+    session.modified = True
     
     sp = get_spotify_client()
     if sp:
@@ -726,7 +704,7 @@ def set_silent_mode_route(status):
                 
     return jsonify({"status": "success", "silent_mode": is_silent})
 
-# --- VUES SECONDAIRES (CLASSEMENT / STATS / QUIT) ---
+# --- VUES SECONDAIRES (CLASSEMENT / STATS) ---
 
 @spotify_bp.route('/classement')
 @spotify_bp.route('/classement/<playlist_id>')
@@ -798,30 +776,3 @@ def stats():
             if a.strip(): 
                 artist_counter[a.strip()] += 1
     return render_template('spotify_stats.html', sorted_artists=artist_counter.most_common(), total_tracks=len(tracks), user=get_user_profile_cached(sp))
-
-@spotify_bp.route('/quit')
-def quit_app():
-    sp = get_spotify_client()
-    if sp and not session.get('silent_mode', False):
-        try: 
-            sp.pause_playback()
-        except Exception: 
-            pass
-
-    playlist_id = session.get('selected_playlist_id')
-    playlist_name = session.get('selected_playlist_name', 'ta playlist')
-
-    if sp and playlist_id and playlist_name == 'ta playlist':
-        try:
-            pl_info = sp.playlist(playlist_id, fields='name')
-            playlist_name = pl_info.get('name', 'ta playlist')
-        except Exception:
-            pass
-
-    scores = load_local_scores()
-    tracks = list(scores.values())
-    tracks.sort(key=lambda x: x.get('elo', 1000), reverse=True)
-    
-    session.pop('tracks_cache', None)
-    session.pop('current_duel', None)
-    return render_template('spotify_quit.html', top5=tracks[:5], playlist_name=playlist_name)

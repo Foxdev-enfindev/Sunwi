@@ -1,0 +1,195 @@
+{% extends 'base_duel.html' %}
+
+{% set page_title = "Sunwi — Duel Spotify" %}
+{% set header_title = "À toi de choisir !" %}
+{% set vote_url = url_for('spotify.vote') %}
+{% set leaderboard_url = url_for('spotify.classement') %}
+
+{% set item_a_id = track_a.id %}
+{% set item_b_id = track_b.id %}
+
+{% block card_a_content %}
+<div class="pochette-wrapper">
+    <img src="{{ track_a.image_url }}" alt="{{ track_a.name }}" class="pochette">
+</div>
+<div class="track-info">
+    <span class="track-badge">TITRE 1</span>
+    <h2 class="track-title" title="{{ track_a.name }}">{{ track_a.name }}</h2>
+    <p class="track-artist" title="{{ track_a.artist }}">{{ track_a.artist }}</p>
+    <div class="elo-display">Elo actuel: <strong>{{ track_a.elo }}</strong></div>
+    <div class="match-count">
+        {% set current_match_a = (track_a.matches_count or 0) + 1 %}
+        {{ current_match_a }}{% if current_match_a == 1 %}er{% else %}e{% endif %} duel
+    </div>
+</div>
+{% endblock %}
+
+{% block card_a_extra %}
+{% if not silent_mode %}
+<div class="seek-controls" id="seek-a">
+    <button type="button" class="seek-btn" onclick="seekOffset(event, -30)">-30s</button>
+    <button type="button" class="seek-btn" onclick="seekOffset(event, -10)">-10s</button>
+    <button type="button" class="seek-btn pause-btn-inline" onclick="togglePause(event)">⏸</button>
+    <button type="button" class="seek-btn" onclick="seekOffset(event, 10)">+10s</button>
+    <button type="button" class="seek-btn" onclick="seekOffset(event, 30)">+30s</button>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block card_b_content %}
+<div class="pochette-wrapper">
+    <img src="{{ track_b.image_url }}" alt="{{ track_b.name }}" class="pochette">
+</div>
+<div class="track-info">
+    <span class="track-badge">TITRE 2</span>
+    <h2 class="track-title" title="{{ track_b.name }}">{{ track_b.name }}</h2>
+    <p class="track-artist" title="{{ track_b.artist }}">{{ track_b.artist }}</p>
+    <div class="elo-display">Elo actuel: <strong>{{ track_b.elo }}</strong></div>
+    <div class="match-count">
+        {% set current_match_b = (track_b.matches_count or 0) + 1 %}
+        {{ current_match_b }}{% if current_match_b == 1 %}er{% else %}e{% endif %} duel
+    </div>
+</div>
+{% endblock %}
+
+{% block card_b_extra %}
+{% if not silent_mode %}
+<div class="seek-controls" id="seek-b">
+    <button type="button" class="seek-btn" onclick="seekOffset(event, -30)">-30s</button>
+    <button type="button" class="seek-btn" onclick="seekOffset(event, -10)">-10s</button>
+    <button type="button" class="seek-btn pause-btn-inline" onclick="togglePause(event)">⏸</button>
+    <button type="button" class="seek-btn" onclick="seekOffset(event, 10)">+10s</button>
+    <button type="button" class="seek-btn" onclick="seekOffset(event, 30)">+30s</button>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block module_scripts %}
+<div id="spotify-toast" class="toast hidden"></div>
+
+<script>
+    let currentPlaying = 'a';
+    const isDesktop = window.matchMedia('(pointer: fine)').matches;
+    const isSilentMode = {{ 'true' if silent_mode else 'false' }};
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const cardA = document.getElementById('card-a');
+        const cardB = document.getElementById('card-b');
+
+        // Seule la carte A qui démarre la lecture doit être active
+        if (!isSilentMode && cardB) {
+            cardB.classList.remove('active');
+        }
+
+        if (cardA) {
+            cardA.onclick = (e) => onCardClick(e, 'a', '{{ track_a.uri }}', 'form-a');
+            cardA.onmouseenter = () => onCardHover('a', '{{ track_a.uri }}');
+        }
+        if (cardB) {
+            cardB.onclick = (e) => onCardClick(e, 'b', '{{ track_b.uri }}', 'form-b');
+            cardB.onmouseenter = () => onCardHover('b', '{{ track_b.uri }}');
+        }
+
+        if (!isSilentMode) {
+            fetch('{{ url_for("spotify.listen", track_uri="") }}' + '{{ track_a.uri }}', { method: 'POST' })
+                .then(res => res.json())
+                .then(data => { 
+                    if (data.warning) showSpotifyWarning("⚠️ " + data.warning, data.can_switch_silent); 
+                })
+                .catch(err => console.error('Erreur lecture initiale :', err));
+        }
+    });
+
+    function onCardClick(event, trackKey, trackUri, formId) {
+        if (event) event.stopPropagation();
+
+        // En mode silence ou si le morceau joue déjà : on valide le vote
+        if (isSilentMode || currentPlaying === trackKey) {
+            handleDuelVote(event, trackKey, formId);
+        } else {
+            // Sinon : on bascule l'écoute sur ce morceau
+            switchActiveCard(trackKey, trackUri);
+        }
+    }
+
+    function onCardHover(trackKey, trackUri) {
+        if (!isDesktop || isSilentMode) return;
+        if (currentPlaying !== trackKey) switchActiveCard(trackKey, trackUri);
+    }
+
+    function switchActiveCard(trackKey, trackUri) {
+        const cardA = document.getElementById('card-a');
+        const cardB = document.getElementById('card-b');
+        currentPlaying = trackKey;
+
+        if (trackKey === 'a') {
+            if (cardA) cardA.classList.add('active');
+            if (cardB) cardB.classList.remove('active');
+        } else {
+            if (cardB) cardB.classList.add('active');
+            if (cardA) cardA.classList.remove('active');
+        }
+
+        if (!isSilentMode) {
+            fetch('{{ url_for("spotify.listen", track_uri="") }}' + trackUri, { method: 'POST' })
+                .then(res => res.json())
+                .then(data => { if (data.warning) showSpotifyWarning("⚠️ " + data.warning, data.can_switch_silent); });
+        }
+    }
+
+    // Coupure automatique de la lecture Spotify lors de l'appui sur le bouton retour (base_duel.html)
+    function stopSpotifyAudio() {
+        if (!isSilentMode) {
+            if (navigator.sendBeacon) {
+                navigator.sendBeacon("{{ url_for('spotify.toggle_pause') }}");
+            } else {
+                fetch("{{ url_for('spotify.toggle_pause') }}", { method: 'POST', keepalive: true });
+            }
+        }
+    }
+
+    function showSpotifyWarning(msg, canSwitch = false) {
+        if (isSilentMode) return;
+        const toast = document.getElementById('spotify-toast');
+        if (canSwitch) {
+            toast.innerHTML = `
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <span>${msg}</span>
+                    <button type="button" onclick="enableSilentMode()" style="background: #0d0d0d; color: #ff9900; border: none; padding: 6px 14px; border-radius: 12px; font-weight: 800; cursor: pointer; font-size: 0.8rem;">
+                        🤫 Passer en Mode Silence
+                    </button>
+                </div>`;
+        } else {
+            toast.innerText = msg;
+        }
+        toast.classList.remove('hidden');
+        toast.classList.add('show');
+    }
+
+    function enableSilentMode() {
+        fetch('{{ url_for("spotify.set_silent_mode_route", status=1) }}', { method: 'POST' })
+            .then(() => window.location.reload())
+            .catch(() => window.location.reload());
+    }
+
+    function seekOffset(event, seconds) {
+        if (event) event.stopPropagation();
+        if (isSilentMode) return;
+        fetch('{{ url_for("spotify.seek_offset", offset_seconds=0) }}'.replace('/0', '/' + seconds), { method: 'POST' })
+            .then(res => res.json())
+            .then(data => { if (data.warning) showSpotifyWarning("⚠️ " + data.warning, data.can_switch_silent); });
+    }
+
+    function togglePause(event) {
+        if (event) event.stopPropagation();
+        if (isSilentMode) return;
+        fetch('{{ url_for("spotify.toggle_pause") }}', { method: 'POST' })
+            .then(res => res.json())
+            .then(data => {
+                const btns = document.querySelectorAll('.pause-btn-inline');
+                if (data.warning) showSpotifyWarning("⚠️ " + data.warning, data.can_switch_silent);
+                else btns.forEach(btn => btn.innerText = (data.status === 'paused') ? '▶' : '⏸');
+            });
+    }
+</script>
+{% endblock %}

@@ -34,26 +34,32 @@ def calculate_new_elo(winner_elo, winner_matches, loser_elo, loser_matches):
 def select_matchup(items):
     """
     Matchmaking hybride :
-    - 80% du temps : Sélection d'un premier élément, puis choix d'un second proche en Elo.
     - 20% du temps : Tirage 100% aléatoire.
+    - 80% du temps : Sélection d'un 1er élément, puis choix d'un 2nd dans une plage de ±150 Elo.
     """
     if len(items) < 2:
         return None, None
 
-    # 20% d'aléatoire pur
+    # 20% d'aléatoire pur pour faire bouger le classement global
     if random.random() < 0.2:
         return random.sample(items, 2)
 
-    # 80% de proximité Elo
+    # 80% de proximité Elo avec tolérance élargie
     item1 = random.choice(items)
     other_items = [i for i in items if i != item1]
-    
-    # Tri des adversaires potentiels par écart d'Elo absolu
-    other_items.sort(key=lambda x: abs(x['elo'] - item1['elo']))
 
-    # Sélection parmi les 10 adversaires les plus proches en Elo
-    pool_size = min(10, len(other_items))
-    item2 = random.choice(other_items[:pool_size])
+    # Filtrage : tous les candidats à ±150 points Elo d'écart
+    elo_range = 150
+    candidates = [i for i in other_items if abs(i['elo'] - item1['elo']) <= elo_range]
+
+    # Sécurité : si moins de 3 candidats sont dans la plage ±150,
+    # on retombe sur les 10 plus proches absolus pour éviter d'être bloqué aux extrêmes
+    if len(candidates) < 3:
+        other_items.sort(key=lambda x: abs(x['elo'] - item1['elo']))
+        candidates = other_items[:min(10, len(other_items))]
+
+    # Tirage au sort du 2ème élément parmi les candidats valides
+    item2 = random.choice(candidates)
 
     return item1, item2
 

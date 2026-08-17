@@ -65,5 +65,22 @@
 
 {% block extra_scripts %}
 <script src="{{ url_for('static', filename='js/duel_engine.js') }}"></script>
+
+<script>
+    // 1. On injecte une nouvelle entrée dans l'historique du navigateur dès qu'on arrive sur un duel
+    history.pushState(null, null, location.href);
+
+    // 2. On écoute l'événement d'appui sur le bouton "Précédent" du navigateur/téléphone
+    window.addEventListener('popstate', function (event) {
+        // Si Spotify tourne (méthode définie dans le module Spotify), on stoppe l'audio
+        if (typeof stopSpotifyAudio === 'function') {
+            stopSpotifyAudio();
+        }
+
+        // 3. Redirection instantanée vers le Hub principal
+        window.location.href = "{{ url_for('main.hub') }}";
+    });
+</script>
+
 {% block module_scripts %}{% endblock %}
 {% endblock %}

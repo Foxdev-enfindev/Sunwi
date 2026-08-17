@@ -42,5 +42,17 @@ app.register_blueprint(auth_bp)
 app.register_blueprint(football_bp)
 app.register_blueprint(pokemon_bp)
 
+@app.after_request
+def add_header(response):
+    """
+    Force le navigateur à ne pas mettre en cache les pages.
+    En appuyant sur "Précédent", le navigateur redemande la page au serveur
+    au lieu de rejouer le formulaire/l'état en cache.
+    """
+    response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

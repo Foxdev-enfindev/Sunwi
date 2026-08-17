@@ -491,6 +491,16 @@ h1 {
         text-align: center !important;
         width: 100% !important;
         min-width: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .track-card .track-badge {
+        position: static !important;
+        display: inline-block !important;
+        margin-bottom: 4px !important;
+        order: -1 !important;
     }
 
     .track-title {
@@ -1126,7 +1136,7 @@ body.playlists-body, body.classement-body, body.quit-body {
 }
 
 /* =======================================================
-   ADAPTATION MOBILE (Portrait) : Image gauche, Infos droite & Zone VS intacte
+   9. ADAPTATION MOBILE (Portrait) : Image gauche, Infos droite & Zone VS intacte
    ======================================================= */
 @media screen and (orientation: portrait) {
     body.duel-body {
@@ -1164,7 +1174,7 @@ body.playlists-body, body.classement-body, body.quit-body {
         margin: 0 auto !important;
     }
 
-/* Image / Pochette / Sprite fluide (s'adapte entre 70px et 95px selon la largeur réelle) */
+    /* Image / Pochette / Sprite fluide (s'adapte entre 70px et 95px selon la largeur réelle) */
     .pochette-wrapper, .track-card img {
         width: clamp(70px, 18vw, 95px) !important;
         height: clamp(70px, 18vw, 95px) !important;

@@ -37,7 +37,7 @@
 
         <!-- SLOT A -->
         <div class="track-slot">
-            <div class="track-card active" id="card-a" onclick="handleDuelVote(event, 'a', 'form-a')">
+            <div class="track-card {{ card_a_class | default('active') }}" id="card-a" onclick="handleDuelVote(event, 'a', 'form-a')">
                 {% block card_a_content %}{% endblock %}
             </div>
             {% block card_a_extra %}{% endblock %}
@@ -54,7 +54,7 @@
 
         <!-- SLOT B -->
         <div class="track-slot">
-            <div class="track-card active" id="card-b" onclick="handleDuelVote(event, 'b', 'form-b')">
+            <div class="track-card {{ card_b_class | default('active') }}" id="card-b" onclick="handleDuelVote(event, 'b', 'form-b')">
                 {% block card_b_content %}{% endblock %}
             </div>
             {% block card_b_extra %}{% endblock %}

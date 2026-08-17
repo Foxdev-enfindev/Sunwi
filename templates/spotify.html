@@ -8,6 +8,9 @@
 {% set item_a_id = track_a.id %}
 {% set item_b_id = track_b.id %}
 
+{# La carte B n'est active au chargement que si on est en mode silence #}
+{% set card_b_class = 'active' if silent_mode else '' %}
+
 {% block card_a_content %}
 <div class="pochette-wrapper">
     <img src="{{ track_a.image_url }}" alt="{{ track_a.name }}" class="pochette">
@@ -70,16 +73,11 @@
 <script>
     let currentPlaying = 'a';
     const isDesktop = window.matchMedia('(pointer: fine)').matches;
-    const isSilentMode = {{ 'true' if silent_mode else 'false' }};
+    const isSilentMode = {{ silent_mode | tojson }};
 
     window.addEventListener('DOMContentLoaded', () => {
         const cardA = document.getElementById('card-a');
         const cardB = document.getElementById('card-b');
-
-        // Seule la carte A qui démarre la lecture doit être active
-        if (!isSilentMode && cardB) {
-            cardB.classList.remove('active');
-        }
 
         if (cardA) {
             cardA.onclick = (e) => onCardClick(e, 'a', '{{ track_a.uri }}', 'form-a');
@@ -103,11 +101,9 @@
     function onCardClick(event, trackKey, trackUri, formId) {
         if (event) event.stopPropagation();
 
-        // En mode silence ou si le morceau joue déjà : on valide le vote
         if (isSilentMode || currentPlaying === trackKey) {
             handleDuelVote(event, trackKey, formId);
         } else {
-            // Sinon : on bascule l'écoute sur ce morceau
             switchActiveCard(trackKey, trackUri);
         }
     }
@@ -137,7 +133,6 @@
         }
     }
 
-    // Coupure automatique de la lecture Spotify lors de l'appui sur le bouton retour (base_duel.html)
     function stopSpotifyAudio() {
         if (!isSilentMode) {
             if (navigator.sendBeacon) {

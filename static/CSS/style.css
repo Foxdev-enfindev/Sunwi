@@ -77,7 +77,7 @@ body.duel-body {
     top: 0;
     z-index: 1000;
     width: 100%;
-    padding: 6px 0 !important; /* Hauteur réduite */
+    padding: 6px 0 !important;
     background-color: var(--header-bg, rgba(11, 19, 41, 0.85));
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -109,7 +109,7 @@ body.duel-body {
 .sunwi-brand-text {
     font-family: 'Outfit', 'Inter', sans-serif !important;
     font-weight: 800;
-    font-size: 1.35rem !important; /* Taille ajustée */
+    font-size: 1.35rem !important;
     letter-spacing: -0.5px;
     background: linear-gradient(135deg, #00f0ff 0%, #b026ff 50%, #ff007f 100%);
     -webkit-background-clip: text;
@@ -163,12 +163,10 @@ h1 {
     white-space: normal;
     text-align: center;
     border-radius: 30px;
-    
     background: rgba(150, 150, 150, 0.08);
     border: 1.5px solid var(--neon-green) !important;
     color: var(--neon-green) !important;
     box-shadow: 0 0 12px var(--neon-green-glow) !important;
-    
     transition: all 0.3s ease;
 }
 
@@ -233,7 +231,7 @@ h1 {
 }
 
 /* =======================================================
-   3. CARTES ET SLOTS MORCEAUX DUEL
+   3. CARTES ET SLOTS DUEL
    ======================================================= */
 .track-slot {
     display: flex;
@@ -422,128 +420,7 @@ h1 {
 }
 
 /* =======================================================
-   4. LAYOUT PORTRAIT
-   ======================================================= */
-@media screen and (orientation: portrait) {
-    body.duel-body {
-        padding: 50px 14px 16px 14px !important;
-    }
-
-    .container {
-        gap: 16px !important;
-    }
-
-    .header-zone {
-        padding-top: 0 !important;
-        gap: 8px !important;
-    }
-
-    .result-banner-wrapper {
-        min-height: 28px !important;
-        margin-top: 2px !important;
-    }
-
-    .duel-zone {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: 100% !important;
-        max-width: 680px !important;
-        gap: 14px !important;
-    }
-
-    .track-slot {
-        width: 100% !important;
-    }
-
-    .track-card {
-        width: 100% !important;
-        padding: 8px 14px !important;
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        gap: 14px !important;
-        min-height: auto !important;
-    }
-
-    .pochette-wrapper, .pochette-wrapper .pochette { 
-        width: clamp(75px, 18vw, 100px) !important; 
-        height: clamp(75px, 18vw, 100px) !important; 
-        flex-shrink: 0 !important; 
-        border-radius: 10px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-
-    .track-info { text-align: left !important; flex: 1 !important; min-width: 0 !important; }
-
-    .track-title {
-        font-size: 1.05rem !important;
-        margin: 1px 0 2px 0 !important;
-    }
-
-    .track-artist {
-        font-size: 0.85rem !important;
-        margin-bottom: 2px !important;
-    }
-
-    .seek-controls {
-        margin-top: 6px !important;
-        gap: 6px !important;
-    }
-
-    .seek-btn {
-        padding: 5px 0 !important;
-        font-size: 0.78rem !important;
-    }
-
-    .vs-zone {
-        display: grid !important;
-        grid-template-columns: 52px 1fr !important;
-        grid-template-areas: "circle tie" "circle rank" !important;
-        align-items: center !important;
-        width: 100% !important;
-        max-width: 280px !important;
-        gap: 6px 12px !important;
-    }
-
-    .vs-circle {
-        grid-area: circle !important;
-        width: 52px !important;
-        height: 52px !important;
-        font-size: 1.05rem !important;
-        background: var(--neon-green) !important;
-        color: #0d0d0d !important;
-        font-weight: 900 !important;
-        border-radius: 50% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        box-shadow: 0 0 10px var(--neon-green-glow) !important;
-    }
-
-    .vs-zone > form { grid-area: tie !important; }
-    .vs-zone > a.central-rank-btn { grid-area: rank !important; }
-
-    .tie-btn, .central-rank-btn, a.central-rank-btn {
-        padding: 7px 0 !important;
-        font-size: 0.82rem !important;
-    }
-
-    .quit-wrapper {
-        margin-top: 6px !important;
-    }
-
-    .quit-btn {
-        padding: 8px 22px !important;
-        font-size: 0.85rem !important;
-    }
-}
-
-/* =======================================================
-   5. LAYOUT PAYSAGE
+   4. LAYOUT PAYSAGE
    ======================================================= */
 @media screen and (orientation: landscape) {
     body.duel-body {
@@ -685,29 +562,7 @@ h1 {
 }
 
 /* =======================================================
-   6. OPTIMISATION SPÉCIALE ÉCRANS BAS EN PAYSAGE
-   ======================================================= */
-@media screen and (orientation: landscape) and (max-height: 480px) {
-    body.duel-body {
-        padding-top: 32px !important;
-    }
-
-    .pochette-wrapper, .pochette-wrapper .pochette {
-        width: clamp(55px, 18vh, 85px) !important;
-        height: clamp(55px, 18vh, 85px) !important;
-    }
-
-    .header-title {
-        display: none !important;
-    }
-
-    .seek-controls {
-        display: flex !important;
-    }
-}
-
-/* =======================================================
-   7. STYLES PAGES SECONDAIRES & GROUPES DE BOUTONS ACCUEIL/QUIT
+   5. STYLES PAGES SECONDAIRES & GROUPES DE BOUTONS
    ======================================================= */
 body.playlists-body, body.classement-body, body.quit-body {
     min-height: 100vh !important;
@@ -807,7 +662,7 @@ body.playlists-body, body.classement-body, body.quit-body {
     font-weight: 500;
 }
 
-/* GROUPE DE BOUTONS D'ACTIONS (CLASSEMENT & QUIT) */
+/* GROUPE DE BOUTONS D'ACTIONS */
 .quit-actions-group {
     display: flex !important;
     flex-wrap: wrap !important;
@@ -1012,7 +867,7 @@ body.playlists-body, body.classement-body, body.quit-body {
 }
 
 /* =======================================================
-   8. FEEDBACK VISUEL DE VOTE & TOAST
+   6. FEEDBACK VISUEL DE VOTE & TOAST
    ======================================================= */
 .track-card.voted-winner {
     border-color: var(--neon-green) !important;
@@ -1065,7 +920,7 @@ body.playlists-body, body.classement-body, body.quit-body {
 }
 
 /* =======================================================
-   9. CAROUSEL FAÇON NETFLIX & ULTRA-COMPACTAGE (HUB 1080p)
+   7. CAROUSEL & HUB
    ======================================================= */
 .hub-container {
     max-width: 1400px !important;
@@ -1109,7 +964,6 @@ body.playlists-body, body.classement-body, body.quit-body {
     text-shadow: 0 0 8px var(--neon-green-glow) !important;
     margin-bottom: 6px !important;
     letter-spacing: -0.2px;
-    transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
 .hub-row-carousel-container {
@@ -1135,8 +989,8 @@ body.playlists-body, body.classement-body, body.quit-body {
 
 .hub-carousel-card {
     flex: 0 0 200px !important;
-    height: auto !important;       /* Hauteur fluide pour accueillir le select */
-    min-height: 115px !important;  /* Hauteur minimum compacte */
+    height: auto !important;
+    min-height: 115px !important;
     background: var(--card-bg) !important;
     border: 1px solid rgba(150, 150, 150, 0.15) !important;
     border-radius: 12px !important;
@@ -1234,13 +1088,8 @@ body.playlists-body, body.classement-body, body.quit-body {
     transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.hub-scroll-arrow.left-arrow {
-    left: -22px;
-}
-
-.hub-scroll-arrow.right-arrow {
-    right: -22px;
-}
+.hub-scroll-arrow.left-arrow { left: -22px; }
+.hub-scroll-arrow.right-arrow { right: -22px; }
 
 .hub-scroll-arrow:hover {
     background: var(--neon-green);
@@ -1248,94 +1097,8 @@ body.playlists-body, body.classement-body, body.quit-body {
     transform: scale(1.1);
 }
 
-/* Adaptation mode clair pour les flèches */
-[data-bg-mode="light"] .hub-scroll-arrow {
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: #0f172a;
-}
-
-[data-bg-mode="light"] .hub-scroll-arrow:hover {
-    background: var(--neon-green);
-    color: #0d0d0d;
-}
-
 /* =======================================================
-   10. ADAPTATIONS GLOBALES POUR LE MODE CLAIR
-   ======================================================= */
-[data-bg-mode="light"] {
-    --bg-color: #f1f3f6 !important;
-    --card-bg: #ffffff !important;
-    --text-color: #0f172a !important;
-    --text-muted: #64748b !important;
-    --header-bg: rgba(255, 255, 255, 0.85) !important;
-}
-
-[data-bg-mode="light"] .sunwi-header {
-    background-color: var(--header-bg) !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
-}
-
-[data-bg-mode="light"] .sunwi-dropdown-menu {
-    background-color: #ffffff !important;
-    border-color: #cbd5e1 !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
-}
-
-[data-bg-mode="light"] .sunwi-dropdown-menu .dropdown-item {
-    color: #0f172a !important;
-}
-
-[data-bg-mode="light"] .sunwi-dropdown-menu .dropdown-item:hover {
-    background-color: #f1f3f6 !important;
-    color: var(--neon-green) !important;
-}
-
-[data-bg-mode="light"] .sunwi-dropdown-menu .theme-label {
-    color: #64748b !important;
-}
-
-[data-bg-mode="light"] .sunwi-dropdown-menu .dropdown-divider {
-    border-top-color: #e2e8f0 !important;
-}
-
-[data-bg-mode="light"] h1 {
-    color: var(--neon-green) !important;
-    text-shadow: none !important;
-}
-
-[data-bg-mode="light"] .track-title,
-[data-bg-mode="light"] .ranking-name,
-[data-bg-mode="light"] .top5-name,
-[data-bg-mode="light"] .playlist-name,
-[data-bg-mode="light"] .hub-module-title {
-    color: #0f172a !important;
-}
-
-[data-bg-mode="light"] .track-artist,
-[data-bg-mode="light"] .elo-display,
-[data-bg-mode="light"] .match-count,
-[data-bg-mode="light"] .ranking-artist,
-[data-bg-mode="light"] .top5-artist,
-[data-bg-mode="light"] .playlist-tracks,
-[data-bg-mode="light"] .quit-subtitle,
-[data-bg-mode="light"] .close-notice,
-[data-bg-mode="light"] .hub-subtitle {
-    color: #64748b !important;
-}
-
-[data-bg-mode="light"] .hub-carousel-card {
-    border: 1px solid rgba(0, 0, 0, 0.08) !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
-}
-
-[data-bg-mode="light"] .hub-scroll-arrow {
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: #0f172a;
-}
-/* =======================================================
-   STYLE DU MENU DÉROULANT DES CHAMPIONNATS
+   8. MENU DÉROULANT DES CHAMPIONNATS
    ======================================================= */
 .hub-league-select {
     background-color: var(--card-bg) !important;
@@ -1361,76 +1124,143 @@ body.playlists-body, body.classement-body, body.quit-body {
     color: var(--text-color) !important;
     padding: 8px;
 }
+
 /* =======================================================
-   NOUVELLE MISE EN PAGE PORTRAIT (IMAGE GAUCHE, NOM + INFOS, ELO DROITE)
+   ADAPTATION MOBILE (Portrait) : Image gauche, Infos droite & Zone VS intacte
    ======================================================= */
 @media screen and (orientation: portrait) {
+    body.duel-body {
+        padding: 50px 14px 16px 14px !important;
+    }
+
+    .container {
+        gap: 12px !important;
+    }
+
+    .duel-zone {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        max-width: 680px !important;
+        gap: 12px !important;
+    }
+
+    .track-slot {
+        width: 100% !important;
+    }
+
+    /* Cartes fluides et adaptatives pour tous les mobiles (du plus étroit au Fold) */
     .track-card {
+        width: 100% !important;
+        max-width: 650px !important;
+        padding: clamp(12px, 3vw, 18px) clamp(14px, 4vw, 20px) !important;
         display: flex !important;
         flex-direction: row !important;
         align-items: center !important;
-        justify-content: space-between !important;
-        padding: 10px 12px !important;
-        gap: 10px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
+        gap: clamp(12px, 3vw, 18px) !important;
+        position: relative !important;
+        margin: 0 auto !important;
     }
 
-    /* 1. L'image à gauche avec une taille fixe */
-    .pochette-wrapper, .pochette-wrapper .pochette, .track-card img {
-        width: 55px !important;
-        height: 55px !important;
-        min-width: 55px !important;
-        min-height: 55px !important;
-        object-fit: contain !important;
+/* Image / Pochette / Sprite fluide (s'adapte entre 70px et 95px selon la largeur réelle) */
+    .pochette-wrapper, .track-card img {
+        width: clamp(70px, 18vw, 95px) !important;
+        height: clamp(70px, 18vw, 95px) !important;
+        min-width: clamp(70px, 18vw, 95px) !important;
+        min-height: clamp(70px, 18vw, 95px) !important;
         flex-shrink: 0 !important;
+        border-radius: 12px !important;
+        object-fit: contain !important;
         display: block !important;
+        margin: 0 !important;
     }
 
-    /* 2. Le bloc central : Nom au-dessus, Numéro/Génération et types en dessous */
+    /* On enlève le positionnement absolu pour qu'il s'intègre naturellement */
+    .track-badge {
+        position: static !important;
+        display: inline-block !important;
+        font-size: 0.65rem !important;
+        padding: 1px 6px !important;
+        margin: 2px 0 0 0 !important;
+        width: auto !important;
+        align-self: flex-start !important;
+    }
+
+    /* Bloc d'informations textuelles à droite */
     .track-info {
-        flex: 1 1 auto !important;
+        text-align: left !important;
+        flex: 1 !important;
         min-width: 0 !important;
         display: flex !important;
         flex-direction: column !important;
-        align-items: flex-start !important;
-        text-align: left !important;
-        gap: 2px !important;
+        justify-content: center !important;
     }
 
     .track-title {
-        font-size: 0.95rem !important;
-        font-weight: 700 !important;
+        font-size: 1.05rem !important;
+        font-weight: 800 !important;
+        margin: 0 0 2px 0 !important;
         white-space: nowrap !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         width: 100% !important;
-        order: 1 !important;
     }
 
-    /* On s'assure que les types et le badge (#ID + Génération) se placent sous le nom */
-    .track-badge {
-        font-size: 0.6rem !important;
-        padding: 1px 4px !important;
-        order: 2 !important;
-        margin-bottom: 0 !important;
-    }
-
-    /* Si les types sont dans un conteneur, on les ajuste */
-    .track-info .d-flex, .track-info div {
-        order: 3 !important;
-    }
-
-    /* 3. Le bloc Elo bien fixé à droite */
-    .elo-display {
-        flex: 0 0 auto !important;
-        text-align: right !important;
-        font-size: 0.72rem !important;
-        white-space: nowrap !important;
-        margin-left: auto !important;
-    }
-
-    .elo-display strong {
+    .track-artist {
         font-size: 0.85rem !important;
+        margin-bottom: 2px !important;
+        color: var(--text-muted) !important;
+    }
+
+    .elo-display {
+        font-size: 0.78rem !important;
+        color: var(--text-muted) !important;
+        font-weight: 500 !important;
+        margin-top: 2px !important;
+    }
+
+    .match-count {
+        font-size: 0.72rem !important;
+        color: var(--text-muted) !important;
+        opacity: 0.8;
+    }
+
+    /* Restauration propre de la zone VS au centre sans la déformer */
+    .vs-zone {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        width: 100% !important;
+        max-width: 260px !important;
+        margin: 4px auto !important;
+    }
+
+    .vs-circle {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 0.95rem !important;
+        background: var(--neon-green) !important;
+        color: #0d0d0d !important;
+        font-weight: 900 !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: 0 0 10px var(--neon-green-glow) !important;
+        margin-bottom: 2px !important;
+    }
+
+    .vs-zone form {
+        width: 100% !important;
+    }
+
+    .tie-btn, .central-rank-btn, a.central-rank-btn {
+        padding: 8px 0 !important;
+        font-size: 0.85rem !important;
+        width: 100% !important;
     }
 }

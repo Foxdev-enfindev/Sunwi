@@ -1,12 +1,11 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for
+from flask import Blueprint, render_template, request, session, redirect, url_for, send_from_directory, current_app
+import os
 from db import get_db_connection
 from elo_engine import compute_and_update_vote, save_vote_async_generic, select_matchup
-import requests
-from flask import Response
 
 football_bp = Blueprint('football', __name__, url_prefix='/football')
 
-# Correspondance entre les slugs d'URL et les noms exacts en base de données
+# Correspondance entre les slugs d'URL et les noms exacts en base de données[cite: 8]
 LEAGUE_MAPPING = {
     'ligue1': "Ligue 1 McDonald's",
     'laliga': "LALIGA EA SPORTS",
@@ -150,7 +149,6 @@ def vote():
     p2 = players_dict.get(p2_id)
 
     if p1 and p2:
-        # On isole les données dans de nouveaux dictionnaires pour éviter la mutation par référence
         item_a = {
             'id': p1_id,
             'name': p1['name'],
@@ -166,7 +164,6 @@ def vote():
 
         new_p1_elo, new_p2_elo, winner_id, loser_id, last_result = compute_and_update_vote(item_a, item_b, outcome)
 
-        # Mise à jour propre du cache de session
         p1['elo'] = int(new_p1_elo)
         p1['matches_count'] += 1
         p2['elo'] = int(new_p2_elo)
@@ -182,34 +179,13 @@ def vote():
         )
 
     return redirect(url_for('football.football_hub', league=active_league) if active_league else url_for('football.football_hub'))
+
 @football_bp.route('/player_photo/<player_id>')
 def player_photo(player_id):
-    conn = get_db_connection()
-    if not conn:
-        return "", 404
-    cur = conn.cursor()
-    cur.execute("SELECT photo_url FROM football_players_scores WHERE player_id = %s;", (player_id,))
-    res = cur.fetchone()
-    cur.close()
-    conn.close()
-
-    if not res or not res[0]:
-        print(f"Pas d'URL trouvée en base pour le joueur {player_id}")
-        return "", 404
-
-    target_url = res[0]
-    print(f"Tentative de proxy pour l'URL : {target_url}")
-
-    try:
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Referer': 'https://sofifa.com/'
-        }
-        resp = requests.get(target_url, headers=headers, timeout=5)
-        print(f"Statut reçu du CDN : {resp.status_code}")
-        if resp.status_code == 200:
-            return Response(resp.content, content_type=resp.headers.get('content-type', 'image/png'))
-    except Exception as e:
-        print(f"Erreur proxy exception : {e}")
-
-    return "", 404
+    img_dir = os.path.join(current_app.root_path, 'static', 'images', 'football')
+    filename = f"{player_id}.png"
+    
+    if os.path.exists(os.path.join(img_dir, filename)):
+        return send_from_directory(img_dir, filename)
+    
+    return redirect('https://cdn.sofifa.net/player_0.png')

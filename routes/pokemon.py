@@ -33,7 +33,8 @@ def fetch_user_pokemon_from_db(user_id, generation=None, p_type=None):
     
     query = """
         SELECT 
-            p.pokemon_id, p.name, p.generation, p.type1, p.type2, p.sprite_url, p.shiny_url,
+            p.pokemon_id, p.name, p.generation, p.type1, p.type2, 
+            p.sprite_url, p.shiny_url, p.local_sprite_path,
             COALESCE(ups.elo, 1000) as elo,
             COALESCE(ups.matches_count, 0) as matches_count
         FROM pokemon_players p
@@ -139,7 +140,6 @@ def vote():
     p2 = pokemon_dict.get(p2_id)
 
     if p1 and p2:
-        # On s'assure de passer des dictionnaires propres avec leurs vraies clés 'pokemon_id' ou 'id'
         item_a = {
             'id': p1_id,
             'name': p1['name'],
@@ -160,7 +160,6 @@ def vote():
         if last_result:
             last_result = last_result.replace('.0', '')
 
-        # Mise à jour directe du cache de session avec les nouvelles valeurs
         p1['elo'] = new_p1_elo
         p1['matches_count'] += 1
         p2['elo'] = new_p2_elo

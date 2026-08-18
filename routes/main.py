@@ -4,6 +4,9 @@ from flask import Blueprint, render_template, request, jsonify, session, redirec
 
 main_bp = Blueprint('main', __name__)
 
+# --- Ta liste blanche d'emails autorisés pour le module Spotify ---
+SPOTIFY_WHITELIST = ["florent.pennarun@gmail.com", "autre_email@exemple.com"]
+
 @main_bp.route('/')
 def hub():
     modules = [
@@ -96,6 +99,16 @@ def hub():
             'url': '#'
         }
     ]
+
+    # --- FILTRE SPOTIFY WHITELIST ---
+    user = session.get('sunwi_user', {})
+    user_email = user.get('email')
+    
+    if not user_email or user_email not in SPOTIFY_WHITELIST:
+        # On supprime le module Spotify de la liste
+        modules = [m for m in modules if m['id'] != 'spotify']
+        # Optionnel : si on veut masquer le module 'steam' aussi (et donc toute la catégorie)
+        # modules = [m for m in modules if m['category'] != 'Personnel (Nécessite une connexion externe)']
 
     category_order = ['Sport', 'Personnel (Nécessite une connexion externe)', 'Gaming', 'Musique', 'Cinéma']
 

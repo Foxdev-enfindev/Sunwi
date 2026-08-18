@@ -651,12 +651,9 @@ def toggle_pause():
     if not sp: 
         return jsonify({"error": "Non authentifié"}), 401
     try:
-        playback = sp.current_playback()
-        if playback and playback.get('is_playing'):
-            sp.pause_playback()
-            return jsonify({"status": "paused"})
-        sp.start_playback()
-        return jsonify({"status": "playing"})
+        # On force l'arrêt direct au lieu de basculer pour éviter le faux rebond de lecture
+        sp.pause_playback()
+        return jsonify({"status": "paused"})
     except Exception:
         return jsonify({"warning": "Erreur lecteur Spotify."}), 200
 

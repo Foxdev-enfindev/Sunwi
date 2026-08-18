@@ -135,6 +135,7 @@
 
     function stopSpotifyAudio() {
         if (!isSilentMode) {
+            // sendBeacon est conçu spécifiquement pour envoyer des requêtes de fermeture de page de manière fiable
             if (navigator.sendBeacon) {
                 navigator.sendBeacon("{{ url_for('spotify.toggle_pause') }}");
             } else {
@@ -150,8 +151,8 @@
             toast.innerHTML = `
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
                     <span>${msg}</span>
-                    <button type="button" onclick="enableSilentMode()" style="background: #0d0d0d; color: #ff9900; border: none; padding: 6px 14px; border-radius: 12px; font-weight: 800; cursor: pointer; font-size: 0.8rem;">
-                        🤫 Passer en Mode Silence
+                    <button type="button" onclick="enableSilentMode()" style="background: #0d0d0d; color: #ff9900; border: none; padding: 6px 14px; border-radius: 4px; cursor: pointer;">
+                        🔇 Passer en Mode Silence
                     </button>
                 </div>`;
         } else {
@@ -159,6 +160,12 @@
         }
         toast.classList.remove('hidden');
         toast.classList.add('show');
+
+        // ⏱️ Ajout de la disparition automatique après 3 secondes (3000 ms)
+        setTimeout(() => {
+            toast.classList.remove('show');
+            toast.classList.add('hidden');
+        }, 3000);
     }
 
     function enableSilentMode() {

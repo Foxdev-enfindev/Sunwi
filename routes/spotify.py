@@ -103,12 +103,12 @@ class DBTokenCacheHandler(spotipy.cache_handler.CacheHandler):
         if session.get('token_info'):
             return session.get('token_info')
         
-        user_profile = session.get('user_profile')
-        if user_profile and user_profile.get('id') and DATABASE_URL:
+        spotify_profile = session.get('spotify_user_profile')
+        if spotify_profile and spotify_profile.get('id') and DATABASE_URL:
             try:
                 conn = get_db_connection()
                 cur = conn.cursor()
-                cur.execute("SELECT token_info FROM user_preferences WHERE user_id = %s;", (user_profile['id'],))
+                cur.execute("SELECT token_info FROM user_preferences WHERE user_id = %s;", (spotify_profile['id'],))
                 row = cur.fetchone()
                 cur.close()
                 conn.close()
@@ -122,9 +122,9 @@ class DBTokenCacheHandler(spotipy.cache_handler.CacheHandler):
 
     def save_token_to_cache(self, token_info):
         session['token_info'] = token_info
-        user_profile = session.get('user_profile')
-        if user_profile and user_profile.get('id'):
-            save_token_to_db_explicit(user_profile['id'], token_info)
+        spotify_profile = session.get('spotify_user_profile')
+        if spotify_profile and spotify_profile.get('id'):
+            save_token_to_db_explicit(spotify_profile['id'], token_info)
 
 def get_spotify_oauth(show_dialog=False):
     return SpotifyOAuth(
@@ -159,10 +159,10 @@ def get_spotify_client():
 
     return spotipy.Spotify(auth=token_info['access_token'])
 
-def get_user_profile_cached(sp):
+def get_spotify_profile_cached(sp):
     now = time.time()
-    cached_profile = session.get('user_profile')
-    cached_time = session.get('user_profile_timestamp', 0)
+    cached_profile = session.get('spotify_user_profile')
+    cached_time = session.get('spotify_profile_timestamp', 0)
     
     if cached_profile and (now - cached_time < 3600):
         return cached_profile
@@ -175,8 +175,8 @@ def get_user_profile_cached(sp):
             'display_name': user_info.get('display_name', 'Utilisateur'),
             'image': images[0]['url'] if images else None
         }
-        session['user_profile'] = profile
-        session['user_profile_timestamp'] = now
+        session['spotify_user_profile'] = profile
+        session['spotify_profile_timestamp'] = now
         session.modified = True
 
         if session.get('token_info') and profile.get('id'):
@@ -184,13 +184,13 @@ def get_user_profile_cached(sp):
 
         return profile
     except Exception:
-        return session.get('user_profile')
+        return session.get('spotify_user_profile')
 
 # --- HOOKS DE SESSION ---
 
 @spotify_bp.before_app_request
 def restore_session_if_lost():
-    if 'user_profile' not in session:
+    if 'spotify_user_profile' not in session:
         cookie_val = request.cookies.get('elotify_user')
         if cookie_val and DATABASE_URL:
             try:
@@ -205,14 +205,14 @@ def restore_session_if_lost():
 
                 if row and row['token_info']:
                     token_info = json.loads(row['token_info'])
-                    session['user_profile'] = {'id': user_id, 'display_name': 'Utilisateur', 'image': None}
+                    session['spotify_user_profile'] = {'id': user_id, 'display_name': 'Utilisateur', 'image': None}
                     session['token_info'] = token_info
 
                     sp = get_spotify_client()
                     if sp:
-                        profile = get_user_profile_cached(sp)
+                        profile = get_spotify_profile_cached(sp)
                         if profile:
-                            session['user_profile'] = profile
+                            session['spotify_user_profile'] = profile
                     
                     if row['active_playlist_id']:
                         session['selected_playlist_id'] = row['active_playlist_id']
@@ -226,10 +226,10 @@ def restore_session_if_lost():
 
 @spotify_bp.after_app_request
 def save_user_cookie(response):
-    user_profile = session.get('user_profile')
-    if user_profile and user_profile.get('id'):
+    spotify_profile = session.get('spotify_user_profile')
+    if spotify_profile and spotify_profile.get('id'):
         serializer = URLSafeTimedSerializer(current_app.secret_key)
-        signed_id = serializer.dumps(user_profile['id'])
+        signed_id = serializer.dumps(spotify_profile['id'])
         response.set_cookie('elotify_user', signed_id, max_age=30*86400, httponly=True, samesite='Lax', path='/')
     return response
 
@@ -405,8 +405,8 @@ def callback():
                     'display_name': user_info.get('display_name', 'Utilisateur'),
                     'image': user_info['images'][0]['url'] if user_info.get('images') else None
                 }
-                session['user_profile'] = profile
-                session['user_profile_timestamp'] = time.time()
+                session['spotify_user_profile'] = profile
+                session['spotify_profile_timestamp'] = time.time()
                 
                 save_token_to_db_explicit(profile['id'], token_info)
 
@@ -448,7 +448,7 @@ def playlists():
                 "image_url": images[0]['url'] if images else None, 
                 "tracks_count": total
             })
-        return render_template('spotify_playlists.html', playlists=user_playlists, user=get_user_profile_cached(sp))
+        return render_template('spotify_playlists.html', playlists=user_playlists, user=get_spotify_profile_cached(sp))
     except Exception as e:
         print(f"⚠️ Erreur liste playlists : {e}")
         return redirect(url_for('spotify.login'))
@@ -463,7 +463,7 @@ def select_playlist(playlist_id):
 
     sp = get_spotify_client()
     if sp:
-        profile = get_user_profile_cached(sp)
+        profile = get_spotify_profile_cached(sp)
         if profile and profile.get('id'):
             threading.Thread(target=save_user_active_playlist_db, args=(profile['id'], playlist_id), daemon=True).start()
             
@@ -477,13 +477,13 @@ def select_playlist(playlist_id):
 
 @spotify_bp.route('/')
 def duel():
-    profile = session.get('user_profile')
+    profile = session.get('spotify_user_profile')
     
     if not profile:
         sp = get_spotify_client()
         if not sp: 
             return redirect(url_for('spotify.login'))
-        profile = get_user_profile_cached(sp)
+        profile = get_spotify_profile_cached(sp)
 
     user_id = profile.get('id') if profile else None
 
@@ -617,7 +617,7 @@ def vote():
             }
         }
 
-        profile = session.get('user_profile')
+        profile = session.get('spotify_user_profile')
         user_id = profile.get('id') if profile else None
 
         session['dernier_resultat'] = last_result
@@ -689,7 +689,7 @@ def set_silent_mode_route(status):
     
     sp = get_spotify_client()
     if sp:
-        profile = get_user_profile_cached(sp)
+        profile = get_spotify_profile_cached(sp)
         if profile and profile.get('id'):
             threading.Thread(target=save_user_silent_mode_db, args=(profile['id'], is_silent), daemon=True).start()
         
@@ -735,8 +735,8 @@ def classement(playlist_id=None):
         tracks.sort(key=lambda x: x.get('elo', 1000), reverse=True)
 
     playlist_name = session.get('selected_playlist_name')
-    user_profile = session.get('user_profile')
-    owner_name = user_profile.get('display_name') if user_profile else None
+    spotify_profile = session.get('spotify_user_profile')
+    owner_name = spotify_profile.get('display_name') if spotify_profile else None
 
     if not playlist_name or playlist_id != session.get('selected_playlist_id'):
         sp = get_spotify_client()
@@ -758,7 +758,7 @@ def classement(playlist_id=None):
         playlist_id=playlist_id, 
         playlist_name=playlist_name, 
         owner_name=owner_name, 
-        user=user_profile
+        user=spotify_profile
     )
 
 @spotify_bp.route('/stats')
@@ -772,4 +772,4 @@ def stats():
         for a in t.get('artist', '').split(','):
             if a.strip(): 
                 artist_counter[a.strip()] += 1
-    return render_template('spotify_stats.html', sorted_artists=artist_counter.most_common(), total_tracks=len(tracks), user=get_user_profile_cached(sp))
+    return render_template('spotify_stats.html', sorted_artists=artist_counter.most_common(), total_tracks=len(tracks), user=get_spotify_profile_cached(sp))

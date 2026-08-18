@@ -5,7 +5,7 @@ from flask import Blueprint, render_template, request, jsonify, session, redirec
 main_bp = Blueprint('main', __name__)
 
 # --- Ta liste blanche d'emails autorisés pour le module Spotify ---
-SPOTIFY_WHITELIST = ["florent.pennarun@gmail.com", "autre_email@exemple.com"]
+SPOTIFY_WHITELIST = ["florent.pennarun@gmail.com", "riche-angelique@gmail.com", "dgo29fcb@gmail.com", "riche.angelique@gmail.com"]
 
 @main_bp.route('/')
 def hub():

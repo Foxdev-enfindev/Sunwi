@@ -1,53 +1,65 @@
-{% extends 'base.html' %}
+<!-- templates/spotify_leaderboard.html -->
+{% extends 'base_leaderboard.html' %}
 
 {% block title %}Classement - {{ playlist_name }}{% endblock %}
 
-{% block content %}
-<div class="classement-container">
-    <div class="classement-header">
-        <h1>🏆 CLASSEMENT COMPLET 🏆</h1>
-        
-        <p class="quit-subtitle" style="margin-top: 4px; font-size: 1.05rem; font-weight: 600;">
-            🎵 {{ playlist_name }}
-            {% if owner_name %}
-                <span style="opacity: 0.8; font-size: 0.9rem; font-weight: 400;">(par {{ owner_name }})</span>
-            {% endif %}
-        </p>
+{% block header_title %}🏆 CLASSEMENT COMPLET 🏆{% endblock %}
+{% block header_subtitle %}
+    🎵 {{ playlist_name }}
+    {% if owner_name %}
+        <span style="opacity: 0.8; font-size: 0.9rem; font-weight: 400;">(par {{ owner_name }})</span>
+    {% endif %}
+{% endblock %}
 
-        <div class="quit-actions-group">
-            <a href="{{ url_for('spotify.duel') }}" class="back-btn">⚔️ Retour aux duels</a>
-            <a href="{{ url_for('main.hub') }}" class="back-btn" style="background: rgba(255,255,255,0.1);">🏠 Hub</a>
-            <button type="button" class="resume-btn" onclick="copyPublicLink()">
-                🔗 Partager ce classement
-            </button>
-        </div>
-    </div>
+{% block header_actions %}
+<a href="{{ url_for('spotify.duel') }}" class="btn btn-primary fw-bold">⚔️ Retour aux duels</a>
+<a href="{{ url_for('main.hub') }}" class="btn btn-outline-secondary">🏠 Hub</a>
+<button type="button" class="btn btn-outline-info" onclick="copyPublicLink()">
+    🔗 Partager ce classement
+</button>
+{% endblock %}
 
-    <div class="ranking-list">
-        {% if ranking %}
-            {% for track in ranking %}
-            <div class="ranking-card">
-                <span class="ranking-rank">#{{ loop.index }}</span>
-                {% if track.image_url %}
-                    <img src="{{ track.image_url }}" alt="{{ track.name }}" class="ranking-img">
-                {% endif %}
-                <div class="ranking-info">
-                    <span class="ranking-name">{{ track.name }}</span>
-                    <span class="ranking-artist">{{ track.artist }}</span>
+{% block ranking_content %}
+    {% if ranking %}
+        {% for item in ranking %}
+        <div class="ranking-card d-flex align-items-center justify-content-between p-3 mb-2 rounded-3 shadow-sm" style="background: linear-gradient(145deg, #1e293b, #0f172a); border: 1px solid rgba(255,255,255,0.08);">
+            
+            <div class="d-flex align-items-center gap-3 flex-grow-1 min-width-0">
+                <span class="ranking-rank fw-bold text-warning fs-5 flex-shrink-0" style="min-width: 40px; text-align: center;">#{{ loop.index }}</span>
+
+                {% if item.image_url %}
+                <div class="flex-shrink-0">
+                    <img src="{{ item.image_url }}" alt="{{ item.name }}" class="rounded-3" style="width: 55px; height: 55px; object-fit: cover;">
                 </div>
-                <div class="ranking-score-box">
-                    <span class="ranking-elo">{{ track.elo }} pts</span>
-                    <span class="ranking-matches">{{ track.matches_count or 0 }} duel{% if track.matches_count and track.matches_count > 1 %}s{% endif %}</span>
+                {% endif %}
+
+                <div class="min-width-0 flex-grow-1">
+                    <div class="fw-bold text-light fs-6 text-truncate">{{ item.name }}</div>
+                    <div class="text-secondary small">{{ item.artist }}</div>
                 </div>
             </div>
-            {% endfor %}
-        {% else %}
-            <p style="text-align: center; color: var(--text-muted); margin-top: 20px;">
-                Aucun titre classé pour le moment dans cette playlist.
-            </p>
-        {% endif %}
-    </div>
-</div>
+
+            <div class="text-end ps-3 flex-shrink-0" style="white-space: nowrap;">
+                <div class="fw-bold text-primary fs-6">{{ item.elo | int }} pts</div>
+                <div class="text-info" style="font-size: 0.8rem;">
+                    {% set matches = item.matches_count or 0 %}
+                    {% if matches == 0 %}
+                        1er duel
+                    {% elif matches == 1 %}
+                        1 duel
+                    {% else %}
+                        {{ matches }} duels
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-center text-muted mt-4">
+            Aucun titre classé pour le moment dans cette playlist.
+        </p>
+    {% endif %}
 {% endblock %}
 
 {% block extra_scripts %}

@@ -7,8 +7,9 @@
 {% set item_b_id = p2.player_id %}
 
 {% block card_a_content %}
-<div class="pochette-wrapper">
-    <img src="{{ p1.photo_url or 'https://cdn.sofifa.net/player_0.png' }}" alt="{{ p1.name }}" class="pochette" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://cdn.sofifa.net/player_0.png';">
+<div class="pochette-wrapper text-center my-3" style="min-height: 120px; display: flex; align-items: center; justify-content: center;">
+    <img src="{{ url_for('football.player_photo', player_id=p1.player_id) }}" alt="{{ p1.name }}" class="player-photo" style="max-height: 110px; object-fit: contain;">
+    <div class="player-fallback rounded-circle bg-secondary bg-opacity-25 text-secondary align-items-center justify-content-center" style="width: 80px; height: 80px; display: none; font-size: 1.5rem;">⚽</div>
 </div>
 <div class="track-info">
     <span class="track-badge">{{ p1.position or 'JOUEUR' }} • GEN {{ p1.overall }}</span>
@@ -23,8 +24,9 @@
 {% endblock %}
 
 {% block card_b_content %}
-<div class="pochette-wrapper">
-    <img src="{{ p2.photo_url or 'https://cdn.sofifa.net/player_0.png' }}" alt="{{ p2.name }}" class="pochette" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://cdn.sofifa.net/player_0.png';">
+<div class="pochette-wrapper text-center my-3" style="min-height: 120px; display: flex; align-items: center; justify-content: center;">
+    <img src="{{ url_for('football.player_photo', player_id=p2.player_id) }}" alt="{{ p2.name }}" class="player-photo" style="max-height: 110px; object-fit: contain;">
+    <div class="player-fallback rounded-circle bg-secondary bg-opacity-25 text-secondary align-items-center justify-content-center" style="width: 80px; height: 80px; display: none; font-size: 1.5rem;">⚽</div>
 </div>
 <div class="track-info">
     <span class="track-badge">{{ p2.position or 'JOUEUR' }} • GEN {{ p2.overall }}</span>

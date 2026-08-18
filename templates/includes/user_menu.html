@@ -27,18 +27,18 @@
     <li><hr class="dropdown-divider"></li>
     {% endif %}
 
-    <!-- Mode Audio (Visible UNIQUEMENT dans le module Spotify) -->
-    {% if request.blueprint == 'spotify' %}
+    <!-- Mode Audio (Visible dans Spotify et Musique) -->
+    {% if request.blueprint in ['spotify', 'music'] %}
     <li class="mb-2">
       <small class="theme-label d-block mb-1">Mode Audio</small>
       <div class="btn-group w-100" role="group">
+        <a href="{{ url_for('main.set_audio_mode', mode='audio') }}" 
+           class="btn btn-sm {% if not session.get('silent_mode', false) %}btn-success{% else %}btn-outline-secondary{% endif %}">
+           🔊 Avec son
+        </a>
         <a href="{{ url_for('main.set_audio_mode', mode='silent') }}" 
            class="btn btn-sm {% if session.get('silent_mode', false) %}btn-secondary{% else %}btn-outline-secondary{% endif %}">
-           🤫 Silencieux
-        </a>
-        <a href="{{ url_for('main.set_audio_mode', mode='spotify') }}" 
-           class="btn btn-sm {% if not session.get('silent_mode', false) %}btn-success{% else %}btn-outline-secondary{% endif %}">
-           🟢 Spotify
+           🤫 Sans son
         </a>
       </div>
     </li>
@@ -92,6 +92,7 @@
   </ul>
 </div>
 {% else %}
+<!-- Lien direct vers la page de connexion -->
 <a href="{{ url_for('auth.google_login') }}" class="btn btn-outline-light rounded-pill px-3 py-1 fw-bold d-flex align-items-center gap-2 text-decoration-none" style="border-color: rgba(255,255,255,0.2); font-size: 0.85rem;">
   <svg width="16" height="16" viewBox="0 0 24 24">
     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>

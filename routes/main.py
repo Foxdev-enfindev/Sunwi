@@ -51,8 +51,6 @@ def hub():
             'url': '#'
         },
 
-        
-
         # --- GAMING ---
         {
             'id': 'pokemon_global',
@@ -78,6 +76,15 @@ def hub():
             'active': True,
             'url': '#'
         },
+        # --- MUSIQUE ---
+        {
+            'id': 'music_top100',
+            'title': 'Top 100 Kpop (Par année)',
+            'category': 'Musique',
+            'badge': 'Disponible',
+            'active': True,
+            'url': '/music/'
+        },
 
         # --- CINÉMA ---
         {
@@ -90,7 +97,7 @@ def hub():
         }
     ]
 
-    category_order = ['Sport', 'Personnel (Nécessite une connexion externe)', 'Gaming', 'Cinéma']
+    category_order = ['Sport', 'Personnel (Nécessite une connexion externe)', 'Gaming', 'Musique', 'Cinéma']
 
     grouped = {}
     for m in modules:
@@ -118,7 +125,7 @@ def set_audio_mode(mode):
         except Exception as e:
             print(f"⚠️ Impossible de mettre Spotify en pause : {e}")
 
-    user_profile = session.get('user_profile')
+    user_profile = session.get('user_profile') or session.get('sunwi_user')
     if user_profile and user_profile.get('id'):
         try:
             from routes.spotify import save_user_silent_mode_db

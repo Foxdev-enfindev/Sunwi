@@ -1,0 +1,25 @@
+<!-- templates/base_leaderboard.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="classement-container py-4">
+    <!-- En-tête de la page -->
+    <div class="classement-header text-center mb-4">
+        <h1 class="display-5 fw-bold text-light mb-2">{% block header_title %}🏆 CLASSEMENT 🏆{% endblock %}</h1>
+        <p class="text-secondary fs-5">{% block header_subtitle %}Ton classement individuel{% endblock %}</p>
+
+        <div class="quit-actions-group d-flex justify-content-center gap-3 mt-3">
+            {% block header_actions %}
+            <a href="{{ url_for('main.hub') }}" class="btn btn-outline-secondary">🏠 Hub</a>
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- Conteneur de la liste géré par le module enfant -->
+    <div class="ranking-list mx-auto" style="max-width: 700px;">
+        {% block ranking_content %}{% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}{% endblock %}

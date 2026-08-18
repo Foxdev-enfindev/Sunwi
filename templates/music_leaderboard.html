@@ -1,0 +1,106 @@
+<!-- templates/music_leaderboard.html -->
+{% extends 'base_leaderboard.html' %}
+
+{% block title %}Sunwi — Classement Top 100 {{ genre|upper }} ({{ year }}){% endblock %}
+
+{% block header_title %}🏆 TOP 100 {{ genre|upper }} ({{ year }}) 🏆{% endblock %}
+{% block header_subtitle %}Mise à jour en temps réel selon tes duels{% endblock %}
+
+{% block header_actions %}
+<a href="{{ url_for('music.duel', genre=genre, year=year) }}" class="btn btn-primary fw-bold">⚔️ Retour aux duels</a>
+<a href="{{ url_for('main.hub') }}" class="btn btn-outline-secondary">🏠 Hub</a>
+{% endblock %}
+
+{% block ranking_content %}
+    {% if ranking %}
+        {% for item in ranking %}
+        <div class="ranking-card d-flex align-items-center justify-content-between p-3 mb-2 rounded-3 shadow-sm" style="background: linear-gradient(145deg, #1e293b, #0f172a); border: 1px solid rgba(255,255,255,0.08);">
+            
+            <!-- Partie Gauche : Rang, Pochette interactive et Infos -->
+            <div class="d-flex align-items-center gap-3 flex-grow-1 min-width-0">
+                <span class="ranking-rank fw-bold text-warning fs-5 flex-shrink-0" style="min-width: 40px; text-align: center;">#{{ loop.index }}</span>
+
+                <!-- Pochette cliquable transmettant l'ID Deezer vers la route proxy -->
+                <div class="flex-shrink-0 position-relative" style="cursor: pointer;" {% if item.preview_url %}onclick="playPreview('{{ item.id }}', this)"{% endif %}>
+                    <img src="{{ item.image_url }}" alt="{{ item.name }}" class="rounded-3 preview-cover" style="width: 55px; height: 55px; object-fit: cover; transition: filter 0.2s;">
+                    {% if item.preview_url %}
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-50 rounded-3 opacity-0 hover-overlay" style="transition: opacity 0.2s;">
+                        <span class="text-white fs-5">▶</span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="min-width-0 flex-grow-1">
+                    <div class="fw-bold text-light fs-6 text-truncate">{{ item.name }}</div>
+                    <div class="text-secondary small">{{ item.artist }}</div>
+                </div>
+            </div>
+
+            <!-- Partie Droite : Score Elo et Nombre de Duels -->
+            <div class="text-end ps-3 flex-shrink-0" style="white-space: nowrap;">
+                <div class="fw-bold text-primary fs-6">{{ item.elo | int }} pts</div>
+                <div class="text-info" style="font-size: 0.8rem;">
+                    {% set matches = item.matches_count or 0 %}
+                    {% if matches == 0 %}
+                        1er duel
+                    {% elif matches == 1 %}
+                        1 duel
+                    {% else %}
+                        {{ matches }} duels
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-center text-muted mt-4">
+            Aucun morceau classé pour le moment.
+        </p>
+    {% endif %}
+{% endblock %}
+
+{% block extra_scripts %}
+<audio id="leaderboard-audio" preload="auto"></audio>
+<style>
+    .position-relative:hover .hover-overlay {
+        opacity: 1 !important;
+    }
+</style>
+<script>
+    const player = document.getElementById('leaderboard-audio');
+    player.volume = 0.2; // Volume à 20%
+
+    async function playPreview(trackId, element) {
+        const overlayIcon = element.querySelector('.hover-overlay span');
+
+        try {
+            // Utilisation rigoureusement identique de la route proxy du module music
+            const response = await fetch("{{ url_for('music.get_preview', track_id='') }}" + trackId);
+            const data = await response.json();
+
+            if (data && data.preview) {
+                if (player.src === data.preview && !player.paused) {
+                    player.pause();
+                    if (overlayIcon) overlayIcon.innerText = '▶';
+                } else {
+                    player.src = data.preview;
+                    await player.play();
+                    
+                    // Remet l'icône de toutes les autres pochettes à '▶'
+                    document.querySelectorAll('.hover-overlay span').forEach(el => el.innerText = '▶');
+                    if (overlayIcon) overlayIcon.innerText = '⏸';
+                }
+            } else {
+                console.warn("Extrait audio indisponible pour ce titre.");
+            }
+        } catch (err) {
+            console.error("Erreur lors de la lecture de l'extrait :", err);
+        }
+
+        player.onended = () => {
+            if (overlayIcon) overlayIcon.innerText = '▶';
+        };
+    }
+</script>
+{% endblock %}

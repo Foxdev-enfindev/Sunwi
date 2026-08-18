@@ -42,7 +42,7 @@
                         <option value="/football/serie_a">Serie A</option>
                         <option value="/football/bundesliga">Bundesliga</option>
                       </select>
-                      <button onclick="window.location.href=document.getElementById('football-league-select').value" class="hub-btn-action border-0" style="padding: 3px 0;">Lancer ⚔️</button>
+                      <button type="button" data-select-id="football-league-select" class="hub-btn-action border-0 require-auth" style="padding: 3px 0;">Lancer ⚔️</button>
                     </div>
 
                   <!-- Cas spécifique de la carte Pokémon par génération -->
@@ -59,7 +59,7 @@
                         <option value="/pokemon/?generation=generation-viii">Génération 8</option>
                         <option value="/pokemon/?generation=generation-ix">Génération 9</option>
                       </select>
-                      <button onclick="window.location.href=document.getElementById('pokemon-gen-select').value" class="hub-btn-action border-0" style="padding: 3px 0;">Lancer ⚔️</button>
+                      <button type="button" data-select-id="pokemon-gen-select" class="hub-btn-action border-0 require-auth" style="padding: 3px 0;">Lancer ⚔️</button>
                     </div>
 
                   <!-- Cas spécifique de la carte Pokémon par type -->
@@ -85,13 +85,23 @@
                         <option value="/pokemon/?type=steel">Acier</option>
                         <option value="/pokemon/?type=fairy">Fée</option>
                       </select>
-                      <button onclick="window.location.href=document.getElementById('pokemon-type-select').value" class="hub-btn-action border-0" style="padding: 3px 0;">Lancer ⚔️</button>
+                      <button type="button" data-select-id="pokemon-type-select" class="hub-btn-action border-0 require-auth" style="padding: 3px 0;">Lancer ⚔️</button>
                     </div>
-
+                    <!-- Cas spécifique du Top 100 Musique -->
+                  {% elif module.id == 'music_top100' %}
+                    <div class="d-flex flex-column gap-1 mt-auto">
+                      <select id="music-year-select" class="form-select form-select-sm hub-league-select">
+                        <option value="/music/?genre=kpop&year=2025" selected>2025</option>
+                        <option value="/music/?genre=kpop&year=2024">2024</option>
+                        <option value="/music/?genre=kpop&year=2023">2023</option>
+                        <option value="/music/?genre=kpop&year=2022">2022</option>
+                      </select>
+                      <button type="button" data-select-id="music-year-select" class="hub-btn-action border-0 require-auth" style="padding: 3px 0;">Lancer ⚔️</button>
+                    </div>
                   {% else %}
                     <div class="mt-auto pt-2">
                       {% if module.active %}
-                        <a href="{{ module.url }}" class="hub-btn-action">Lancer ⚔️</a>
+                        <a href="{{ module.url }}" class="hub-btn-action require-auth">Lancer ⚔️</a>
                       {% else %}
                         <button class="hub-btn-disabled" disabled>Bientôt 🔒</button>
                       {% endif %}

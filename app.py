@@ -13,6 +13,7 @@ from routes.spotify import spotify_bp
 from routes.auth import auth_bp, init_oauth
 from routes.football import football_bp
 from routes.pokemon import pokemon_bp
+from routes.music import music_bp
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'une_cle_secrete_super_securisee_elotify_12345')
@@ -41,6 +42,7 @@ app.register_blueprint(spotify_bp, url_prefix='/spotify')
 app.register_blueprint(auth_bp)
 app.register_blueprint(football_bp)
 app.register_blueprint(pokemon_bp)
+app.register_blueprint(music_bp, url_prefix='/music')
 
 @app.after_request
 def add_header(response):

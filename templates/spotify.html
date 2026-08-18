@@ -187,4 +187,17 @@
             });
     }
 </script>
+<script>
+    // Intercepte tous les clics sur les liens de navigation (logo Sunwi / Hub / retour) pour couper Spotify
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            stopSpotifyAudio();
+        });
+    });
+
+    // Sécurité lors de la fermeture ou du changement de page par l'historique
+    window.addEventListener('pagehide', () => {
+        stopSpotifyAudio();
+    });
+</script>
 {% endblock %}

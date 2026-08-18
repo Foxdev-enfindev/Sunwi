@@ -1,0 +1,170 @@
+{% extends 'base_duel.html' %}
+
+{% set page_title = "Sunwi — Top 100 " ~ genre|upper ~ " (" ~ year ~ ")" %}
+{% set header_title = "Top 100 " ~ genre|upper ~ " — " ~ year %}
+{% set vote_url = url_for('music.vote', genre=genre, year=year) %}
+{% set leaderboard_url = url_for('music.classement', genre=genre, year=year) %}
+
+{% set item_a_id = track_a.id %}
+{% set item_b_id = track_b.id %}
+
+{% set card_b_class = 'active' if silent_mode else '' %}
+
+{% block card_a_content %}
+<div class="pochette-wrapper">
+    <img src="{{ track_a.image_url }}" alt="{{ track_a.name }}" class="pochette">
+</div>
+<div class="track-info">
+    <span class="track-badge">TITRE 1</span>
+    <h2 class="track-title" title="{{ track_a.name }}">{{ track_a.name }}</h2>
+    <p class="track-artist" title="{{ track_a.artist }}">{{ track_a.artist }}</p>
+    <div class="elo-display">Elo actuel: <strong>{{ track_a.elo }}</strong></div>
+    <div class="match-count">
+        {% set current_match_a = (track_a.matches_count or 0) + 1 %}
+        {{ current_match_a }}{% if current_match_a == 1 %}er{% else %}e{% endif %} duel
+    </div>
+</div>
+{% endblock %}
+
+{% block card_a_extra %}
+{% if not silent_mode %}
+<div class="seek-controls text-center mt-2" id="seek-a">
+    <button type="button" class="seek-btn pause-btn-inline btn btn-sm btn-outline-light" onclick="togglePause(event)">⏸</button>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block card_b_content %}
+<div class="pochette-wrapper">
+    <img src="{{ track_b.image_url }}" alt="{{ track_b.name }}" class="pochette">
+</div>
+<div class="track-info">
+    <span class="track-badge">TITRE 2</span>
+    <h2 class="track-title" title="{{ track_b.name }}">{{ track_b.name }}</h2>
+    <p class="track-artist" title="{{ track_b.artist }}">{{ track_b.artist }}</p>
+    <div class="elo-display">Elo actuel: <strong>{{ track_b.elo }}</strong></div>
+    <div class="match-count">
+        {% set current_match_b = (track_b.matches_count or 0) + 1 %}
+        {{ current_match_b }}{% if current_match_b == 1 %}er{% else %}e{% endif %} duel
+    </div>
+</div>
+{% endblock %}
+
+{% block card_b_extra %}
+{% if not silent_mode %}
+<div class="seek-controls text-center mt-2" id="seek-b">
+    <button type="button" class="seek-btn pause-btn-inline btn btn-sm btn-outline-light" onclick="togglePause(event)">⏸</button>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block module_scripts %}
+<audio id="global-audio-player" crossorigin="anonymous" preload="auto"></audio>
+
+<script>
+    let currentPlaying = 'a';
+    const isDesktop = window.matchMedia('(pointer: fine)').matches;
+    const isSilentMode = {{ silent_mode | tojson }};
+    const trackA_id = "{{ track_a.id }}";
+    const trackB_id = "{{ track_b.id }}";
+    const audioPlayer = document.getElementById('global-audio-player');
+
+    async function playAudio(trackKey) {
+        if (isSilentMode) return;
+        const trackId = trackKey === 'a' ? trackA_id : trackB_id;
+        if (!trackId) return;
+
+        try {
+            const response = await fetch("{{ url_for('music.get_preview', track_id='') }}" + trackId);
+            const data = await response.json();
+
+            if (data && data.preview) {
+                if (audioPlayer.src !== data.preview) {
+                    audioPlayer.src = data.preview;
+                }
+
+                audioPlayer.play().then(() => {
+                    updatePauseButtons(false);
+                }).catch((err) => {
+                    console.warn("Autoplay bloqué par le navigateur, attente d'une interaction :", err);
+                    updatePauseButtons(true);
+                });
+            }
+        } catch (err) {
+            console.error("Erreur lors de la récupération de la preview Deezer :", err);
+        }
+    }
+
+    function updatePauseButtons(isPaused) {
+        const btns = document.querySelectorAll('.pause-btn-inline');
+        btns.forEach(btn => btn.innerText = isPaused ? '▶' : '⏸');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        if (audioPlayer) {
+            audioPlayer.volume = 0.15;
+        }
+
+        const cardA = document.getElementById('card-a');
+        const cardB = document.getElementById('card-b');
+
+        if (cardA) {
+            cardA.onclick = (e) => onCardClick(e, 'a', 'form-a');
+            cardA.onmouseenter = () => onCardHover('a');
+        }
+        if (cardB) {
+            cardB.onclick = (e) => onCardClick(e, 'b', 'form-b');
+            cardB.onmouseenter = () => onCardHover('b');
+        }
+
+        if (!isSilentMode) {
+            playAudio('a');
+        }
+    });
+
+    function onCardClick(event, trackKey, formId) {
+        if (event) event.stopPropagation();
+
+        if (isSilentMode || currentPlaying === trackKey) {
+            handleDuelVote(event, trackKey, formId);
+        } else {
+            switchActiveCard(trackKey);
+        }
+    }
+
+    function onCardHover(trackKey) {
+        if (!isDesktop || isSilentMode) return;
+        if (currentPlaying !== trackKey) switchActiveCard(trackKey);
+    }
+
+    function switchActiveCard(trackKey) {
+        const cardA = document.getElementById('card-a');
+        const cardB = document.getElementById('card-b');
+        currentPlaying = trackKey;
+
+        if (trackKey === 'a') {
+            if (cardA) cardA.classList.add('active');
+            if (cardB) cardB.classList.remove('active');
+        } else {
+            if (cardB) cardB.classList.add('active');
+            if (cardA) cardA.classList.remove('active');
+        }
+
+        if (!isSilentMode) {
+            playAudio(trackKey);
+        }
+    }
+
+    function togglePause(event) {
+        if (event) event.stopPropagation();
+        if (isSilentMode || !audioPlayer) return;
+        if (audioPlayer.paused) {
+            audioPlayer.play();
+            updatePauseButtons(false);
+        } else {
+            audioPlayer.pause();
+            updatePauseButtons(true);
+        }
+    }
+</script>
+{% endblock %}

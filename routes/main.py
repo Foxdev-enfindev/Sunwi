@@ -95,8 +95,8 @@ def hub():
             'title': 'Films Disney',
             'category': 'Cinéma',
             'badge': 'Bientôt',
-            'active': False,
-            'url': '#'
+            'active': True,
+            'url': '/disney/'
         }
     ]
 

@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Vérification Affiches Disney</title>
+    <style>
+        body { font-family: system-ui, sans-serif; background: #0f172a; color: #f8fafc; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+        .card { background: #1e293b; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #334155; }
+        .card img { width: 100%; height: 210px; object-fit: cover; border-radius: 4px; background: #000; }
+        .title { font-size: 0.85rem; font-weight: bold; margin-top: 6px; height: 36px; display: flex; align-items: center; justify-content: center; }
+        .id { color: #38bdf8; font-size: 0.8rem; font-weight: bold; margin-bottom: 4px; }
+        .missing { border: 2px solid #ef4444; }
+    </style>
+</head>
+<body>
+    <h2>Galerie d'inspection des affiches</h2>
+    <div class="grid">
+
+        <div class="card">
+            <div class="id">#422 (1937)</div>
+            <img src="static/images/disney/422.jpg" alt="Blanche-Neige et les Sept Nains">
+            <div class="title">Blanche-Neige et les Sept Nains</div>
+        </div>
+        <div class="card">
+            <div class="id">#423 (1940)</div>
+            <img src="static/images/disney/423.jpg" alt="Pinocchio">
+            <div class="title">Pinocchio</div>
+        </div>
+        <div class="card">
+            <div class="id">#424 (1940)</div>
+            <img src="static/images/disney/424.jpg" alt="Fantasia">
+            <div class="title">Fantasia</div>
+        </div>
+        <div class="card">
+            <div class="id">#425 (1941)</div>
+            <img src="static/images/disney/425.jpg" alt="Dumbo">
+            <div class="title">Dumbo</div>
+        </div>
+        <div class="card">
+            <div class="id">#426 (1942)</div>
+            <img src="static/images/disney/426.jpg" alt="Bambi">
+            <div class="title">Bambi</div>
+        </div>
+        <div class="card">
+            <div class="id">#427 (1942)</div>
+            <img src="static/images/disney/427.jpg" alt="Saludos Amigos">
+            <div class="title">Saludos Amigos</div>
+        </div>
+        <div class="card">
+            <div class="id">#428 (1944)</div>
+            <img src="static/images/disney/428.jpg" alt="Les Trois Caballeros">
+            <div class="title">Les Trois Caballeros</div>
+        </div>
+        <div class="card">
+            <div class="id">#429 (1946)</div>
+            <img src="static/images/disney/429.jpg" alt="La Boîte à musique">
+            <div class="title">La Boîte à musique</div>
+        </div>
+        <div class="card">
+            <div class="id">#430 (1946)</div>
+            <img src="static/images/disney/430.jpg" alt="Mélodie du Sud">
+            <div class="title">Mélodie du Sud</div>
+        </div>
+        <div class="card">
+            <div class="id">#431 (1947)</div>
+            <img src="static/images/disney/431.jpg" alt="Coquin de printemps">
+            <div class="title">Coquin de printemps</div>
+        </div>
+        <div class="card">
+            <div class="id">#432 (1948)</div>
+            <img src="static/images/disney/432.jpg" alt="Mélodie Cocktail">
+            <div class="title">Mélodie Cocktail</div>
+        </div>
+        <div class="card">
+            <div class="id">#433 (1948)</div>
+            <img src="static/images/disney/433.jpg" alt="Danny le petit mouton noir">
+            <div class="title">Danny le petit mouton noir</div>
+        </div>
+        <div class="card">
+            <div class="id">#434 (1949)</div>
+            <img src="static/images/disney/434.jpg" alt="Le Crapaud et le Maître d'école">
+            <div class="title">Le Crapaud et le Maître d'école</div>
+        </div>
+        <div class="card">
+            <div class="id">#435 (1950)</div>
+            <img src="static/images/disney/435.jpg" alt="Cendrillon">
+            <div class="title">Cendrillon</div>
+        </div>
+        <div class="card">
+            <div class="id">#436 (1951)</div>
+            <img src="static/images/disney/436.jpg" alt="Alice au pays des merveilles">
+            <div class="title">Alice au pays des merveilles</div>
+        </div>
+        <div class="card">
+            <div class="id">#437 (1953)</div>
+            <img src="static/images/disney/437.jpg" alt="Peter Pan">
+            <div class="title">Peter Pan</div>
+        </div>
+        <div class="card">
+            <div class="id">#438 (1955)</div>
+            <img src="static/images/disney/438.jpg" alt="La Belle et le Clochard">
+            <div class="title">La Belle et le Clochard</div>
+        </div>
+        <div class="card">
+            <div class="id">#439 (1959)</div>
+            <img src="static/images/disney/439.jpg" alt="La Belle au bois dormant">
+            <div class="title">La Belle au bois dormant</div>
+        </div>
+        <div class="card">
+            <div class="id">#440 (1961)</div>
+            <img src="static/images/disney/440.jpg" alt="Les 101 Dalmatiens">
+            <div class="title">Les 101 Dalmatiens</div>
+        </div>
+        <div class="card">
+            <div class="id">#441 (1963)</div>
+            <img src="static/images/disney/441.jpg" alt="Merlin l'Enchanteur">
+            <div class="title">Merlin l'Enchanteur</div>
+        </div>
+        <div class="card">
+            <div class="id">#442 (1964)</div>
+            <img src="static/images/disney/442.jpg" alt="Mary Poppins">
+            <div class="title">Mary Poppins</div>
+        </div>
+        <div class="card">
+            <div class="id">#443 (1967)</div>
+            <img src="static/images/disney/443.jpg" alt="Le Livre de la jungle">
+            <div class="title">Le Livre de la jungle</div>
+        </div>
+        <div class="card">
+            <div class="id">#444 (1970)</div>
+            <img src="static/images/disney/444.jpg" alt="Les Aristochats">
+            <div class="title">Les Aristochats</div>
+        </div>
+        <div class="card">
+            <div class="id">#445 (1971)</div>
+            <img src="static/images/disney/445.jpg" alt="L'Apprentie Sorcière">
+            <div class="title">L'Apprentie Sorcière</div>
+        </div>
+        <div class="card">
+            <div class="id">#446 (1973)</div>
+            <img src="static/images/disney/446.jpg" alt="Robin des Bois">
+            <div class="title">Robin des Bois</div>
+        </div>
+        <div class="card">
+            <div class="id">#447 (1977)</div>
+            <img src="static/images/disney/447.jpg" alt="Les Aventures de Bernard et Bianca">
+            <div class="title">Les Aventures de Bernard et Bianca</div>
+        </div>
+        <div class="card">
+            <div class="id">#448 (1977)</div>
+            <img src="static/images/disney/448.jpg" alt="Peter et Elliott le dragon">
+            <div class="title">Peter et Elliott le dragon</div>
+        </div>
+        <div class="card">
+            <div class="id">#449 (1977)</div>
+            <img src="static/images/disney/449.jpg" alt="Les Aventures de Winnie L'Ourson">
+            <div class="title">Les Aventures de Winnie L'Ourson</div>
+        </div>
+        <div class="card">
+            <div class="id">#450 (1981)</div>
+            <img src="static/images/disney/450.jpg" alt="Rox et Rouky">
+            <div class="title">Rox et Rouky</div>
+        </div>
+        <div class="card">
+            <div class="id">#451 (1985)</div>
+            <img src="static/images/disney/451.jpg" alt="Taram et le Chaudron magique">
+            <div class="title">Taram et le Chaudron magique</div>
+        </div>
+        <div class="card">
+            <div class="id">#452 (1986)</div>
+            <img src="static/images/disney/452.jpg" alt="Basil, détective privé">
+            <div class="title">Basil, détective privé</div>
+        </div>
+        <div class="card">
+            <div class="id">#453 (1988)</div>
+            <img src="static/images/disney/453.jpg" alt="Oliver & Compagnie">
+            <div class="title">Oliver & Compagnie</div>
+        </div>
+        <div class="card">
+            <div class="id">#454 (1989)</div>
+            <img src="static/images/disney/454.jpg" alt="La Petite Sirène">
+            <div class="title">La Petite Sirène</div>
+        </div>
+        <div class="card">
+            <div class="id">#455 (1990)</div>
+            <img src="static/images/disney/455.jpg" alt="La Bande à Picsou, le film : Le Trésor de la lampe perdue">
+            <div class="title">La Bande à Picsou, le film : Le Trésor de la lampe perdue</div>
+        </div>
+        <div class="card">
+            <div class="id">#456 (1990)</div>
+            <img src="static/images/disney/456.jpg" alt="Bernard et Bianca au pays des kangourous">
+            <div class="title">Bernard et Bianca au pays des kangourous</div>
+        </div>
+        <div class="card">
+            <div class="id">#457 (1991)</div>
+            <img src="static/images/disney/457.jpg" alt="La Belle et la Bête">
+            <div class="title">La Belle et la Bête</div>
+        </div>
+        <div class="card">
+            <div class="id">#458 (1992)</div>
+            <img src="static/images/disney/458.jpg" alt="Aladdin">
+            <div class="title">Aladdin</div>
+        </div>
+        <div class="card">
+            <div class="id">#459 (1994)</div>
+            <img src="static/images/disney/459.jpg" alt="Le Roi Lion">
+            <div class="title">Le Roi Lion</div>
+        </div>
+        <div class="card">
+            <div class="id">#460 (1994)</div>
+            <img src="static/images/disney/460.jpg" alt="Le Retour de Jafar">
+            <div class="title">Le Retour de Jafar</div>
+        </div>
+        <div class="card">
+            <div class="id">#461 (1995)</div>
+            <img src="static/images/disney/461.jpg" alt="Dingo et Max">
+            <div class="title">Dingo et Max</div>
+        </div>
+        <div class="card">
+            <div class="id">#462 (1995)</div>
+            <img src="static/images/disney/462.jpg" alt="Pocahontas - Une légende indienne">
+            <div class="title">Pocahontas - Une légende indienne</div>
+        </div>
+        <div class="card missing">
+            <div class="id">#463 (1995)</div>
+            <img src="https://via.placeholder.com/150x210?text=MANQUANT" alt="Toy Story">
+            <div class="title">Toy Story</div>
+        </div>
+        <div class="card">
+            <div class="id">#464 (1996)</div>
+            <img src="static/images/disney/464.jpg" alt="Le Bossu de Notre-Dame">
+            <div class="title">Le Bossu de Notre-Dame</div>
+        </div>
+        <div class="card">
+            <div class="id">#465 (1996)</div>
+            <img src="static/images/disney/465.jpg" alt="Aladdin et le Roi des voleurs">
+            <div class="title">Aladdin et le Roi des voleurs</div>
+        </div>
+        <div class="card">
+            <div class="id">#466 (1997)</div>
+            <img src="static/images/disney/466.jpg" alt="Hercule">
+            <div class="title">Hercule</div>
+        </div>
+        <div class="card">
+            <div class="id">#467 (1997)</div>
+            <img src="static/images/disney/467.jpg" alt="Winnie L'Ourson 2 - Le grand voyage">
+            <div class="title">Winnie L'Ourson 2 - Le grand voyage</div>
+        </div>
+        <div class="card">
+            <div class="id">#468 (1997)</div>
+            <img src="static/images/disney/468.jpg" alt="La Belle et la Bête 2 - Le Noël enchanté">
+            <div class="title">La Belle et la Bête 2 - Le Noël enchanté</div>
+        </div>
+        <div class="card">
+            <div class="id">#469 (1998)</div>
+            <img src="static/images/disney/469.jpg" alt="Mulan">
+            <div class="title">Mulan</div>
+        </div>
+        <div class="card">
+            <div class="id">#470 (1998)</div>
+            <img src="static/images/disney/470.jpg" alt="Le Roi Lion 2 - L'honneur de la tribu">
+            <div class="title">Le Roi Lion 2 - L'honneur de la tribu</div>
+        </div>
+        <div class="card">
+            <div class="id">#471 (1998)</div>
+            <img src="static/images/disney/471.jpg" alt="Pocahontas II : Un monde nouveau">
+            <div class="title">Pocahontas II : Un monde nouveau</div>
+        </div>
+        <div class="card">
+            <div class="id">#472 (1998)</div>
+            <img src="static/images/disney/472.jpg" alt="1001 Pattes">
+            <div class="title">1001 Pattes</div>
+        </div>
+        <div class="card">
+            <div class="id">#473 (1999)</div>
+            <img src="static/images/disney/473.jpg" alt="Tarzan">
+            <div class="title">Tarzan</div>
+        </div>
+        <div class="card">
+            <div class="id">#474 (1999)</div>
+            <img src="static/images/disney/474.jpg" alt="Toy Story 2">
+            <div class="title">Toy Story 2</div>
+        </div>
+        <div class="card">
+            <div class="id">#475 (2000)</div>
+            <img src="static/images/disney/475.jpg" alt="Fantasia 2000">
+            <div class="title">Fantasia 2000</div>
+        </div>
+        <div class="card">
+            <div class="id">#476 (2000)</div>
+            <img src="static/images/disney/476.jpg" alt="Dingo et Max 2 : Les Sportifs de l'extrême">
+            <div class="title">Dingo et Max 2 : Les Sportifs de l'extrême</div>
+        </div>
+        <div class="card">
+            <div class="id">#477 (2000)</div>
+            <img src="static/images/disney/477.jpg" alt="La Petite Sirène 2 - Retour à l'océan">
+            <div class="title">La Petite Sirène 2 - Retour à l'océan</div>
+        </div>
+        <div class="card">
+            <div class="id">#478 (2000)</div>
+            <img src="static/images/disney/478.jpg" alt="Les Aventures de Tigrou et de Winnie l'ourson">
+            <div class="title">Les Aventures de Tigrou et de Winnie l'ourson</div>
+        </div>
+        <div class="card">
+            <div class="id">#479 (2000)</div>
+            <img src="static/images/disney/479.jpg" alt="Dinosaure">
+            <div class="title">Dinosaure</div>
+        </div>
+        <div class="card">
+            <div class="id">#480 (2001)</div>
+            <img src="static/images/disney/480.jpg" alt="La Belle et le Clochard 2 : L'Appel de la rue">
+            <div class="title">La Belle et le Clochard 2 : L'Appel de la rue</div>
+        </div>
+        <div class="card">
+            <div class="id">#481 (2000)</div>
+            <img src="static/images/disney/481.jpg" alt="Kuzco, l'empereur mégalo">
+            <div class="title">Kuzco, l'empereur mégalo</div>
+        </div>
+        <div class="card">
+            <div class="id">#482 (2001)</div>
+            <img src="static/images/disney/482.jpg" alt="Atlantide, l'empire perdu">
+            <div class="title">Atlantide, l'empire perdu</div>
+        </div>
+        <div class="card">
+            <div class="id">#483 (2002)</div>
+            <img src="static/images/disney/483.jpg" alt="Le Bossu de Notre-Dame 2 : Le Secret de Quasimodo">
+            <div class="title">Le Bossu de Notre-Dame 2 : Le Secret de Quasimodo</div>
+        </div>
+        <div class="card">
+            <div class="id">#484 (2002)</div>
+            <img src="static/images/disney/484.jpg" alt="Cendrillon 2 : Une vie de princesse">
+            <div class="title">Cendrillon 2 : Une vie de princesse</div>
+        </div>
+        <div class="card">
+            <div class="id">#485 (2001)</div>
+            <img src="static/images/disney/485.jpg" alt="Monstres & Cie">
+            <div class="title">Monstres & Cie</div>
+        </div>
+        <div class="card">
+            <div class="id">#486 (2002)</div>
+            <img src="static/images/disney/486.jpg" alt="Lilo & Stitch">
+            <div class="title">Lilo & Stitch</div>
+        </div>
+        <div class="card">
+            <div class="id">#487 (2002)</div>
+            <img src="static/images/disney/487.jpg" alt="Peter Pan 2 : Retour au pays imaginaire">
+            <div class="title">Peter Pan 2 : Retour au pays imaginaire</div>
+        </div>
+        <div class="card">
+            <div class="id">#488 (2003)</div>
+            <img src="static/images/disney/488.jpg" alt="Les 101 Dalmatiens 2 : Sur la trace des héros">
+            <div class="title">Les 101 Dalmatiens 2 : Sur la trace des héros</div>
+        </div>
+        <div class="card">
+            <div class="id">#489 (2002)</div>
+            <img src="static/images/disney/489.jpg" alt="La Planète au trésor, un nouvel univers">
+            <div class="title">La Planète au trésor, un nouvel univers</div>
+        </div>
+        <div class="card">
+            <div class="id">#490 (2003)</div>
+            <img src="static/images/disney/490.jpg" alt="Le Livre de la jungle 2">
+            <div class="title">Le Livre de la jungle 2</div>
+        </div>
+        <div class="card">
+            <div class="id">#491 (2003)</div>
+            <img src="static/images/disney/491.jpg" alt="Les Aventures de Porcinet">
+            <div class="title">Les Aventures de Porcinet</div>
+        </div>
+        <div class="card">
+            <div class="id">#492 (2004)</div>
+            <img src="static/images/disney/492.jpg" alt="Le Roi Lion 3 - Hakuna Matata">
+            <div class="title">Le Roi Lion 3 - Hakuna Matata</div>
+        </div>
+        <div class="card">
+            <div class="id">#493 (2003)</div>
+            <img src="static/images/disney/493.jpg" alt="Le Monde de Nemo">
+            <div class="title">Le Monde de Nemo</div>
+        </div>
+        <div class="card">
+            <div class="id">#494 (2003)</div>
+            <img src="static/images/disney/494.jpg" alt="Frère des ours">
+            <div class="title">Frère des ours</div>
+        </div>
+        <div class="card">
+            <div class="id">#495 (2004)</div>
+            <img src="static/images/disney/495.jpg" alt="Les Aventures de Petit Gourou">
+            <div class="title">Les Aventures de Petit Gourou</div>
+        </div>
+        <div class="card">
+            <div class="id">#496 (2004)</div>
+            <img src="static/images/disney/496.jpg" alt="Mickey, Donald, Dingo: Les Trois Mousquetaires">
+            <div class="title">Mickey, Donald, Dingo: Les Trois Mousquetaires</div>
+        </div>
+        <div class="card">
+            <div class="id">#497 (2004)</div>
+            <img src="static/images/disney/497.jpg" alt="La ferme se rebelle">
+            <div class="title">La ferme se rebelle</div>
+        </div>
+        <div class="card">
+            <div class="id">#498 (2005)</div>
+            <img src="static/images/disney/498.jpg" alt="Mulan 2 : La Mission de l'empereur">
+            <div class="title">Mulan 2 : La Mission de l'empereur</div>
+        </div>
+        <div class="card">
+            <div class="id">#499 (2004)</div>
+            <img src="static/images/disney/499.jpg" alt="Les Indestructibles">
+            <div class="title">Les Indestructibles</div>
+        </div>
+        <div class="card">
+            <div class="id">#500 (2005)</div>
+            <img src="static/images/disney/500.jpg" alt="Winnie l'ourson et l'Éfélant">
+            <div class="title">Winnie l'ourson et l'Éfélant</div>
+        </div>
+        <div class="card">
+            <div class="id">#501 (2005)</div>
+            <img src="static/images/disney/501.jpg" alt="Tarzan 2 - L'Enfance d'un héros">
+            <div class="title">Tarzan 2 - L'Enfance d'un héros</div>
+        </div>
+        <div class="card">
+            <div class="id">#502 (2005)</div>
+            <img src="static/images/disney/502.jpg" alt="Lilo & Stitch 2 : Hawaï, nous avons un problème !">
+            <div class="title">Lilo & Stitch 2 : Hawaï, nous avons un problème !</div>
+        </div>
+        <div class="card">
+            <div class="id">#503 (2005)</div>
+            <img src="static/images/disney/503.jpg" alt="Chicken Little">
+            <div class="title">Chicken Little</div>
+        </div>
+        <div class="card">
+            <div class="id">#504 (2005)</div>
+            <img src="static/images/disney/504.jpg" alt="Kuzco 2 : King Kronk">
+            <div class="title">Kuzco 2 : King Kronk</div>
+        </div>
+        <div class="card">
+            <div class="id">#505 (2006)</div>
+            <img src="static/images/disney/505.jpg" alt="Bambi 2 : Le Prince de la forêt">
+            <div class="title">Bambi 2 : Le Prince de la forêt</div>
+        </div>
+        <div class="card">
+            <div class="id">#506 (2006)</div>
+            <img src="static/images/disney/506.jpg" alt="The Wild">
+            <div class="title">The Wild</div>
+        </div>
+        <div class="card">
+            <div class="id">#507 (2006)</div>
+            <img src="static/images/disney/507.jpg" alt="Cars - Quatre Roues">
+            <div class="title">Cars - Quatre Roues</div>
+        </div>
+        <div class="card">
+            <div class="id">#508 (2006)</div>
+            <img src="static/images/disney/508.jpg" alt="Frère des ours 2">
+            <div class="title">Frère des ours 2</div>
+        </div>
+        <div class="card">
+            <div class="id">#509 (2007)</div>
+            <img src="static/images/disney/509.jpg" alt="Le Sortilège de Cendrillon">
+            <div class="title">Le Sortilège de Cendrillon</div>
+        </div>
+        <div class="card">
+            <div class="id">#510 (2006)</div>
+            <img src="static/images/disney/510.jpg" alt="Rox et Rouky 2">
+            <div class="title">Rox et Rouky 2</div>
+        </div>
+        <div class="card">
+            <div class="id">#511 (2007)</div>
+            <img src="static/images/disney/511.jpg" alt="Ratatouille">
+            <div class="title">Ratatouille</div>
+        </div>
+        <div class="card">
+            <div class="id">#512 (2007)</div>
+            <img src="static/images/disney/512.jpg" alt="Bienvenue chez les Robinson">
+            <div class="title">Bienvenue chez les Robinson</div>
+        </div>
+        <div class="card">
+            <div class="id">#513 (2008)</div>
+            <img src="static/images/disney/513.jpg" alt="Le Secret de la Petite Sirène">
+            <div class="title">Le Secret de la Petite Sirène</div>
+        </div>
+        <div class="card">
+            <div class="id">#514 (2008)</div>
+            <img src="static/images/disney/514.jpg" alt="La Fée Clochette">
+            <div class="title">La Fée Clochette</div>
+        </div>
+        <div class="card">
+            <div class="id">#515 (2008)</div>
+            <img src="static/images/disney/515.jpg" alt="Wall-E">
+            <div class="title">Wall-E</div>
+        </div>
+        <div class="card">
+            <div class="id">#516 (2008)</div>
+            <img src="static/images/disney/516.jpg" alt="Volt, star malgré lui">
+            <div class="title">Volt, star malgré lui</div>
+        </div>
+        <div class="card">
+            <div class="id">#517 (2009)</div>
+            <img src="static/images/disney/517.jpg" alt="Clochette et la Pierre de lune">
+            <div class="title">Clochette et la Pierre de lune</div>
+        </div>
+        <div class="card">
+            <div class="id">#518 (2009)</div>
+            <img src="static/images/disney/518.jpg" alt="Là-haut">
+            <div class="title">Là-haut</div>
+        </div>
+        <div class="card">
+            <div class="id">#519 (2009)</div>
+            <img src="static/images/disney/519.jpg" alt="La Princesse et la Grenouille">
+            <div class="title">La Princesse et la Grenouille</div>
+        </div>
+        <div class="card">
+            <div class="id">#520 (2010)</div>
+            <img src="static/images/disney/520.jpg" alt="Clochette et l'Expédition féerique">
+            <div class="title">Clochette et l'Expédition féerique</div>
+        </div>
+        <div class="card">
+            <div class="id">#521 (2010)</div>
+            <img src="static/images/disney/521.jpg" alt="Toy Story 3">
+            <div class="title">Toy Story 3</div>
+        </div>
+        <div class="card">
+            <div class="id">#522 (2010)</div>
+            <img src="static/images/disney/522.jpg" alt="Raiponce">
+            <div class="title">Raiponce</div>
+        </div>
+        <div class="card">
+            <div class="id">#523 (2011)</div>
+            <img src="static/images/disney/523.jpg" alt="Winnie l'Ourson">
+            <div class="title">Winnie l'Ourson</div>
+        </div>
+        <div class="card">
+            <div class="id">#524 (2011)</div>
+            <img src="static/images/disney/524.jpg" alt="Cars 2">
+            <div class="title">Cars 2</div>
+        </div>
+        <div class="card">
+            <div class="id">#525 (2012)</div>
+            <img src="static/images/disney/525.jpg" alt="Rebelle">
+            <div class="title">Rebelle</div>
+        </div>
+        <div class="card">
+            <div class="id">#526 (2012)</div>
+            <img src="static/images/disney/526.jpg" alt="Clochette et le Secret des fées">
+            <div class="title">Clochette et le Secret des fées</div>
+        </div>
+        <div class="card">
+            <div class="id">#527 (2012)</div>
+            <img src="static/images/disney/527.jpg" alt="Les Mondes de Ralph">
+            <div class="title">Les Mondes de Ralph</div>
+        </div>
+        <div class="card">
+            <div class="id">#528 (2013)</div>
+            <img src="static/images/disney/528.jpg" alt="Monstres Academy">
+            <div class="title">Monstres Academy</div>
+        </div>
+        <div class="card">
+            <div class="id">#529 (2013)</div>
+            <img src="static/images/disney/529.jpg" alt="Planes">
+            <div class="title">Planes</div>
+        </div>
+        <div class="card">
+            <div class="id">#530 (2013)</div>
+            <img src="static/images/disney/530.jpg" alt="La Reine des Neiges">
+            <div class="title">La Reine des Neiges</div>
+        </div>
+        <div class="card">
+            <div class="id">#531 (2014)</div>
+            <img src="static/images/disney/531.jpg" alt="Clochette et la Fée pirate">
+            <div class="title">Clochette et la Fée pirate</div>
+        </div>
+        <div class="card">
+            <div class="id">#532 (2014)</div>
+            <img src="static/images/disney/532.jpg" alt="Planes 2">
+            <div class="title">Planes 2</div>
+        </div>
+        <div class="card">
+            <div class="id">#533 (2014)</div>
+            <img src="static/images/disney/533.jpg" alt="Les Nouveaux Héros">
+            <div class="title">Les Nouveaux Héros</div>
+        </div>
+        <div class="card">
+            <div class="id">#534 (2015)</div>
+            <img src="static/images/disney/534.jpg" alt="Clochette et la Créature légendaire">
+            <div class="title">Clochette et la Créature légendaire</div>
+        </div>
+        <div class="card">
+            <div class="id">#535 (2015)</div>
+            <img src="static/images/disney/535.jpg" alt="Vice-versa">
+            <div class="title">Vice-versa</div>
+        </div>
+        <div class="card">
+            <div class="id">#536 (2015)</div>
+            <img src="static/images/disney/536.jpg" alt="Le Voyage d'Arlo">
+            <div class="title">Le Voyage d'Arlo</div>
+        </div>
+        <div class="card">
+            <div class="id">#537 (2016)</div>
+            <img src="static/images/disney/537.jpg" alt="Zootopie">
+            <div class="title">Zootopie</div>
+        </div>
+        <div class="card">
+            <div class="id">#538 (2016)</div>
+            <img src="static/images/disney/538.jpg" alt="Le Monde de Dory">
+            <div class="title">Le Monde de Dory</div>
+        </div>
+        <div class="card">
+            <div class="id">#539 (2016)</div>
+            <img src="static/images/disney/539.jpg" alt="Vaiana - La légende du bout du monde">
+            <div class="title">Vaiana - La légende du bout du monde</div>
+        </div>
+        <div class="card missing">
+            <div class="id">#540 (2017)</div>
+            <img src="https://via.placeholder.com/150x210?text=MANQUANT" alt="Cars 3">
+            <div class="title">Cars 3</div>
+        </div>
+        <div class="card missing">
+            <div class="id">#541 (2017)</div>
+            <img src="https://via.placeholder.com/150x210?text=MANQUANT" alt="Coco">
+            <div class="title">Coco</div>
+        </div>
+        <div class="card">
+            <div class="id">#542 (2018)</div>
+            <img src="static/images/disney/542.jpg" alt="Les Indestructibles 2">
+            <div class="title">Les Indestructibles 2</div>
+        </div>
+        <div class="card">
+            <div class="id">#543 (2018)</div>
+            <img src="static/images/disney/543.jpg" alt="Ralph 2.0">
+            <div class="title">Ralph 2.0</div>
+        </div>
+        <div class="card">
+            <div class="id">#544 (2019)</div>
+            <img src="static/images/disney/544.jpg" alt="Toy Story 4">
+            <div class="title">Toy Story 4</div>
+        </div>
+        <div class="card">
+            <div class="id">#545 (2019)</div>
+            <img src="static/images/disney/545.jpg" alt="La Reine des Neiges II">
+            <div class="title">La Reine des Neiges II</div>
+        </div>
+        <div class="card">
+            <div class="id">#546 (2020)</div>
+            <img src="static/images/disney/546.jpg" alt="En avant">
+            <div class="title">En avant</div>
+        </div>
+        <div class="card">
+            <div class="id">#547 (2020)</div>
+            <img src="static/images/disney/547.jpg" alt="Soul">
+            <div class="title">Soul</div>
+        </div>
+        <div class="card">
+            <div class="id">#548 (2021)</div>
+            <img src="static/images/disney/548.jpg" alt="Raya et le Dernier Dragon">
+            <div class="title">Raya et le Dernier Dragon</div>
+        </div>
+        <div class="card">
+            <div class="id">#549 (2021)</div>
+            <img src="static/images/disney/549.jpg" alt="Luca">
+            <div class="title">Luca</div>
+        </div>
+        <div class="card">
+            <div class="id">#550 (2021)</div>
+            <img src="static/images/disney/550.jpg" alt="Encanto : La Fantastique Famille Madrigal">
+            <div class="title">Encanto : La Fantastique Famille Madrigal</div>
+        </div>
+        <div class="card">
+            <div class="id">#551 (2022)</div>
+            <img src="static/images/disney/551.jpg" alt="Alerte rouge">
+            <div class="title">Alerte rouge</div>
+        </div>
+        <div class="card">
+            <div class="id">#552 (2022)</div>
+            <img src="static/images/disney/552.jpg" alt="Buzz l'Éclair">
+            <div class="title">Buzz l'Éclair</div>
+        </div>
+        <div class="card">
+            <div class="id">#553 (2022)</div>
+            <img src="static/images/disney/553.jpg" alt="Avalonia, l'étrange voyage">
+            <div class="title">Avalonia, l'étrange voyage</div>
+        </div>
+        <div class="card">
+            <div class="id">#554 (2023)</div>
+            <img src="static/images/disney/554.jpg" alt="Élémentaire">
+            <div class="title">Élémentaire</div>
+        </div>
+        <div class="card">
+            <div class="id">#555 (2023)</div>
+            <img src="static/images/disney/555.jpg" alt="Wish - Asha et la bonne étoile">
+            <div class="title">Wish - Asha et la bonne étoile</div>
+        </div>
+        <div class="card">
+            <div class="id">#556 (2024)</div>
+            <img src="static/images/disney/556.jpg" alt="Vice-versa 2">
+            <div class="title">Vice-versa 2</div>
+        </div>
+        <div class="card">
+            <div class="id">#557 (2024)</div>
+            <img src="static/images/disney/557.jpg" alt="Vaiana 2">
+            <div class="title">Vaiana 2</div>
+        </div>
+        <div class="card">
+            <div class="id">#558 (2025)</div>
+            <img src="static/images/disney/558.jpg" alt="Elio">
+            <div class="title">Elio</div>
+        </div>
+        <div class="card">
+            <div class="id">#559 (2025)</div>
+            <img src="static/images/disney/559.jpg" alt="Zootopie 2">
+            <div class="title">Zootopie 2</div>
+        </div>
+        <div class="card">
+            <div class="id">#560 (2026)</div>
+            <img src="static/images/disney/560.jpg" alt="Jumpers">
+            <div class="title">Jumpers</div>
+        </div>
+        <div class="card">
+            <div class="id">#561 (2026)</div>
+            <img src="static/images/disney/561.jpg" alt="Toy Story 5">
+            <div class="title">Toy Story 5</div>
+        </div>
+    </div>
+</body>
+</html>

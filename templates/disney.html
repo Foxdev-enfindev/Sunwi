@@ -1,0 +1,45 @@
+{% extends 'base_duel.html' %}
+
+{% set page_title = 'Sunwi — Duel Disney' %}
+{% set vote_url = url_for('disney.vote') %}
+{% set leaderboard_url = url_for('disney.classement') %}
+{% set item_a_id = p1.movie_id %}
+{% set item_b_id = p2.movie_id %}
+
+{% block card_a_content %}
+<div class="pochette-wrapper text-center my-3" style="min-height: 180px; display: flex; align-items: center; justify-content: center;">
+    <img src="{{ url_for('disney.movie_poster', movie_id=p1.movie_id) }}" alt="{{ p1.fr_title }}" class="player-photo rounded shadow" style="max-height: 170px; object-fit: contain;">
+    <div class="player-fallback rounded bg-secondary bg-opacity-25 text-secondary align-items-center justify-content-center" style="width: 110px; height: 160px; display: none; font-size: 2rem;">✨</div>
+</div>
+<div class="track-info">
+    <span class="track-badge">{{ p1.studio | upper }} • {{ p1.release_year or 'N/A' }}</span>
+    <h2 class="track-title" title="{{ p1.fr_title }}">{{ p1.fr_title }}</h2>
+    {% if p1.en_title %}
+    <p class="track-artist" title="{{ p1.en_title }}">{{ p1.en_title }}</p>
+    {% endif %}
+    <div class="elo-display">Elo actuel : <strong>{{ p1.elo }}</strong></div>
+    <div class="match-count">
+        {% set current_match_a = (p1.matches_count or 0) + 1 %}
+        {{ current_match_a }}{% if current_match_a == 1 %}er{% else %}e{% endif %} duel
+    </div>
+</div>
+{% endblock %}
+
+{% block card_b_content %}
+<div class="pochette-wrapper text-center my-3" style="min-height: 180px; display: flex; align-items: center; justify-content: center;">
+    <img src="{{ url_for('disney.movie_poster', movie_id=p2.movie_id) }}" alt="{{ p2.fr_title }}" class="player-photo rounded shadow" style="max-height: 170px; object-fit: contain;">
+    <div class="player-fallback rounded bg-secondary bg-opacity-25 text-secondary align-items-center justify-content-center" style="width: 110px; height: 160px; display: none; font-size: 2rem;">✨</div>
+</div>
+<div class="track-info">
+    <span class="track-badge">{{ p2.studio | upper }} • {{ p2.release_year or 'N/A' }}</span>
+    <h2 class="track-title" title="{{ p2.fr_title }}">{{ p2.fr_title }}</h2>
+    {% if p2.en_title %}
+    <p class="track-artist" title="{{ p2.en_title }}">{{ p2.en_title }}</p>
+    {% endif %}
+    <div class="elo-display">Elo actuel : <strong>{{ p2.elo }}</strong></div>
+    <div class="match-count">
+        {% set current_match_b = (p2.matches_count or 0) + 1 %}
+        {{ current_match_b }}{% if current_match_b == 1 %}er{% else %}e{% endif %} duel
+    </div>
+</div>
+{% endblock %}

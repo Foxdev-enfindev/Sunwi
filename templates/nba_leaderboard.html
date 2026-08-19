@@ -1,0 +1,57 @@
+{% extends 'base_leaderboard.html' %}
+
+{% block title %}Classement — NBA{% endblock %}
+
+{% block header_title %}🏀 CLASSEMENT NBA 🏀{% endblock %}
+{% block header_subtitle %}Ton classement individuel des stars de la NBA{% endblock %}
+
+{% block header_actions %}
+<a href="{{ url_for('nba.nba_hub') }}" class="btn btn-primary fw-bold">⚔️ Retour aux duels</a>
+<a href="{{ url_for('main.hub') }}" class="btn btn-outline-secondary">🏠 Hub</a>
+{% endblock %}
+
+{% block ranking_content %}
+    {% if ranking %}
+        {% for item in ranking %}
+        <div class="ranking-card d-flex align-items-center justify-content-between p-3 mb-2 rounded-3 shadow-sm" style="background: linear-gradient(145deg, #1e293b, #0f172a); border: 1px solid rgba(255,255,255,0.08);">
+            
+            <div class="d-flex align-items-center gap-3 flex-grow-1 min-width-0">
+                <span class="ranking-rank fw-bold text-warning fs-5 flex-shrink-0" style="min-width: 40px; text-align: center;">#{{ loop.index }}</span>
+
+                <div class="flex-shrink-0">
+                    <img src="{{ url_for('nba.player_photo', player_id=item.player_id) }}" alt="{{ item.name }}" class="rounded bg-dark" style="width: 55px; height: 50px; object-fit: contain;">
+                </div>
+
+                <div class="min-width-0 flex-grow-1">
+                    <div class="fw-bold text-light fs-6 text-truncate">
+                        {{ item.name }}
+                        {% if item.overall %}
+                        <span class="badge bg-warning text-dark ms-1">{{ item.overall }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="text-secondary small text-truncate">{{ item.position }} • {{ item.team }}</div>
+                </div>
+            </div>
+
+            <div class="text-end ps-3 flex-shrink-0" style="white-space: nowrap;">
+                <div class="fw-bold text-primary fs-6">{{ item.elo | int }} pts</div>
+                <div class="text-info" style="font-size: 0.8rem;">
+                    {% set matches = item.matches_count or 0 %}
+                    {% if matches == 0 %}
+                        1er duel
+                    {% elif matches == 1 %}
+                        1 duel
+                    {% else %}
+                        {{ matches }} duels
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-center text-muted mt-4">
+            Aucun joueur classé pour le moment.
+        </p>
+    {% endif %}
+{% endblock %}

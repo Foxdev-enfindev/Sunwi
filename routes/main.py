@@ -32,8 +32,8 @@ def hub():
             'title': 'NBA',
             'category': 'Sport',
             'badge': 'Bientôt',
-            'active': False,
-            'url': '#'
+            'active': True,
+            'url': '/nba/'
         },
 
         # --- PERSONNEL ---
@@ -74,6 +74,22 @@ def hub():
         {
             'id': 'pokemon_types',
             'title': 'Pokémon (Par type)',
+            'category': 'Gaming',
+            'badge': 'Disponible',
+            'active': True,
+            'url': '#'
+        },
+        {
+            'id': 'lol_global',
+            'title': 'League of Legends (Global)',
+            'category': 'Gaming',
+            'badge': 'Disponible',
+            'active': True,
+            'url': '/lol/'
+        },
+        {
+            'id': 'lol_roles',
+            'title': 'League of Legends (Par rôle)',
             'category': 'Gaming',
             'badge': 'Disponible',
             'active': True,

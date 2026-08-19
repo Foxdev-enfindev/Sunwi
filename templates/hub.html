@@ -98,6 +98,19 @@
                       </select>
                       <button type="button" data-select-id="music-year-select" class="hub-btn-action border-0 require-auth" style="padding: 3px 0;">Lancer ⚔️</button>
                     </div>
+                    <!-- Cas spécifique LoL par rôle -->
+                  {% elif module.id == 'lol_roles' %}
+                    <div class="d-flex flex-column gap-1 mt-auto">
+                      <select id="lol-role-select" class="form-select form-select-sm hub-league-select">
+                        <option value="/lol/Fighter">Combattant</option>
+                        <option value="/lol/Tank">Tank</option>
+                        <option value="/lol/Mage">Mage</option>
+                        <option value="/lol/Assassin">Assassin</option>
+                        <option value="/lol/Marksman">Tireur</option>
+                        <option value="/lol/Support">Support</option>
+                      </select>
+                      <button type="button" data-select-id="lol-role-select" class="hub-btn-action border-0 require-auth" style="padding: 3px 0;">Lancer ⚔️</button>
+                    </div>
                   {% else %}
                     <div class="mt-auto pt-2">
                       {% if module.active %}

@@ -31,10 +31,18 @@ def hub():
             'id': 'nba',
             'title': 'NBA',
             'category': 'Sport',
-            'badge': 'Bientôt',
+            'badge': 'Disponible',
             'active': True,
             'url': '/nba/'
         },
+        {
+            'id': 'f1',
+            'title': 'F1',
+            'category': 'Sport',
+            'badge': 'Disponible',
+            'active': True,
+            'url': '#'
+        },  
 
         # --- PERSONNEL ---
         {

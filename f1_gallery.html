@@ -1,0 +1,2598 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Galerie des Pilotes F1 — Sunwi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0f172a; color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; }
+        .card-driver {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .card-driver:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 215, 0, 0.4);
+        }
+        .driver-img {
+            height: 160px;
+            object-fit: contain;
+            background-color: #020617;
+            width: 100%;
+            padding: 10px;
+        }
+        .badge-legend { background-color: #d97706; color: #fff; }
+        .badge-modern { background-color: #0284c7; color: #fff; }
+        .badge-default { background-color: #475569; color: #cbd5e1; }
+    </style>
+</head>
+<body class="p-4">
+    <div class="container-fluid">
+        <header class="mb-4 pb-3 border-bottom border-secondary d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="h2 text-warning fw-bold mb-1">🏎️ Galerie des Pilotes F1 — Sunwi</h1>
+                <p class="text-secondary mb-0">196 pilotes référencés au total</p>
+            </div>
+            <div class="text-end">
+                <span class="badge bg-success fs-6 me-2">144 photos personnalisées</span>
+                <span class="badge badge-default fs-6">52 images par défaut</span>
+            </div>
+        </header>
+
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/hamilton.jpg" alt="Lewis Hamilton" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Lewis Hamilton">Lewis Hamilton</div>
+                        <div class="text-secondary small">British • 🏆 106</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/michael_schumacher.jpg" alt="Michael Schumacher" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Michael Schumacher">Michael Schumacher</div>
+                        <div class="text-secondary small">German • 🏆 91</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/max_verstappen.jpg" alt="Max Verstappen" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Max Verstappen">Max Verstappen</div>
+                        <div class="text-secondary small">Dutch • 🏆 71</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/vettel.jpg" alt="Sebastian Vettel" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Sebastian Vettel">Sebastian Vettel</div>
+                        <div class="text-secondary small">German • 🏆 53</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/prost.jpg" alt="Alain Prost" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Alain Prost">Alain Prost</div>
+                        <div class="text-secondary small">French • 🏆 51</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/senna.jpg" alt="Ayrton Senna" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Ayrton Senna">Ayrton Senna</div>
+                        <div class="text-secondary small">Brazilian • 🏆 41</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/alonso.jpg" alt="Fernando Alonso" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Fernando Alonso">Fernando Alonso</div>
+                        <div class="text-secondary small">Spanish • 🏆 32</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/mansell.jpg" alt="Nigel Mansell" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Nigel Mansell">Nigel Mansell</div>
+                        <div class="text-secondary small">British • 🏆 31</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/stewart.jpg" alt="Jackie Stewart" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jackie Stewart">Jackie Stewart</div>
+                        <div class="text-secondary small">British • 🏆 27</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/clark.jpg" alt="Jim Clark" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jim Clark">Jim Clark</div>
+                        <div class="text-secondary small">British • 🏆 25</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/lauda.jpg" alt="Niki Lauda" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Niki Lauda">Niki Lauda</div>
+                        <div class="text-secondary small">Austrian • 🏆 25</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/fangio.jpg" alt="Juan Fangio" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Juan Fangio">Juan Fangio</div>
+                        <div class="text-secondary small">Argentine • 🏆 24</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/piquet.jpg" alt="Nelson Piquet" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Nelson Piquet">Nelson Piquet</div>
+                        <div class="text-secondary small">Brazilian • 🏆 23</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/rosberg.jpg" alt="Nico Rosberg" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Nico Rosberg">Nico Rosberg</div>
+                        <div class="text-secondary small">German • 🏆 23</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/damon_hill.jpg" alt="Damon Hill" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Damon Hill">Damon Hill</div>
+                        <div class="text-secondary small">British • 🏆 22</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/raikkonen.jpg" alt="Kimi Räikkönen" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Kimi Räikkönen">Kimi Räikkönen</div>
+                        <div class="text-secondary small">Finnish • 🏆 21</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/hakkinen.jpg" alt="Mika Häkkinen" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Mika Häkkinen">Mika Häkkinen</div>
+                        <div class="text-secondary small">Finnish • 🏆 20</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/moss.jpg" alt="Stirling Moss" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Stirling Moss">Stirling Moss</div>
+                        <div class="text-secondary small">British • 🏆 16</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/button.jpg" alt="Jenson Button" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jenson Button">Jenson Button</div>
+                        <div class="text-secondary small">British • 🏆 15</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/emerson_fittipaldi.jpg" alt="Emerson Fittipaldi" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Emerson Fittipaldi">Emerson Fittipaldi</div>
+                        <div class="text-secondary small">Brazilian • 🏆 14</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/hill.jpg" alt="Graham Hill" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Graham Hill">Graham Hill</div>
+                        <div class="text-secondary small">British • 🏆 14</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/jack_brabham.jpg" alt="Jack Brabham" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jack Brabham">Jack Brabham</div>
+                        <div class="text-secondary small">Australian • 🏆 14</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/ascari.jpg" alt="Alberto Ascari" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Alberto Ascari">Alberto Ascari</div>
+                        <div class="text-secondary small">Italian • 🏆 13</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/coulthard.jpg" alt="David Coulthard" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="David Coulthard">David Coulthard</div>
+                        <div class="text-secondary small">British • 🏆 13</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/jones.jpg" alt="Alan Jones" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Alan Jones">Alan Jones</div>
+                        <div class="text-secondary small">Australian • 🏆 12</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/reutemann.jpg" alt="Carlos Reutemann" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Carlos Reutemann">Carlos Reutemann</div>
+                        <div class="text-secondary small">Argentine • 🏆 12</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/norris.jpg" alt="Lando Norris" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Lando Norris">Lando Norris</div>
+                        <div class="text-secondary small">British • 🏆 12</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/mario_andretti.jpg" alt="Mario Andretti" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Mario Andretti">Mario Andretti</div>
+                        <div class="text-secondary small">American • 🏆 12</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/massa.jpg" alt="Felipe Massa" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Felipe Massa">Felipe Massa</div>
+                        <div class="text-secondary small">Brazilian • 🏆 11</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/villeneuve.jpg" alt="Jacques Villeneuve" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jacques Villeneuve">Jacques Villeneuve</div>
+                        <div class="text-secondary small">Canadian • 🏆 11</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/barrichello.jpg" alt="Rubens Barrichello" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Rubens Barrichello">Rubens Barrichello</div>
+                        <div class="text-secondary small">Brazilian • 🏆 11</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/berger.png" alt="Gerhard Berger" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Gerhard Berger">Gerhard Berger</div>
+                        <div class="text-secondary small">Austrian • 🏆 10</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/hunt.jpg" alt="James Hunt" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="James Hunt">James Hunt</div>
+                        <div class="text-secondary small">British • 🏆 10</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/scheckter.jpg" alt="Jody Scheckter" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jody Scheckter">Jody Scheckter</div>
+                        <div class="text-secondary small">South African • 🏆 10</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/peterson.jpg" alt="Ronnie Peterson" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Ronnie Peterson">Ronnie Peterson</div>
+                        <div class="text-secondary small">Swedish • 🏆 10</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/bottas.jpg" alt="Valtteri Bottas" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Valtteri Bottas">Valtteri Bottas</div>
+                        <div class="text-secondary small">Finnish • 🏆 10</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/leclerc.jpg" alt="Charles Leclerc" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Charles Leclerc">Charles Leclerc</div>
+                        <div class="text-secondary small">Monegasque • 🏆 9</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/webber.jpg" alt="Mark Webber" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Mark Webber">Mark Webber</div>
+                        <div class="text-secondary small">Australian • 🏆 9</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/piastri.jpg" alt="Oscar Piastri" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Oscar Piastri">Oscar Piastri</div>
+                        <div class="text-secondary small">Australian • 🏆 9</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/ricciardo.jpg" alt="Daniel Ricciardo" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Daniel Ricciardo">Daniel Ricciardo</div>
+                        <div class="text-secondary small">Australian • 🏆 8</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/hulme.png" alt="Denny Hulme" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Denny Hulme">Denny Hulme</div>
+                        <div class="text-secondary small">New Zealander • 🏆 8</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/ickx.jpg" alt="Jacky Ickx" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jacky Ickx">Jacky Ickx</div>
+                        <div class="text-secondary small">Belgian • 🏆 8</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/russell.jpg" alt="George Russell" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="George Russell">George Russell</div>
+                        <div class="text-secondary small">British • 🏆 7</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/montoya.jpg" alt="Juan Pablo Montoya" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Juan Pablo Montoya">Juan Pablo Montoya</div>
+                        <div class="text-secondary small">Colombian • 🏆 7</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/arnoux.jpg" alt="René Arnoux" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="René Arnoux">René Arnoux</div>
+                        <div class="text-secondary small">French • 🏆 7</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/antonelli.jpg" alt="Andrea Kimi Antonelli" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Andrea Kimi Antonelli">Andrea Kimi Antonelli</div>
+                        <div class="text-secondary small">Italian • 🏆 6</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/gilles_villeneuve.jpg" alt="Gilles Villeneuve" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Gilles Villeneuve">Gilles Villeneuve</div>
+                        <div class="text-secondary small">Canadian • 🏆 6</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/laffite.jpg" alt="Jacques Laffite" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jacques Laffite">Jacques Laffite</div>
+                        <div class="text-secondary small">French • 🏆 6</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/rindt.jpg" alt="Jochen Rindt" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jochen Rindt">Jochen Rindt</div>
+                        <div class="text-secondary small">Austrian • 🏆 6</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/surtees.jpg" alt="John Surtees" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="John Surtees">John Surtees</div>
+                        <div class="text-secondary small">British • 🏆 6</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/ralf_schumacher.jpg" alt="Ralf Schumacher" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Ralf Schumacher">Ralf Schumacher</div>
+                        <div class="text-secondary small">German • 🏆 6</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/patrese.png" alt="Riccardo Patrese" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Riccardo Patrese">Riccardo Patrese</div>
+                        <div class="text-secondary small">Italian • 🏆 6</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/perez.jpg" alt="Sergio Pérez" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Sergio Pérez">Sergio Pérez</div>
+                        <div class="text-secondary small">Mexican • 🏆 6</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/brooks.jpg" alt="Tony Brooks" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Tony Brooks">Tony Brooks</div>
+                        <div class="text-secondary small">British • 🏆 6</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/regazzoni.jpg" alt="Clay Regazzoni" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Clay Regazzoni">Clay Regazzoni</div>
+                        <div class="text-secondary small">Swiss • 🏆 5</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/watson.jpg" alt="John Watson" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="John Watson">John Watson</div>
+                        <div class="text-secondary small">British • 🏆 5</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/keke_rosberg.jpg" alt="Keke Rosberg" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Keke Rosberg">Keke Rosberg</div>
+                        <div class="text-secondary small">Finnish • 🏆 5</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/alboreto.png" alt="Michele Alboreto" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Michele Alboreto">Michele Alboreto</div>
+                        <div class="text-secondary small">Italian • 🏆 5</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/farina.jpg" alt="Nino Farina" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Nino Farina">Nino Farina</div>
+                        <div class="text-secondary small">Italian • 🏆 5</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/mclaren.jpg" alt="Bruce McLaren" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Bruce McLaren">Bruce McLaren</div>
+                        <div class="text-secondary small">New Zealander • 🏆 4</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/sainz.jpg" alt="Carlos Sainz" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Carlos Sainz">Carlos Sainz</div>
+                        <div class="text-secondary small">Spanish • 🏆 4</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/gurney.jpg" alt="Dan Gurney" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Dan Gurney">Dan Gurney</div>
+                        <div class="text-secondary small">American • 🏆 4</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/irvine.jpg" alt="Eddie Irvine" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Eddie Irvine">Eddie Irvine</div>
+                        <div class="text-secondary small">British • 🏆 4</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/pironi.jpg" alt="Didier Pironi" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Didier Pironi">Didier Pironi</div>
+                        <div class="text-secondary small">French • 🏆 3</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/fisichella.jpg" alt="Giancarlo Fisichella" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Giancarlo Fisichella">Giancarlo Fisichella</div>
+                        <div class="text-secondary small">Italian • 🏆 3</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/frentzen.jpg" alt="Heinz-Harald Frentzen" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Heinz-Harald Frentzen">Heinz-Harald Frentzen</div>
+                        <div class="text-secondary small">German • 🏆 3</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/herbert.jpg" alt="Johnny Herbert" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Johnny Herbert">Johnny Herbert</div>
+                        <div class="text-secondary small">British • 🏆 3</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/hawthorn.jpg" alt="Mike Hawthorn" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Mike Hawthorn">Mike Hawthorn</div>
+                        <div class="text-secondary small">British • 🏆 3</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/collins.png" alt="Peter Collins" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Peter Collins">Peter Collins</div>
+                        <div class="text-secondary small">British • 🏆 3</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/phil_hill.jpg" alt="Phil Hill" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Phil Hill">Phil Hill</div>
+                        <div class="text-secondary small">American • 🏆 3</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/boutsen.png" alt="Thierry Boutsen" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Thierry Boutsen">Thierry Boutsen</div>
+                        <div class="text-secondary small">Belgian • 🏆 3</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/vukovich.png" alt="Bill Vukovich" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Bill Vukovich">Bill Vukovich</div>
+                        <div class="text-secondary small">American • 🏆 2</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/angelis.jpg" alt="Elio de Angelis" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Elio de Angelis">Elio de Angelis</div>
+                        <div class="text-secondary small">Italian • 🏆 2</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/jabouille.jpg" alt="Jean-Pierre Jabouille" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jean-Pierre Jabouille">Jean-Pierre Jabouille</div>
+                        <div class="text-secondary small">French • 🏆 2</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/siffert.jpg" alt="Jo Siffert" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jo Siffert">Jo Siffert</div>
+                        <div class="text-secondary small">Swiss • 🏆 2</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/gonzalez.png" alt="José Froilán González" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="José Froilán González">José Froilán González</div>
+                        <div class="text-secondary small">Argentine • 🏆 2</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/trintignant.jpg" alt="Maurice Trintignant" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Maurice Trintignant">Maurice Trintignant</div>
+                        <div class="text-secondary small">French • 🏆 2</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/depailler.png" alt="Patrick Depailler" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Patrick Depailler">Patrick Depailler</div>
+                        <div class="text-secondary small">French • 🏆 2</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/tambay.jpg" alt="Patrick Tambay" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Patrick Tambay">Patrick Tambay</div>
+                        <div class="text-secondary small">French • 🏆 2</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/rodriguez.png" alt="Pedro Rodríguez" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Pedro Rodríguez">Pedro Rodríguez</div>
+                        <div class="text-secondary small">Mexican • 🏆 2</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/revson.png" alt="Peter Revson" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Peter Revson">Peter Revson</div>
+                        <div class="text-secondary small">American • 🏆 2</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/trips.jpg" alt="Wolfgang von Trips" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Wolfgang von Trips">Wolfgang von Trips</div>
+                        <div class="text-secondary small">German • 🏆 2</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/nannini.png" alt="Alessandro Nannini" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Alessandro Nannini">Alessandro Nannini</div>
+                        <div class="text-secondary small">Italian • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/pace.png" alt="Carlos Pace" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Carlos Pace">Carlos Pace</div>
+                        <div class="text-secondary small">Brazilian • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/ocon.jpg" alt="Esteban Ocon" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Esteban Ocon">Esteban Ocon</div>
+                        <div class="text-secondary small">French • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/cevert.jpg" alt="François Cevert" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="François Cevert">François Cevert</div>
+                        <div class="text-secondary small">French • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/baghetti.jpg" alt="Giancarlo Baghetti" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Giancarlo Baghetti">Giancarlo Baghetti</div>
+                        <div class="text-secondary small">Italian • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/nilsson.png" alt="Gunnar Nilsson" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Gunnar Nilsson">Gunnar Nilsson</div>
+                        <div class="text-secondary small">Swedish • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/kovalainen.jpg" alt="Heikki Kovalainen" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Heikki Kovalainen">Heikki Kovalainen</div>
+                        <div class="text-secondary small">Finnish • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/ireland.jpg" alt="Innes Ireland" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Innes Ireland">Innes Ireland</div>
+                        <div class="text-secondary small">British • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/trulli.jpg" alt="Jarno Trulli" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jarno Trulli">Jarno Trulli</div>
+                        <div class="text-secondary small">Italian • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/alesi.png" alt="Jean Alesi" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jean Alesi">Jean Alesi</div>
+                        <div class="text-secondary small">French • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/beltoise.jpg" alt="Jean-Pierre Beltoise" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jean-Pierre Beltoise">Jean-Pierre Beltoise</div>
+                        <div class="text-secondary small">French • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/mass.jpg" alt="Jochen Mass" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jochen Mass">Jochen Mass</div>
+                        <div class="text-secondary small">German • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/bandini.jpg" alt="Lorenzo Bandini" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Lorenzo Bandini">Lorenzo Bandini</div>
+                        <div class="text-secondary small">Italian • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/scarfiotti.jpg" alt="Ludovico Scarfiotti" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Ludovico Scarfiotti">Ludovico Scarfiotti</div>
+                        <div class="text-secondary small">Italian • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/panis.png" alt="Olivier Panis" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Olivier Panis">Olivier Panis</div>
+                        <div class="text-secondary small">French • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/maldonado.jpg" alt="Pastor Maldonado" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Pastor Maldonado">Pastor Maldonado</div>
+                        <div class="text-secondary small">Venezuelan • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/gethin.png" alt="Peter Gethin" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Peter Gethin">Peter Gethin</div>
+                        <div class="text-secondary small">British • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/gasly.jpg" alt="Pierre Gasly" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Pierre Gasly">Pierre Gasly</div>
+                        <div class="text-secondary small">French • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/ginther.jpg" alt="Richie Ginther" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Richie Ginther">Richie Ginther</div>
+                        <div class="text-secondary small">American • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/kubica.jpg" alt="Robert Kubica" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Robert Kubica">Robert Kubica</div>
+                        <div class="text-secondary small">Polish • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span> <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/brambilla.jpg" alt="Vittorio Brambilla" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Vittorio Brambilla">Vittorio Brambilla</div>
+                        <div class="text-secondary small">Italian • 🏆 1</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-legend">👑 Légende</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/sutil.jpg" alt="Adrian Sutil" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Adrian Sutil">Adrian Sutil</div>
+                        <div class="text-secondary small">German • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/yoong.png" alt="Alex Yoong" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Alex Yoong">Alex Yoong</div>
+                        <div class="text-secondary small">Malaysian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/albon.jpg" alt="Alexander Albon" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Alexander Albon">Alexander Albon</div>
+                        <div class="text-secondary small">Thai • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/rossi.png" alt="Alexander Rossi" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Alexander Rossi">Alexander Rossi</div>
+                        <div class="text-secondary small">American • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/wurz.jpg" alt="Alexander Wurz" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Alexander Wurz">Alexander Wurz</div>
+                        <div class="text-secondary small">Austrian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/mcnish.png" alt="Allan McNish" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Allan McNish">Allan McNish</div>
+                        <div class="text-secondary small">British • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/lotterer.jpg" alt="André Lotterer" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="André Lotterer">André Lotterer</div>
+                        <div class="text-secondary small">German • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/davidson.jpg" alt="Anthony Davidson" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Anthony Davidson">Anthony Davidson</div>
+                        <div class="text-secondary small">British • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/giovinazzi.png" alt="Antonio Giovinazzi" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Antonio Giovinazzi">Antonio Giovinazzi</div>
+                        <div class="text-secondary small">Italian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/pizzonia.png" alt="Antônio Pizzonia" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Antônio Pizzonia">Antônio Pizzonia</div>
+                        <div class="text-secondary small">Brazilian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/arvid_lindblad.jpg" alt="Arvid Lindblad" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Arvid Lindblad">Arvid Lindblad</div>
+                        <div class="text-secondary small">Swedish • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/brendon_hartley.png" alt="Brendon Hartley" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Brendon Hartley">Brendon Hartley</div>
+                        <div class="text-secondary small">New Zealander • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/bruno_senna.jpg" alt="Bruno Senna" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Bruno Senna">Bruno Senna</div>
+                        <div class="text-secondary small">Brazilian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/pic.jpg" alt="Charles Pic" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Charles Pic">Charles Pic</div>
+                        <div class="text-secondary small">French • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/klien.jpg" alt="Christian Klien" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Christian Klien">Christian Klien</div>
+                        <div class="text-secondary small">Austrian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/albers.jpg" alt="Christijan Albers" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Christijan Albers">Christijan Albers</div>
+                        <div class="text-secondary small">Dutch • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/matta.png" alt="Cristiano da Matta" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Cristiano da Matta">Cristiano da Matta</div>
+                        <div class="text-secondary small">Brazilian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/kvyat.jpg" alt="Daniil Kvyat" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Daniil Kvyat">Daniil Kvyat</div>
+                        <div class="text-secondary small">Russian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/bernoldi.png" alt="Enrique Bernoldi" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Enrique Bernoldi">Enrique Bernoldi</div>
+                        <div class="text-secondary small">Brazilian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/gutierrez.png" alt="Esteban Gutiérrez" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Esteban Gutiérrez">Esteban Gutiérrez</div>
+                        <div class="text-secondary small">Mexican • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/nasr.png" alt="Felipe Nasr" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Felipe Nasr">Felipe Nasr</div>
+                        <div class="text-secondary small">Brazilian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/montagny.jpg" alt="Franck Montagny" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Franck Montagny">Franck Montagny</div>
+                        <div class="text-secondary small">French • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/colapinto.jpg" alt="Franco Colapinto" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Franco Colapinto">Franco Colapinto</div>
+                        <div class="text-secondary small">Argentinian  • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/bortoleto.jpg" alt="Gabriel Bortoleto" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Gabriel Bortoleto">Gabriel Bortoleto</div>
+                        <div class="text-secondary small">Brazilian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/mazzacane.png" alt="Gastón Mazzacane" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Gastón Mazzacane">Gastón Mazzacane</div>
+                        <div class="text-secondary small">Argentine • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/bruni.png" alt="Gianmaria Bruni" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Gianmaria Bruni">Gianmaria Bruni</div>
+                        <div class="text-secondary small">Italian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/garde.jpg" alt="Giedo van der Garde" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Giedo van der Garde">Giedo van der Garde</div>
+                        <div class="text-secondary small">Dutch • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/pantano.jpg" alt="Giorgio Pantano" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Giorgio Pantano">Giorgio Pantano</div>
+                        <div class="text-secondary small">Italian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/zhou.png" alt="Guanyu Zhou" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Guanyu Zhou">Guanyu Zhou</div>
+                        <div class="text-secondary small">Chinese • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/hadjar.jpg" alt="Isack Hadjar" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Isack Hadjar">Isack Hadjar</div>
+                        <div class="text-secondary small">French • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/aitken.png" alt="Jack Aitken" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jack Aitken">Jack Aitken</div>
+                        <div class="text-secondary small">British • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/doohan.jpg" alt="Jack Doohan" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jack Doohan">Jack Doohan</div>
+                        <div class="text-secondary small">Australian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/alguersuari.jpg" alt="Jaime Alguersuari" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jaime Alguersuari">Jaime Alguersuari</div>
+                        <div class="text-secondary small">Spanish • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/vergne.jpg" alt="Jean-Éric Vergne" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jean-Éric Vergne">Jean-Éric Vergne</div>
+                        <div class="text-secondary small">French • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/jolyon_palmer.jpg" alt="Jolyon Palmer" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jolyon Palmer">Jolyon Palmer</div>
+                        <div class="text-secondary small">British • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/verstappen.jpg" alt="Jos Verstappen" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jos Verstappen">Jos Verstappen</div>
+                        <div class="text-secondary small">Dutch • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/jules_bianchi.jpg" alt="Jules Bianchi" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jules Bianchi">Jules Bianchi</div>
+                        <div class="text-secondary small">French • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/wilson.jpg" alt="Justin Wilson" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Justin Wilson">Justin Wilson</div>
+                        <div class="text-secondary small">British • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/ambrosio.png" alt="Jérôme d'Ambrosio" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Jérôme d'Ambrosio">Jérôme d'Ambrosio</div>
+                        <div class="text-secondary small">Belgian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/kobayashi.jpg" alt="Kamui Kobayashi" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Kamui Kobayashi">Kamui Kobayashi</div>
+                        <div class="text-secondary small">Japanese • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/chandhok.png" alt="Karun Chandhok" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Karun Chandhok">Karun Chandhok</div>
+                        <div class="text-secondary small">Indian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/nakajima.jpg" alt="Kazuki Nakajima" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Kazuki Nakajima">Kazuki Nakajima</div>
+                        <div class="text-secondary small">Japanese • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/kevin_magnussen.jpg" alt="Kevin Magnussen" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Kevin Magnussen">Kevin Magnussen</div>
+                        <div class="text-secondary small">Danish • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/stroll.jpg" alt="Lance Stroll" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Lance Stroll">Lance Stroll</div>
+                        <div class="text-secondary small">Canadian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/lawson.jpg" alt="Liam Lawson" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Liam Lawson">Liam Lawson</div>
+                        <div class="text-secondary small">New Zealander • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/sargeant.png" alt="Logan Sargeant" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Logan Sargeant">Logan Sargeant</div>
+                        <div class="text-secondary small">American • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/badoer.png" alt="Luca Badoer" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Luca Badoer">Luca Badoer</div>
+                        <div class="text-secondary small">Italian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/grassi.jpg" alt="Lucas di Grassi" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Lucas di Grassi">Lucas di Grassi</div>
+                        <div class="text-secondary small">Brazilian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/burti.png" alt="Luciano Burti" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Luciano Burti">Luciano Burti</div>
+                        <div class="text-secondary small">Brazilian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/gene.jpg" alt="Marc Gené" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Marc Gené">Marc Gené</div>
+                        <div class="text-secondary small">Spanish • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/ericsson.png" alt="Marcus Ericsson" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Marcus Ericsson">Marcus Ericsson</div>
+                        <div class="text-secondary small">Swedish • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/markus_winkelhock.jpg" alt="Markus Winkelhock" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Markus Winkelhock">Markus Winkelhock</div>
+                        <div class="text-secondary small">German • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/chilton.jpg" alt="Max Chilton" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Max Chilton">Max Chilton</div>
+                        <div class="text-secondary small">British • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/mick_schumacher.jpg" alt="Mick Schumacher" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Mick Schumacher">Mick Schumacher</div>
+                        <div class="text-secondary small">German • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/salo.png" alt="Mika Salo" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Mika Salo">Mika Salo</div>
+                        <div class="text-secondary small">Finnish • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/karthikeyan.jpg" alt="Narain Karthikeyan" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Narain Karthikeyan">Narain Karthikeyan</div>
+                        <div class="text-secondary small">Indian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/piquet_jr.jpg" alt="Nelson Piquet Jr." class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Nelson Piquet Jr.">Nelson Piquet Jr.</div>
+                        <div class="text-secondary small">Brazilian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/latifi.jpg" alt="Nicholas Latifi" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Nicholas Latifi">Nicholas Latifi</div>
+                        <div class="text-secondary small">Canadian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/heidfeld.jpg" alt="Nick Heidfeld" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Nick Heidfeld">Nick Heidfeld</div>
+                        <div class="text-secondary small">German • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/hulkenberg.jpg" alt="Nico Hülkenberg" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Nico Hülkenberg">Nico Hülkenberg</div>
+                        <div class="text-secondary small">German • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/kiesa.png" alt="Nicolas Kiesa" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Nicolas Kiesa">Nicolas Kiesa</div>
+                        <div class="text-secondary small">Danish • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/mazepin.png" alt="Nikita Mazepin" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Nikita Mazepin">Nikita Mazepin</div>
+                        <div class="text-secondary small">Russian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/de_vries.jpg" alt="Nyck de Vries" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Nyck de Vries">Nyck de Vries</div>
+                        <div class="text-secondary small">Dutch • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/bearman.jpg" alt="Oliver Bearman" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Oliver Bearman">Oliver Bearman</div>
+                        <div class="text-secondary small">British • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/wehrlein.png" alt="Pascal Wehrlein" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Pascal Wehrlein">Pascal Wehrlein</div>
+                        <div class="text-secondary small">German • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/friesacher.png" alt="Patrick Friesacher" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Patrick Friesacher">Patrick Friesacher</div>
+                        <div class="text-secondary small">Austrian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/resta.png" alt="Paul di Resta" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Paul di Resta">Paul di Resta</div>
+                        <div class="text-secondary small">British • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/diniz.png" alt="Pedro Diniz" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Pedro Diniz">Pedro Diniz</div>
+                        <div class="text-secondary small">Brazilian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/rosa.jpg" alt="Pedro de la Rosa" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Pedro de la Rosa">Pedro de la Rosa</div>
+                        <div class="text-secondary small">Spanish • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/pietro_fittipaldi.jpg" alt="Pietro Fittipaldi" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Pietro Fittipaldi">Pietro Fittipaldi</div>
+                        <div class="text-secondary small">Brazilian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/firman.png" alt="Ralph Firman" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Ralph Firman">Ralph Firman</div>
+                        <div class="text-secondary small">Irish • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/zonta.jpg" alt="Ricardo Zonta" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Ricardo Zonta">Ricardo Zonta</div>
+                        <div class="text-secondary small">Brazilian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/haryanto.png" alt="Rio Haryanto" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Rio Haryanto">Rio Haryanto</div>
+                        <div class="text-secondary small">Indonesian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/doornbos.jpg" alt="Robert Doornbos" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Robert Doornbos">Robert Doornbos</div>
+                        <div class="text-secondary small">Dutch • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/merhi.png" alt="Roberto Merhi" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Roberto Merhi">Roberto Merhi</div>
+                        <div class="text-secondary small">Spanish • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/grosjean.jpg" alt="Romain Grosjean" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Romain Grosjean">Romain Grosjean</div>
+                        <div class="text-secondary small">French • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/yamamoto.jpg" alt="Sakon Yamamoto" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Sakon Yamamoto">Sakon Yamamoto</div>
+                        <div class="text-secondary small">Japanese • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/speed.jpg" alt="Scott Speed" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Scott Speed">Scott Speed</div>
+                        <div class="text-secondary small">American • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/sirotkin.png" alt="Sergey Sirotkin" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Sergey Sirotkin">Sergey Sirotkin</div>
+                        <div class="text-secondary small">Russian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/vandoorne.png" alt="Stoffel Vandoorne" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Stoffel Vandoorne">Stoffel Vandoorne</div>
+                        <div class="text-secondary small">Belgian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/bourdais.jpg" alt="Sébastien Bourdais" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Sébastien Bourdais">Sébastien Bourdais</div>
+                        <div class="text-secondary small">French • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/buemi.jpg" alt="Sébastien Buemi" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Sébastien Buemi">Sébastien Buemi</div>
+                        <div class="text-secondary small">Swiss • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/sato.jpg" alt="Takuma Sato" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Takuma Sato">Takuma Sato</div>
+                        <div class="text-secondary small">Japanese • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/marques.png" alt="Tarso Marques" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Tarso Marques">Tarso Marques</div>
+                        <div class="text-secondary small">Brazilian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/monteiro.jpg" alt="Tiago Monteiro" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Tiago Monteiro">Tiago Monteiro</div>
+                        <div class="text-secondary small">Portuguese • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/glock.jpg" alt="Timo Glock" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Timo Glock">Timo Glock</div>
+                        <div class="text-secondary small">German • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/enge.jpg" alt="Tomáš Enge" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Tomáš Enge">Tomáš Enge</div>
+                        <div class="text-secondary small">Czech • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/petrov.png" alt="Vitaly Petrov" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Vitaly Petrov">Vitaly Petrov</div>
+                        <div class="text-secondary small">Russian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/liuzzi.jpg" alt="Vitantonio Liuzzi" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Vitantonio Liuzzi">Vitantonio Liuzzi</div>
+                        <div class="text-secondary small">Italian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/stevens.jpg" alt="Will Stevens" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Will Stevens">Will Stevens</div>
+                        <div class="text-secondary small">British • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/ide.jpg" alt="Yuji Ide" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Yuji Ide">Yuji Ide</div>
+                        <div class="text-secondary small">Japanese • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/tsunoda.jpg" alt="Yuki Tsunoda" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Yuki Tsunoda">Yuki Tsunoda</div>
+                        <div class="text-secondary small">Japanese • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-driver h-100 p-2 d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="static/images/f1/baumgartner.png" alt="Zsolt Baumgartner" class="driver-img rounded mb-2" loading="lazy">
+                        <div class="fw-bold text-light text-truncate" title="Zsolt Baumgartner">Zsolt Baumgartner</div>
+                        <div class="text-secondary small">Hungarian • 🏆 0</div>
+                    </div>
+                    <div class="mt-2 d-flex flex-wrap gap-1">
+                        <span class="badge badge-modern">🏎️ 2000+</span> <span class="badge badge-default">Défaut</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

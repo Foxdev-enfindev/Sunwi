@@ -17,6 +17,7 @@ from routes.music import music_bp
 from routes.disney import disney_bp
 from routes.lol import lol_bp
 from routes.nba import nba_bp
+from routes.f1 import f1_bp
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'une_cle_secrete_super_securisee_elotify_12345')
@@ -49,6 +50,7 @@ app.register_blueprint(music_bp, url_prefix='/music')
 app.register_blueprint(disney_bp)
 app.register_blueprint(lol_bp)
 app.register_blueprint(nba_bp)
+app.register_blueprint(f1_bp)
 
 @app.after_request
 def add_header(response):

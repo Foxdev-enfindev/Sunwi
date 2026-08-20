@@ -111,6 +111,15 @@
                       </select>
                       <button type="button" data-select-id="lol-role-select" class="hub-btn-action border-0 require-auth" style="padding: 3px 0;">Lancer ⚔️</button>
                     </div>
+                  {% elif module.id == 'f1_eras' or module.id == 'f1' %}
+                    <div class="d-flex flex-column gap-1 mt-auto">
+                      <select id="f1-era-select" class="form-select form-select-sm hub-league-select">
+                        <!-- <option value="/f1/">Tous les pilotes</option>-->
+                        <option value="/f1/legends">👑 Légendes</option>
+                        <option value="/f1/modern">🏎️ Ère 2000+</option>
+                      </select>
+                      <button type="button" data-select-id="f1-era-select" class="hub-btn-action border-0 require-auth" style="padding: 3px 0;">Lancer ⚔️</button>
+                    </div>
                   {% else %}
                     <div class="mt-auto pt-2">
                       {% if module.active %}

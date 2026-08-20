@@ -1,0 +1,43 @@
+{% extends 'base_duel.html' %}
+
+{% set page_title = 'Sunwi — Duel F1' %}
+{% set vote_url = url_for('f1.vote') %}
+{% set leaderboard_url = url_for('f1.classement') %}
+{% set item_a_id = p1.driver_id %}
+{% set item_b_id = p2.driver_id %}
+
+{% block card_a_content %}
+<div class="pochette-wrapper text-center my-3" style="min-height: 140px; display: flex; align-items: center; justify-content: center;">
+    <img src="{{ url_for('f1.driver_photo', driver_id=p1.driver_id) }}" alt="{{ p1.name }}" class="driver-photo" style="max-height: 120px; object-fit: contain;">
+</div>
+<div class="track-info">
+    <span class="track-badge">
+        {% if p1.permanent_number %}N°{{ p1.permanent_number }} • {% endif %}{{ p1.nationality or 'F1' }}
+    </span>
+    <h2 class="track-title" title="{{ p1.name }}">{{ p1.name }}</h2>
+    <p class="track-artist">🏆 {{ p1.wins or 0 }} victoire{% if p1.wins and p1.wins > 1 %}s{% endif %}</p>
+    <div class="elo-display">Elo actuel : <strong>{{ p1.elo }}</strong></div>
+    <div class="match-count">
+        {% set current_match_a = (p1.matches_count or 0) + 1 %}
+        {{ current_match_a }}{% if current_match_a == 1 %}er{% else %}e{% endif %} duel
+    </div>
+</div>
+{% endblock %}
+
+{% block card_b_content %}
+<div class="pochette-wrapper text-center my-3" style="min-height: 140px; display: flex; align-items: center; justify-content: center;">
+    <img src="{{ url_for('f1.driver_photo', driver_id=p2.driver_id) }}" alt="{{ p2.name }}" class="driver-photo" style="max-height: 120px; object-fit: contain;">
+</div>
+<div class="track-info">
+    <span class="track-badge">
+        {% if p2.permanent_number %}N°{{ p2.permanent_number }} • {% endif %}{{ p2.nationality or 'F1' }}
+    </span>
+    <h2 class="track-title" title="{{ p2.name }}">{{ p2.name }}</h2>
+    <p class="track-artist">🏆 {{ p2.wins or 0 }} victoire{% if p2.wins and p2.wins > 1 %}s{% endif %}</p>
+    <div class="elo-display">Elo actuel : <strong>{{ p2.elo }}</strong></div>
+    <div class="match-count">
+        {% set current_match_b = (p2.matches_count or 0) + 1 %}
+        {{ current_match_b }}{% if current_match_b == 1 %}er{% else %}e{% endif %} duel
+    </div>
+</div>
+{% endblock %}

@@ -106,4 +106,5 @@ def google_callback():
 @auth_bp.route('/logout')
 def logout():
     session.pop('sunwi_user', None)
-    return redirect(url_for('main.hub'))
+    session.pop('user_profile', None)
+    return redirect(url_for('main.index'))

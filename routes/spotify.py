@@ -45,6 +45,7 @@ def init_db():
                 image_url TEXT,
                 elo INT,
                 matches_count INT DEFAULT 0,
+                user_id VARCHAR(255),
                 PRIMARY KEY (playlist_id, track_id)
             );
         """)
@@ -65,7 +66,8 @@ def init_db():
         """)
         cur.execute("""
             ALTER TABLE tracks_scores 
-            ADD COLUMN IF NOT EXISTS matches_count INT DEFAULT 0;
+            ADD COLUMN IF NOT EXISTS matches_count INT DEFAULT 0,
+            ADD COLUMN IF NOT EXISTS user_id VARCHAR(255);
         """)
         conn.commit()
         cur.close()
@@ -322,31 +324,36 @@ def _save_to_db_async(playlist_id, scores_to_update, user_id=None, winner_id=Non
         conn = get_db_connection()
         cur = conn.cursor()
 
-        # 1. Mise à jour des scores ELO dans tracks_scores
+        # 1. Mise à jour des scores ELO et enregistrement du user_id dans tracks_scores
         for track_id, data in scores_to_update.items():
             cur.execute("""
-                INSERT INTO tracks_scores (playlist_id, track_id, name, artist, image_url, elo, matches_count)
-                VALUES (%s, %s, %s, %s, %s, %s, %s)
+                INSERT INTO tracks_scores (playlist_id, track_id, name, artist, image_url, elo, matches_count, user_id)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                 ON CONFLICT (playlist_id, track_id) 
                 DO UPDATE SET 
                     elo = EXCLUDED.elo, 
                     matches_count = EXCLUDED.matches_count,
                     name = EXCLUDED.name, 
                     artist = EXCLUDED.artist, 
-                    image_url = EXCLUDED.image_url;
+                    image_url = EXCLUDED.image_url,
+                    user_id = COALESCE(EXCLUDED.user_id, tracks_scores.user_id);
             """, (
                 playlist_id, track_id, 
                 data.get('name', ''), data.get('artist', ''), 
                 data.get('image_url', ''), data.get('elo', 1000), 
-                data.get('matches_count', 0)
+                data.get('matches_count', 0),
+                str(user_id) if user_id else None
             ))
 
         # 2. Enregistrement de l'historique du vote dans user_votes
         if user_id and winner_id and loser_id:
-            cur.execute("""
-                INSERT INTO user_votes (user_id, module_id, winner_id, loser_id)
-                VALUES (%s, 'spotify', %s, %s);
-            """, (str(user_id), str(winner_id), str(loser_id)))
+            try:
+                cur.execute("""
+                    INSERT INTO user_votes (user_id, module_id, winner_id, loser_id)
+                    VALUES (%s, 'spotify', %s, %s);
+                """, (str(user_id), str(winner_id), str(loser_id)))
+            except Exception:
+                conn.rollback()
 
         conn.commit()
         cur.close()
@@ -617,8 +624,17 @@ def vote():
             }
         }
 
-        profile = session.get('spotify_user_profile')
-        user_id = profile.get('id') if profile else None
+        # Récupération de l'identifiant utilisateur (Google / BDD / Spotify / Email)
+        sunwi_user = session.get('sunwi_user') or {}
+        spotify_profile = session.get('spotify_user_profile') or {}
+
+        user_id = (
+            sunwi_user.get('id') or 
+            sunwi_user.get('google_id') or 
+            spotify_profile.get('id') or 
+            sunwi_user.get('email') or 
+            spotify_profile.get('email')
+        )
 
         session['dernier_resultat'] = last_result
         save_local_scores(updated, user_id=user_id, winner_id=winner_id, loser_id=loser_id)
@@ -651,7 +667,6 @@ def toggle_pause():
     if not sp: 
         return jsonify({"error": "Non authentifié"}), 401
     try:
-        # On force l'arrêt direct au lieu de basculer pour éviter le faux rebond de lecture
         sp.pause_playback()
         return jsonify({"status": "paused"})
     except Exception:

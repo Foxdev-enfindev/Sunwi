@@ -31,7 +31,7 @@
     <!-- Header compact : Logo à gauche, Menu à droite -->
     <header class="sunwi-header py-2 mb-3">
         <div class="container-fluid px-3 px-md-4 d-flex justify-content-between align-items-center">
-            <a href="{{ url_for('main.hub') }}" class="sunwi-logo text-decoration-none fw-bold fs-4">
+            <a href="{{ url_for('main.hub') if session.get('sunwi_user') or session.get('user_profile') else url_for('main.index') }}" class="sunwi-logo text-decoration-none fw-bold fs-4">
                 <span class="sunwi-brand-text">Sunwi</span>
             </a>
             <div>

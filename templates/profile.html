@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Mon Profil — Sunwi{% endblock %}
+
+{% block content %}
+<div class="container py-4" style="max-width: 1000px;">
+    
+    <h1 class="h3 fw-bold text-white mb-4 text-start">Mon Profil</h1>
+
+    <div class="d-flex flex-column gap-4">
+        
+        <!-- Case 1 : Infos Personnelles -->
+        <div class="p-4 rounded-4" style="background: #1e293b; border: 1px solid rgba(255, 255, 255, 0.1);">
+            <h2 class="h5 fw-bold text-warning mb-3 text-start">👤 Infos personnelles</h2>
+            <div class="d-flex align-items-center gap-3">
+                {% if user.picture %}
+                    <img src="{{ user.picture }}" alt="Avatar" class="rounded-circle" width="56" height="56">
+                {% else %}
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold fs-4" style="width: 56px; height: 56px; background-color: #d946ef;">
+                        {{ user.name[0] if user.name else 'U' }}
+                    </div>
+                {% endif %}
+                <div class="text-start">
+                    <div class="fw-bold fs-5 text-white">{{ user.name or 'Utilisateur' }}</div>
+                    <div class="text-secondary small">📧 {{ user.email }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case 2 : Mes Participations -->
+        <div class="p-4 rounded-4 text-start" style="background: #1e293b; border: 1px solid rgba(255, 255, 255, 0.1);">
+            <h2 class="h5 fw-bold text-warning mb-3">📊 Mes Participations & Classements</h2>
+            
+            {% if stats %}
+                <div class="d-flex flex-column gap-2">
+                    {% for item in stats %}
+                    <div class="p-3 rounded-3 d-flex justify-content-between align-items-center" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);">
+                        <div>
+                            <div class="fw-bold text-white">{{ item.module_name }}</div>
+                            <div class="text-secondary small">{{ item.total_duels }} duels joués</div>
+                        </div>
+                        <a href="{{ item.ranking_url }}" class="btn btn-outline-warning btn-sm rounded-pill px-3">
+                            Voir mon classement 🏆
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="py-2 text-secondary">
+                    <p class="mb-3">Tu n'as pas encore participé à de duels.</p>
+                    <a href="{{ url_for('main.hub') }}" class="btn btn-warning btn-sm rounded-pill fw-bold px-3">
+                        Lancer un duel sur le Hub ⚔️
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Case 3 : Mes Modules Musicaux -->
+        <div class="p-4 rounded-4 text-start" style="background: #1e293b; border: 1px solid rgba(255, 255, 255, 0.1);">
+            <h2 class="h5 fw-bold text-info mb-3">🎵 Mes Modules Musicaux Personnalisés</h2>
+            
+            {% if custom_modules %}
+                <div class="d-flex flex-column gap-2">
+                    {% for mod in custom_modules %}
+                    <div class="p-3 rounded-3 d-flex justify-content-between align-items-center" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);">
+                        <div>
+                            <div class="fw-bold text-white">{{ mod.title }}</div>
+                            <div class="text-secondary small">{{ mod.track_count or 0 }} pistes</div>
+                        </div>
+                        <a href="/spotify/custom/{{ mod.id }}" class="btn btn-outline-info btn-sm rounded-pill px-3">
+                            Lancer ⚔️
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-secondary mb-0">
+                    Tu n'as pas encore créé de module musical personnalisé. Les modules se créent directement depuis le Tableau de bord.
+                </p>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

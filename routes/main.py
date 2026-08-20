@@ -126,7 +126,7 @@ def hub():
         # Optionnel : si on veut masquer le module 'steam' aussi (et donc toute la catégorie)
         # modules = [m for m in modules if m['category'] != 'Personnel (Nécessite une connexion externe)']
 
-    category_order = ['Sport', 'Personnel (Nécessite une connexion externe)', 'Gaming', 'Musique', 'Cinéma']
+    category_order = ['Sport', 'Gaming', 'Musique', 'Cinéma', 'Personnel (Nécessite une connexion externe)']
 
     grouped = {}
     for m in modules:

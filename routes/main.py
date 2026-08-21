@@ -28,7 +28,7 @@ def hub():
         {'id': 'f1', 'title': 'F1', 'category': 'Sport', 'badge': 'Disponible', 'active': True, 'url': '#'},  
 
         # --- PERSONNEL ---
-        {'id': 'spotify_custom_create', 'title': '➕ Créer un module personnalisé', 'category': 'Personnel (Nécessite une connexion externe)', 'badge': 'Nouveau', 'active': True, 'url': '/spotify/create'},
+        #{'id': 'spotify_custom_create', 'title': '➕ Créer un module personnalisé', 'category': 'Personnel (Nécessite une connexion externe)', 'badge': 'Nouveau', 'active': True, 'url': '/spotify/create'},
         {'id': 'spotify', 'title': 'Musique (Spotify)', 'category': 'Personnel (Nécessite une connexion externe)', 'badge': 'Disponible', 'active': True, 'url': '/spotify/'},
         {'id': 'steam', 'title': 'Steam', 'category': 'Personnel (Nécessite une connexion externe)', 'badge': 'Bientôt', 'active': False, 'url': '#'},
 

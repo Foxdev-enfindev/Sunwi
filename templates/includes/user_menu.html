@@ -3,7 +3,7 @@
 
 {% if user %}
 <div class="dropdown">
-    <button class="btn btn-outline-light btn-sm rounded-pill dropdown-toggle d-flex align-items-center gap-2 px-3 py-1 shadow-sm" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.2);">
+    <button class="btn btn-sm rounded-pill dropdown-toggle user-menu-btn d-flex align-items-center gap-2 px-3 py-1 shadow-sm" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
         {% if user.picture %}
             <img src="{{ user.picture }}" alt="Avatar" class="rounded-circle" width="22" height="22">
         {% else %}
@@ -11,25 +11,61 @@
                 {{ user.name[0] if user.name else 'U' }}
             </span>
         {% endif %}
-        <span class="fw-semibold text-truncate" style="max-width: 130px;">{{ user.name or 'Mon compte' }}</span>
+        <span class="fw-semibold text-truncate user-menu-name" style="max-width: 130px;">{{ user.name or 'Mon compte' }}</span>
     </button>
     
-    <ul class="dropdown-menu dropdown-menu-end shadow-lg p-2" aria-labelledby="userMenuButton" style="background-color: #1e293b; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; min-width: 220px;">
-        <li class="px-3 py-2 mb-2 rounded" style="background: rgba(255,255,255,0.03);">
-            <div class="fw-bold text-white small text-truncate">{{ user.name }}</div>
-            <div class="text-secondary extra-small text-truncate" style="font-size: 0.75rem;">{{ user.email }}</div>
+    <ul class="dropdown-menu dropdown-menu-end sunwi-dropdown-menu shadow-lg p-2" aria-labelledby="userMenuButton" style="border-radius: 12px; min-width: 230px;">
+        <!-- Profil info -->
+        <li class="px-3 py-2 mb-2 rounded user-header-info">
+            <div class="fw-bold user-text-main small text-truncate">{{ user.name }}</div>
+            <div class="user-text-sub extra-small text-truncate" style="font-size: 0.75rem;">{{ user.email }}</div>
         </li>
+        
+        <!-- SECTION THÈMES & MODE SOMBRE -->
+        <li class="px-3 py-2">
+            <div class="theme-label small fw-bold mb-2">Thème</div>
+            <div class="d-flex justify-content-between align-items-center gap-1">
+                <div class="theme-dot dot-green" onclick="setAccentColor('green')" title="Vert"></div>
+                <div class="theme-dot dot-cyan" onclick="setAccentColor('cyan')" title="Cyan"></div>
+                <div class="theme-dot dot-pink" onclick="setAccentColor('pink')" title="Rose"></div>
+                <div class="theme-dot dot-orange" onclick="setAccentColor('orange')" title="Orange"></div>
+                <div class="theme-dot dot-purple" onclick="setAccentColor('purple')" title="Violet"></div>
+                <div class="theme-dot dot-yellow" onclick="setAccentColor('yellow')" title="Jaune"></div>
+                <div class="theme-dot dot-random" onclick="setAccentColor('random')" title="Aléatoire" style="background: rgba(150,150,150,0.15); border: 1px dashed var(--text-muted); display: flex; align-items: center; justify-content: center; font-size: 0.65rem;">🎲</div>
+            </div>
+        </li>
+        <li class="px-3 py-2">
+            <div class="form-check form-switch d-flex align-items-center gap-2 m-0 p-0" style="padding-left: 2.5em !important;">
+                <input class="form-check-input m-0" type="checkbox" role="switch" id="darkModeToggle" onchange="handleModeToggle(this)">
+                <label class="form-check-label small fw-bold theme-label m-0" for="darkModeToggle">Mode sombre</label>
+            </div>
+        </li>
+        
+        <li><hr class="dropdown-divider my-2"></li>
+        
+        <!-- Liens dynamiques -->
+        {% if request.endpoint != 'main.profile' %}
         <li>
-            <a class="dropdown-item text-white rounded py-2 d-flex align-items-center gap-2" href="{{ url_for('main.profile') }}">
+            <a class="dropdown-item rounded py-2 d-flex align-items-center gap-2" href="{{ url_for('main.profile') }}">
                 👤 <span>Mon Profil</span>
             </a>
         </li>
+        {% endif %}
+
+        {% if request.endpoint != 'main.hub' %}
         <li>
-            <a class="dropdown-item text-white rounded py-2 d-flex align-items-center gap-2" href="{{ url_for('main.hub') }}">
+            <a class="dropdown-item rounded py-2 d-flex align-items-center gap-2" href="{{ url_for('main.hub') }}">
                 🏎️ <span>Tableau de bord</span>
             </a>
         </li>
-        <li><hr class="dropdown-divider my-2" style="border-color: rgba(255,255,255,0.1);"></li>
+        {% endif %}
+
+        <li>
+            <a class="dropdown-item rounded py-2 d-flex align-items-center gap-2" href="#" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+                💬 <span>Signaler un bug / Suggestion</span>
+            </a>
+        </li>
+        <li><hr class="dropdown-divider my-2"></li>
         <li>
             <a class="dropdown-item text-danger rounded py-2 d-flex align-items-center gap-2" href="{{ url_for('auth.logout') }}">
                 🚪 <span>Déconnexion</span>
@@ -37,6 +73,21 @@
         </li>
     </ul>
 </div>
+
+<script>
+    function handleModeToggle(switchEl) {
+        const mode = switchEl.checked ? 'dark' : 'light';
+        setBgMode(mode);
+    }
+
+    document.getElementById('userMenuButton')?.addEventListener('show.bs.dropdown', () => {
+        const toggle = document.getElementById('darkModeToggle');
+        if (toggle) {
+            const currentMode = localStorage.getItem('sunwi_bg_mode') || 'dark';
+            toggle.checked = (currentMode === 'dark');
+        }
+    });
+</script>
 {% else %}
 <a href="{{ url_for('auth.google_login') }}" class="btn btn-warning btn-sm rounded-pill px-3 fw-bold">
     Se connecter

@@ -4,20 +4,23 @@
 /* =======================================================
    1. VARIABLES DE FOND & ACCENTS
    ======================================================= */
+/* =======================================================
+   1. VARIABLES DE FOND & ACCENTS
+   ======================================================= */
 :root, [data-bg-mode="dark"] {
-    --bg-color: #0b1329 !important;   /* Bleu nuit profond et élégant */
-    --card-bg: #152238 !important;   /* Bleu ardoise foncé pour les cartes */
+    --bg-color: #0b1329;   /* Bleu nuit profond */
+    --card-bg: #152238;   /* Bleu ardoise foncé */
     --text-color: #ffffff;
     --text-muted: #94a3b8;
     --danger-color: #ff3366;
 }
 
 [data-bg-mode="light"] {
-    --bg-color: #f1f3f6;
-    --card-bg: #ffffff;
-    --text-color: #0f172a;
-    --text-muted: #64748b;
-    --danger-color: #ef4444;
+    --bg-color: #f1f3f6 !important;
+    --card-bg: #ffffff !important;
+    --text-color: #0f172a !important;
+    --text-muted: #64748b !important;
+    --danger-color: #ef4444 !important;
 }
 
 /* PALETTES D'ACCENTUATION */
@@ -958,7 +961,7 @@ body.playlists-body, body.classement-body, body.quit-body {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 16px !important;
+    gap: 2px !important;
 }
 
 .hub-row-section {
@@ -1273,4 +1276,216 @@ body.playlists-body, body.classement-body, body.quit-body {
         font-size: 0.85rem !important;
         width: 100% !important;
     }
+}
+/* 1. Bouton du menu (Fix du nom d'utilisateur au survol et au clic) */
+.dropdown-toggle,
+.dropdown-toggle:hover,
+.dropdown-toggle:focus,
+.dropdown-toggle:active,
+.show > .dropdown-toggle {
+    color: #ffffff !important; /* Maintient le texte en blanc clair */
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: none !important;
+}
+
+/* 2. Éléments à l'intérieur du menu déroulant */
+.dropdown-menu .dropdown-item {
+    color: #f8f9fa;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Correctif au survol et à la sélection dans le menu */
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus,
+.dropdown-menu .dropdown-item.active {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+}
+
+/* Optionnel : couleur au survol pour le bouton Déconnexion */
+.dropdown-menu .dropdown-item.text-danger:hover,
+.dropdown-menu .dropdown-item.text-danger:focus {
+    background-color: rgba(220, 53, 69, 0.2) !important;
+    color: #ff6b6b !important;
+}
+/* =======================================================
+   10. MODALE ET FORMULAIRES DE FEEDBACK
+   ======================================================= */
+
+/* Champs de saisie personnalisés (fond lisible + bordure visible) */
+.custom-dark-input {
+    background-color: #1e293b !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    color: #ffffff !important;
+}
+
+/* État Focus/Clic sur la zone de texte et le sélecteur */
+.custom-dark-input:focus {
+    background-color: #243347 !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.25) !important;
+    color: #ffffff !important;
+}
+
+/* Texte indicatif (Placeholder) bien contrasté */
+.custom-dark-input::placeholder {
+    color: #94a3b8 !important;
+    opacity: 1;
+}
+
+/* Force la flèche du menu <select> à apparaître en blanc */
+select.custom-dark-input {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+}
+
+/* Correction du menu d'options système (supprime le fond blanc natif) */
+.custom-dark-option {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+}
+/* Adaptation dynamique du menu utilisateur et de ses composants */
+.user-menu-btn {
+    background-color: var(--card-bg) !important;
+    border: 1px solid rgba(150, 150, 150, 0.25) !important;
+    color: var(--text-color) !important;
+}
+
+.user-menu-btn .user-menu-name {
+    color: var(--text-color) !important;
+}
+
+.user-menu-btn:hover,
+.user-menu-btn:focus,
+.show > .user-menu-btn {
+    color: var(--text-color) !important;
+    border-color: var(--neon-green) !important;
+}
+
+.sunwi-dropdown-menu {
+    background-color: var(--card-bg) !important;
+    border: 1px solid rgba(150, 150, 150, 0.2) !important;
+}
+
+.user-header-info {
+    background-color: rgba(150, 150, 150, 0.1) !important;
+}
+
+.user-text-main {
+    color: var(--text-color) !important;
+}
+
+.user-text-sub {
+    color: var(--text-muted) !important;
+}
+
+.sunwi-dropdown-menu .dropdown-item {
+    color: var(--text-color) !important;
+}
+
+.sunwi-dropdown-menu .dropdown-item:hover,
+.sunwi-dropdown-menu .dropdown-item:focus {
+    background-color: rgba(150, 150, 150, 0.15) !important;
+    color: var(--neon-green) !important;
+}
+
+.sunwi-dropdown-menu .dropdown-divider {
+    border-top-color: rgba(150, 150, 150, 0.2) !important;
+}
+/* Adaptation dynamique de la page Profil */
+.profile-main-title {
+    color: var(--neon-green) !important;
+    text-shadow: 0 0 10px var(--neon-green-glow) !important;
+}
+
+.profile-card {
+    background: var(--card-bg) !important;
+    border: 1px solid rgba(150, 150, 150, 0.2) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
+}
+
+.profile-section-title {
+    color: var(--neon-green) !important;
+}
+
+.profile-text-main {
+    color: var(--text-color) !important;
+}
+
+.profile-text-sub {
+    color: var(--text-muted) !important;
+}
+
+.profile-item-row {
+    background: rgba(150, 150, 150, 0.08) !important;
+    border: 1px solid rgba(150, 150, 150, 0.12) !important;
+}
+
+.profile-action-btn {
+    background-color: var(--neon-green) !important;
+    color: #0d0d0d !important;
+    border: none !important;
+    font-weight: 700 !important;
+    box-shadow: 0 0 8px var(--neon-green-glow) !important;
+    transition: filter 0.15s ease, transform 0.15s ease !important;
+}
+
+.profile-action-btn:hover {
+    filter: brightness(1.1) !important;
+    color: #0d0d0d !important;
+    transform: translateY(-1px) !important;
+}
+/* Adaptation dynamique des pages de classement */
+.classement-header h1,
+.playlists-header h1 {
+    color: var(--neon-green) !important;
+    text-shadow: 0 0 12px var(--neon-green-glow) !important;
+}
+
+/* Forcer la couleur du titre dans la balise .display-5 ou .text-light */
+.classement-header h1.text-light {
+    color: var(--neon-green) !important;
+}
+
+.classement-header p,
+.playlists-header p,
+.classement-header .text-secondary {
+    color: var(--text-muted) !important;
+}
+
+/* Noms des éléments dans les cartes de classement */
+.ranking-name,
+.top5-name,
+.playlist-name {
+    color: var(--text-color) !important;
+}
+
+.ranking-artist,
+.top5-artist,
+.ranking-matches,
+.playlist-tracks {
+    color: var(--text-muted) !important;
+}
+
+/* Badges spécifiques (ex: #3 • GENERATION-I) */
+.ranking-card .badge,
+.ranking-info .badge {
+    background-color: rgba(150, 150, 150, 0.2) !important;
+    color: var(--text-color) !important;
+}
+/* Correctif prioritaire pour les titres de morceaux/éléments dans les classements */
+.ranking-card .text-white,
+.ranking-card .text-light,
+.ranking-info .text-white,
+.ranking-info .text-light,
+.ranking-name,
+.top5-name {
+    color: var(--text-color) !important;
+}
+
+/* S'assure que les sous-titres (artistes, nombre de duels) gardent le bon contraste */
+.ranking-card .text-secondary,
+.ranking-card .text-muted,
+.ranking-artist,
+.top5-artist {
+    color: var(--text-muted) !important;
 }

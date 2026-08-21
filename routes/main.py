@@ -1,6 +1,9 @@
 # routes/main.py
 import os
 import threading
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from flask import Blueprint, render_template, request, jsonify, session, redirect, url_for
@@ -8,6 +11,10 @@ from flask import Blueprint, render_template, request, jsonify, session, redirec
 main_bp = Blueprint('main', __name__)
 
 SPOTIFY_WHITELIST = ["florent.pennarun@gmail.com", "riche-angelique@gmail.com", "dgo29fcb@gmail.com", "riche.angelique@gmail.com", "foxpapa@gmail.com"]
+
+EMAIL_ALIASES = {
+    "foxpapa@gmail.com": "florent.pennarun@gmail.com",
+}
 
 @main_bp.route('/')
 def index():
@@ -28,7 +35,6 @@ def hub():
         {'id': 'f1', 'title': 'F1', 'category': 'Sport', 'badge': 'Disponible', 'active': True, 'url': '#'},  
 
         # --- PERSONNEL ---
-        #{'id': 'spotify_custom_create', 'title': '➕ Créer un module personnalisé', 'category': 'Personnel (Nécessite une connexion externe)', 'badge': 'Nouveau', 'active': True, 'url': '/spotify/create'},
         {'id': 'spotify', 'title': 'Musique (Spotify)', 'category': 'Personnel (Nécessite une connexion externe)', 'badge': 'Disponible', 'active': True, 'url': '/spotify/'},
         {'id': 'steam', 'title': 'Steam', 'category': 'Personnel (Nécessite une connexion externe)', 'badge': 'Bientôt', 'active': False, 'url': '#'},
 
@@ -64,12 +70,6 @@ def hub():
     ]
 
     return render_template('hub.html', categories=ordered_categories)
-
-# Dans routes/main.py
-
-EMAIL_ALIASES = {
-    "foxpapa@gmail.com": "florent.pennarun@gmail.com",
-}
 
 @main_bp.route('/profile')
 def profile():
@@ -209,6 +209,59 @@ def profile():
             print(f"⚠️ Erreur BDD Profil : {e}")
 
     return render_template('profile.html', user=user, stats=user_stats, custom_modules=custom_modules)
+
+@main_bp.route('/feedback', methods=['POST'])
+def send_feedback():
+    feedback_type = request.form.get('feedback_type', 'bug')
+    message_body = request.form.get('message', '').strip()
+
+    if not message_body:
+        return jsonify({'status': 'error', 'message': 'Le message ne peut pas être vide.'}), 400
+
+    sunwi_user = session.get('sunwi_user') or {}
+    spotify_user = session.get('spotify_user_profile') or session.get('user_profile') or {}
+    
+    sender_name = sunwi_user.get('name') or spotify_user.get('display_name') or 'Utilisateur inconnu'
+    sender_email = sunwi_user.get('email') or spotify_user.get('email') or 'Non renseigné'
+
+    smtp_server = os.environ.get('MAIL_SERVER', 'smtp.gmail.com')
+    smtp_port = int(os.environ.get('MAIL_PORT', 587))
+    smtp_user = os.environ.get('MAIL_USERNAME') or os.environ.get('ADMIN_EMAIL')
+    smtp_password = os.environ.get('MAIL_PASSWORD')
+    admin_email = os.environ.get('ADMIN_EMAIL') or smtp_user
+
+    if not smtp_user or not smtp_password or not admin_email:
+        print("⚠️ Configuration SMTP manquante pour l'envoi de feedback.")
+        return jsonify({'status': 'error', 'message': 'Erreur de configuration serveur.'}), 500
+
+    subject = f"[Sunwi Feedback] [{feedback_type.upper()}] De {sender_name}"
+    
+    content = f"""Un nouveau retour a été envoyé depuis Sunwi :
+
+Type : {feedback_type.capitalize()}
+Utilisateur : {sender_name} ({sender_email})
+
+Message :
+--------------------------------------------------
+{message_body}
+--------------------------------------------------"""
+
+    msg = MIMEMultipart()
+    msg['From'] = smtp_user
+    msg['To'] = admin_email
+    msg['Subject'] = subject
+    msg.attach(MIMEText(content, 'plain', 'utf-8'))
+
+    try:
+        server = smtplib.SMTP(smtp_server, smtp_port)
+        server.starttls()
+        server.login(smtp_user, smtp_password)
+        server.send_message(msg)
+        server.quit()
+        return jsonify({'status': 'success', 'message': 'Merci ! Ton retour a bien été envoyé.'})
+    except Exception as e:
+        print(f"❌ Erreur envoi mail feedback : {e}")
+        return jsonify({'status': 'error', 'message': 'Impossible d\'envoyer le message pour le moment.'}), 500
 
 @main_bp.route('/set_audio_mode/<mode>')
 def set_audio_mode(mode):

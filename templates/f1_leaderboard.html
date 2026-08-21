@@ -11,10 +11,7 @@
     <a href="{{ url_for('f1.classement_filter', era_filter='legends') }}" class="btn btn-sm {% if current_filter == 'legends' %}btn-warning{% else %}btn-outline-light{% endif %}">👑 Légendes</a>
     <a href="{{ url_for('f1.classement_filter', era_filter='modern') }}" class="btn btn-sm {% if current_filter == 'modern' %}btn-warning{% else %}btn-outline-light{% endif %}">🏎️ Ère 2000+</a>
 </div>
-<div class="mt-3">
-    <a href="{{ url_for('f1.f1_hub', era_filter=current_filter) if current_filter else url_for('f1.f1_hub') }}" class="btn btn-primary fw-bold">⚔️ Retour aux duels</a>
-    <a href="{{ url_for('main.hub') }}" class="btn btn-outline-secondary">🏠 Hub</a>
-</div>
+    {{ super() }}  
 {% endblock %}
 
 {% block ranking_content %}

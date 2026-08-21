@@ -5,10 +5,6 @@
 {% block header_title %}🏆 CLASSEMENT LEAGUE OF LEGENDS 🏆{% endblock %}
 {% block header_subtitle %}Ton classement individuel des champions de la Faille{% endblock %}
 
-{% block header_actions %}
-<a href="{{ url_for('lol.lol_hub') }}" class="btn btn-primary fw-bold">⚔️ Retour aux duels</a>
-<a href="{{ url_for('main.hub') }}" class="btn btn-outline-secondary">🏠 Hub</a>
-{% endblock %}
 
 {% block ranking_content %}
     {% if ranking %}

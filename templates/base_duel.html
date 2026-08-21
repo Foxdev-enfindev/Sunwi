@@ -48,7 +48,7 @@
             <div class="vs-circle">VS</div>
             <button type="button" class="tie-btn" onclick="handleDuelVote(event, 'tie', 'form-tie')">🤝 Match Nul</button>
             {% if leaderboard_url %}
-                <a href="{{ leaderboard_url }}" class="central-rank-btn" onclick="event.stopPropagation();">📊 Classement</a>
+                <a href="{{ leaderboard_url }}{{ '&' if '?' in leaderboard_url else '?' }}from=duel" class="central-rank-btn" onclick="event.stopPropagation();">📊 Classement</a>
             {% endif %}
         </div>
 

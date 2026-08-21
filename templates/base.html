@@ -1,29 +1,27 @@
 <!-- templates/base.html -->
 <!DOCTYPE html>
-<html lang="fr" data-bg-mode="dark" data-theme="{{ current_theme if current_theme else session.get('theme', 'green') }}">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Sunwi{% endblock %}</title>
+
+    <!-- Script de thème exécuté AVANT le CSS pour éviter tout flash blanc/rose -->
+    <script src="{{ url_for('static', filename='theme.js') }}?v=5"></script>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}?v=4">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}?v=5">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon_io/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon_io/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon_io/favicon-16x16.png') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon_io/favicon.ico') }}">
-    <!-- Fichier Manifest pour l'installation sur mobile -->
     <link rel="manifest" href="{{ url_for('static', filename='favicon_io/site.webmanifest') }}">
 
-    <!-- Configuration pour iOS (Plein écran) -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Sunwi">
-
-    <!-- Couleur de la barre d'état sur mobile (Android / Chrome) -->
     <meta name="theme-color" content="#0f172a">
     
-    <script src="{{ url_for('static', filename='theme.js') }}?v=4"></script>
     {% block extra_head %}{% endblock %}
 </head>
 <body class="sunwi-body">
@@ -44,11 +42,7 @@
         {% block content %}{% endblock %}
     </main>
 
-    <script src="{{ url_for('static', filename='js/duel_engine.js') }}?v=4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    {% block extra_scripts %}{% endblock %}
-
-    <!-- Modale d'authentification lisible et optimisée -->
+    <!-- Modale d'authentification -->
     <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content text-white border-secondary shadow-lg" style="background-color: #121826 !important;">
@@ -69,6 +63,44 @@
         </div>
     </div>
 
+    <!-- Modale Feedback / Bug -->
+    <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-white border border-secondary shadow-lg" style="background-color: #121826 !important;">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title fw-bold" id="feedbackModalLabel">💬 Signaler un bug / Suggestion</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+                <form id="feedbackForm">
+                    <div class="modal-body px-4 py-3">
+                        <div id="feedbackAlert" class="alert d-none mb-3" role="alert"></div>
+
+                        <div class="mb-3">
+                            <label class="form-label text-light small fw-bold">Type de retour</label>
+                            <select class="form-select custom-dark-input text-white" name="feedback_type" id="feedbackType" required>
+                                <option value="bug" class="custom-dark-option">🐛 Remontée de bug</option>
+                                <option value="suggestion" class="custom-dark-option">💡 Suggestion / Amélioration</option>
+                                <option value="autre" class="custom-dark-option">❓ Autre</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label text-light small fw-bold">Message</label>
+                            <textarea class="form-control custom-dark-input text-white" name="message" id="feedbackMessage" rows="4" placeholder="Décris le problème rencontré ou ton idée..." required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-secondary">
+                        <button type="button" class="btn btn-outline-light btn-sm" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary btn-sm fw-bold" id="feedbackSubmitBtn">Envoyer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/duel_engine.js') }}?v=5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const authTriggers = document.querySelectorAll('.require-auth');
@@ -77,13 +109,11 @@
                     {% set sunwi_u = session.get('sunwi_user') %}
                     {% set spotify_u = session.get('user_profile') %}
                     {% if not sunwi_u and not spotify_u %}
-                        // Utilisateur non connecté : on bloque et on ouvre la modale
                         e.preventDefault();
                         e.stopPropagation();
                         const authModal = new bootstrap.Modal(document.getElementById('authModal'));
                         authModal.show();
                     {% else %}
-                        // Utilisateur connecté : on gère la redirection normale ou via sélecteur
                         const selectId = element.getAttribute('data-select-id');
                         if (selectId) {
                             e.preventDefault();
@@ -92,13 +122,61 @@
                                 window.location.href = selectEl.value;
                             }
                         } else if (element.tagName === 'A' && element.href) {
-                            // Laisse faire le lien href direct si c'est un <a>
                             return true;
                         }
                     {% endif %}
                 });
             });
+
+            const feedbackForm = document.getElementById('feedbackForm');
+            if (feedbackForm) {
+                feedbackForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const alertBox = document.getElementById('feedbackAlert');
+                    const submitBtn = document.getElementById('feedbackSubmitBtn');
+                    const formData = new FormData(this);
+
+                    alertBox.classList.add('d-none');
+                    submitBtn.disabled = true;
+                    submitBtn.innerText = 'Envoi en cours...';
+
+                    try {
+                        const response = await fetch("{{ url_for('main.send_feedback') }}", {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        const result = await response.json();
+
+                        alertBox.classList.remove('d-none', 'alert-success', 'alert-danger');
+                        
+                        if (response.ok && result.status === 'success') {
+                            alertBox.classList.add('alert-success');
+                            alertBox.innerText = result.message;
+                            document.getElementById('feedbackMessage').value = '';
+                            setTimeout(() => {
+                                const modalEl = document.getElementById('feedbackModal');
+                                const modal = bootstrap.Modal.getInstance(modalEl);
+                                if (modal) modal.hide();
+                                alertBox.classList.add('d-none');
+                            }, 2000);
+                        } else {
+                            alertBox.classList.add('alert-danger');
+                            alertBox.innerText = result.message || 'Une erreur est survenue.';
+                        }
+                    } catch (err) {
+                        alertBox.classList.remove('d-none');
+                        alertBox.classList.add('alert-danger');
+                        alertBox.innerText = 'Erreur réseau lors de l\'envoi.';
+                    } finally {
+                        submitBtn.disabled = false;
+                        submitBtn.innerText = 'Envoyer';
+                    }
+                });
+            }
         });
     </script>
+    {% block extra_scripts %}{% endblock %}
 </body>
 </html>

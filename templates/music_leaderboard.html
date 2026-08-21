@@ -6,11 +6,6 @@
 {% block header_title %}🏆 TOP 100 {{ genre|upper }} ({{ year }}) 🏆{% endblock %}
 {% block header_subtitle %}Mise à jour en temps réel selon tes duels{% endblock %}
 
-{% block header_actions %}
-<a href="{{ url_for('music.duel', genre=genre, year=year) }}" class="btn btn-primary fw-bold">⚔️ Retour aux duels</a>
-<a href="{{ url_for('main.hub') }}" class="btn btn-outline-secondary">🏠 Hub</a>
-{% endblock %}
-
 {% block ranking_content %}
     {% if ranking %}
         {% for item in ranking %}

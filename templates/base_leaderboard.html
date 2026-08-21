@@ -10,7 +10,14 @@
 
         <div class="quit-actions-group d-flex justify-content-center gap-3 mt-3">
             {% block header_actions %}
-            <a href="{{ url_for('main.hub') }}" class="btn btn-outline-secondary">🏠 Hub</a>
+                {% set origin = request.args.get('from') %}
+                {% if origin == 'profile' %}
+                    <a href="{{ url_for('main.profile') }}" class="btn back-btn">👤 Mon Profil</a>
+                {% elif origin == 'duel' %}
+                    <a href="javascript:history.back()" class="btn back-btn">⚔️ Reprendre les duels</a>
+                {% else %}
+                    <a href="{{ url_for('main.hub') }}" class="btn back-btn">🏠 Hub</a>
+                {% endif %}
             {% endblock %}
         </div>
     </div>

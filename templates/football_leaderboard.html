@@ -6,10 +6,6 @@
 {% block header_title %}🏆 CLASSEMENT FOOTBALL 🏆{% endblock %}
 {% block header_subtitle %}Ton classement individuel EA FC Top 500{% endblock %}
 
-{% block header_actions %}
-<a href="{{ url_for('football.football_hub') }}" class="btn btn-primary fw-bold">⚔️ Retour aux duels</a>
-<a href="{{ url_for('main.hub') }}" class="btn btn-outline-secondary">🏠 Hub</a>
-{% endblock %}
 
 {% block ranking_content %}
     {% if ranking %}

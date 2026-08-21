@@ -11,14 +11,6 @@
     {% endif %}
 {% endblock %}
 
-{% block header_actions %}
-<a href="{{ url_for('spotify.duel') }}" class="btn btn-primary fw-bold">⚔️ Retour aux duels</a>
-<a href="{{ url_for('main.hub') }}" class="btn btn-outline-secondary">🏠 Hub</a>
-<button type="button" class="btn btn-outline-info" onclick="copyPublicLink()">
-    🔗 Partager ce classement
-</button>
-{% endblock %}
-
 {% block ranking_content %}
     {% if ranking %}
         {% for item in ranking %}

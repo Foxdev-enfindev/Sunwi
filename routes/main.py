@@ -44,7 +44,8 @@ def hub():
         {'id': 'pokemon_types', 'title': 'Pokémon (Par type)', 'category': 'Gaming', 'badge': 'Disponible', 'active': True, 'url': '#'},
         {'id': 'lol_global', 'title': 'League of Legends (Global)', 'category': 'Gaming', 'badge': 'Disponible', 'active': True, 'url': '/lol/'},
         {'id': 'lol_roles', 'title': 'League of Legends (Par rôle)', 'category': 'Gaming', 'badge': 'Disponible', 'active': True, 'url': '#'},
-
+        {'id': 'genshin', 'title': 'Genshin Impact', 'category': 'Gaming', 'badge': 'Disponible', 'active': True, 'url': '/genshin/'},
+        
         # --- MUSIQUE ---
         {'id': 'music_top100', 'title': 'Top 100 Kpop (Par année)', 'category': 'Musique', 'badge': 'Disponible', 'active': True, 'url': '/music/'},
 

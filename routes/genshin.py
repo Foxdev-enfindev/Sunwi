@@ -34,29 +34,23 @@ def fetch_user_characters_from_db(user_id, element=None):
     
     user_id_str = str(user_id) if user_id is not None else None
     
+    query = """
+        SELECT 
+            c.character_id, c.name, c.title, c.element, c.weapon,
+            COALESCE(ugs.elo, 1000) as elo,
+            COALESCE(ugs.matches_count, 0) as matches_count
+        FROM genshin_characters c
+        LEFT JOIN user_genshin_scores ugs 
+            ON c.character_id = ugs.character_id AND ugs.user_id = %s
+        WHERE 1=1
+    """
+    params = [user_id_str]
+    
     if element:
-        query = """
-            SELECT 
-                c.character_id, c.name, c.title, c.element, c.weapon,
-                COALESCE(ugs.elo, 1000) as elo,
-                COALESCE(ugs.matches_count, 0) as matches_count
-            FROM genshin_characters c
-            LEFT JOIN user_genshin_scores ugs 
-                ON c.character_id = ugs.character_id AND ugs.user_id = %s
-            WHERE LOWER(c.element) = LOWER(%s);
-        """
-        cur.execute(query, (user_id_str, element))
-    else:
-        query = """
-            SELECT 
-                c.character_id, c.name, c.title, c.element, c.weapon,
-                COALESCE(ugs.elo, 1000) as elo,
-                COALESCE(ugs.matches_count, 0) as matches_count
-            FROM genshin_characters c
-            LEFT JOIN user_genshin_scores ugs 
-                ON c.character_id = ugs.character_id AND ugs.user_id = %s;
-        """
-        cur.execute(query, (user_id_str,))
+        query += " AND LOWER(c.element) = LOWER(%s)"
+        params.append(element)
+
+    cur.execute(query, tuple(params))
         
     columns = [desc[0] for desc in cur.description]
     characters = [dict(zip(columns, row)) for row in cur.fetchall()]
@@ -89,11 +83,16 @@ def db_save_genshin_vote(cur, user_id, p1_id, p2_id, new_p1_elo, new_p2_elo, win
     """, (str(user_id), str(winner_id), str(loser_id)))
 
 @genshin_bp.route('/')
-@genshin_bp.route('/<element>')
-def genshin_hub(element=None):
+def genshin_hub():
     user_id = get_current_user_id()
     if not user_id:
         return redirect(url_for('auth.google_login'))
+
+    element = request.args.get('element') or None
+    
+    # FORCER LE RAFRAÎCHISSEMENT DU CACHE DE SESSION
+    cache_key = f'genshin_characters_cache_{element or "all"}'
+    session.pop(cache_key, None)
 
     session['current_genshin_element'] = element
     characters_dict = get_cached_characters(user_id, element)
@@ -109,16 +108,15 @@ def genshin_hub(element=None):
 
 @genshin_bp.route('/classement', endpoint='classement')
 @genshin_bp.route('/leaderboard', endpoint='leaderboard')
-@genshin_bp.route('/classement/<element>', endpoint='classement_element')
-def classement(element=None):
+def classement():
     user_id = get_current_user_id()
     if not user_id:
         return redirect(url_for('auth.google_login'))
 
-    active_element = element or session.get('current_genshin_element')
-    characters = fetch_user_characters_from_db(user_id, active_element)
+    element = request.args.get('element') or session.get('current_genshin_element')
+    characters = fetch_user_characters_from_db(user_id, element)
     characters.sort(key=lambda x: (x['elo'], x['matches_count']), reverse=True)
-    return render_template('genshin_leaderboard.html', ranking=characters, current_element=active_element)
+    return render_template('genshin_leaderboard.html', ranking=characters, current_element=element)
 
 @genshin_bp.route('/vote', methods=['POST'])
 def vote():
@@ -167,7 +165,10 @@ def vote():
             user_id, p1_id, p2_id, int(new_p1_elo), int(new_p2_elo), winner_id, loser_id
         )
 
-    return redirect(url_for('genshin.genshin_hub', element=active_element) if active_element else url_for('genshin.genshin_hub'))
+    args = {}
+    if active_element:
+        args['element'] = active_element
+    return redirect(url_for('genshin.genshin_hub', **args))
 
 @genshin_bp.route('/character_icon/<character_id>')
 def character_icon(character_id):
@@ -177,5 +178,4 @@ def character_icon(character_id):
         if os.path.exists(os.path.join(img_dir, filename)):
             return send_from_directory(img_dir, filename)
             
-    # Fallback automatique vers l'API genshin.jmp.blue si l'image locale est absente
     return redirect(f"https://genshin.jmp.blue/characters/{character_id}/icon")

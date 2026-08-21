@@ -18,15 +18,20 @@
                 </div>
 
                 <div class="min-width-0 flex-grow-1">
-                    <div class="fw-bold text-light fs-6 text-truncate">
-                        {{ item.name }}
-                        {% if item.element %}
-                        <span class="badge bg-secondary text-light ms-1" style="font-size: 0.7rem;">{{ item.element }}</span>
+                    <div class="d-flex align-items-center flex-wrap gap-2">
+                        <span class="fw-bold text-light fs-6 text-truncate">{{ item.name }}</span>
+                        {% if item.weapon %}
+                        <span class="badge bg-secondary text-uppercase" style="font-size: 0.6rem;">{{ item.weapon }}</span>
                         {% endif %}
                     </div>
                     {% if item.title %}
-                    <div class="text-secondary small text-truncate text-capitalize">{{ item.title }}</div>
+                    <div class="text-secondary small text-truncate text-capitalize mb-1">{{ item.title }}</div>
                     {% endif %}
+                    <div class="d-flex gap-1 mt-1">
+                        {% if item.element %}
+                        <span class="badge element-badge element-{{ item.element | lower }}" style="font-size: 0.65rem;">{{ item.element }}</span>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
 
@@ -51,4 +56,23 @@
             Aucun personnage classé pour le moment.
         </p>
     {% endif %}
+{% endblock %}
+
+{% block extra_scripts %}
+<style>
+.element-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.element-pyro { background-color: #EF7A35; color: white; }
+.element-hydro { background-color: #4BC3F6; color: white; }
+.element-anemo { background-color: #74E3AB; color: #111; }
+.element-electro { background-color: #B08EE6; color: white; }
+.element-dendro { background-color: #A5C83B; color: white; }
+.element-cryo { background-color: #A0E9E5; color: #111; }
+.element-geo { background-color: #FAB652; color: white; }
+.element-adaptive { background-color: #6C757D; color: white; }
+.element-multi { background-color: #8D6E63; color: white; }
+</style>
 {% endblock %}
